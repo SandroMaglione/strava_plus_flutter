@@ -1,6 +1,6 @@
 import 'package:mobile_polimi_project/app/goal/data/models/compose_activity_model.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/data_activity_model.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/activity/complex_activity.dart';
+import 'package:mobile_polimi_project/app/goal/domain/entities/complex_activity.dart';
 
 abstract class ComplexActivityModel extends ComplexActivity {
   const ComplexActivityModel();

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/complex_activity_model.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/activity/compose_activity.dart';
+import 'package:mobile_polimi_project/app/goal/domain/entities/compose_activity.dart';
 import 'package:mobile_polimi_project/core/enums/goal_operation.dart';
 
 part 'compose_activity_model.g.dart';

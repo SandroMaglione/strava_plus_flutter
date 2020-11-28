@@ -2,14 +2,14 @@
 
 // ignore_for_file: implicit_dynamic_parameter, always_declare_return_types, public_member_api_docs
 
-part of 'goal_remote_data_source.dart';
+part of 'activity_remote_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _GoalRemoteDataSource implements GoalRemoteDataSource {
-  _GoalRemoteDataSource(this._dio, {this.baseUrl}) {
+class _ActivityRemoteDataSource implements ActivityRemoteDataSource {
+  _ActivityRemoteDataSource(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
   }
 

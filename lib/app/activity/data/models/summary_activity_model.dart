@@ -2,13 +2,13 @@ import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/strava/detailed_activity.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/summary_activity.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
-part 'detailed_activity_model.g.dart';
+part 'summary_activity_model.g.dart';
 
 @JsonSerializable()
-class DetailedActivityModel extends DetailedActivity {
+class SummaryActivityModel extends SummaryActivity {
   @override
   final int id;
   final String external_id;
@@ -30,12 +30,12 @@ class DetailedActivityModel extends DetailedActivity {
   final DateTime start_date_local;
   @override
   final String timezone;
-  final int utc_offset;
   final int achievement_count;
   final int kudos_count;
   final int comment_count;
   final int athlete_count;
   final int photo_count;
+  final int total_photo_count;
   @override
   final bool trainer;
   @override
@@ -58,19 +58,25 @@ class DetailedActivityModel extends DetailedActivity {
   final bool device_watts;
   final int max_watts;
   final int weighted_average_watts;
-  @override
-  final String description;
-  @override
-  final double calories;
-  final String device_name;
-  final String embed_token;
 
   final List<double> start_latlng;
   final List<double> end_latlng;
+  final bool display_hide_heartrate_option;
+  final bool from_accepted_tag;
+  final bool has_heartrate;
+  final bool heartrate_opt_out;
+  final String location_city;
+  final String location_country;
+  final String location_state;
+  final int pr_count;
+  final int resource_state;
+  final double utc_offset;
 
-  const DetailedActivityModel({
+  @override
+  final String visibility;
+
+  const SummaryActivityModel({
     @required this.id,
-    @required this.external_id,
     @required this.upload_id,
     @required this.athlete,
     @required this.name,
@@ -84,7 +90,7 @@ class DetailedActivityModel extends DetailedActivity {
     @required this.start_date,
     @required this.start_date_local,
     @required this.timezone,
-    @required this.utc_offset,
+    @required this.total_photo_count,
     @required this.achievement_count,
     @required this.kudos_count,
     @required this.comment_count,
@@ -100,23 +106,31 @@ class DetailedActivityModel extends DetailedActivity {
     @required this.average_speed,
     @required this.max_speed,
     @required this.has_kudoed,
-    @required this.gear_id,
-    @required this.kilojoules,
-    @required this.average_watts,
-    @required this.device_watts,
-    @required this.max_watts,
-    @required this.weighted_average_watts,
-    @required this.description,
-    @required this.calories,
-    @required this.device_name,
-    @required this.embed_token,
     @required this.start_latlng,
     @required this.end_latlng,
+    @required this.display_hide_heartrate_option,
+    @required this.from_accepted_tag,
+    @required this.has_heartrate,
+    @required this.heartrate_opt_out,
+    @required this.pr_count,
+    @required this.resource_state,
+    @required this.utc_offset,
+    @required this.visibility,
+    this.gear_id,
+    this.external_id,
+    this.location_city,
+    this.location_country,
+    this.location_state,
+    this.kilojoules,
+    this.average_watts,
+    this.device_watts,
+    this.max_watts,
+    this.weighted_average_watts,
   });
 
-  factory DetailedActivityModel.fromJson(Map<String, dynamic> json) =>
-      _$DetailedActivityModelFromJson(json);
-  Map<String, dynamic> toJson() => _$DetailedActivityModelToJson(this);
+  factory SummaryActivityModel.fromJson(Map<String, dynamic> json) =>
+      _$SummaryActivityModelFromJson(json);
+  // Map<String, dynamic> toJson() => _$SummaryActivityModelToJson(this);
 
   @override
   int get achievementCount => achievement_count;
@@ -128,16 +142,13 @@ class DetailedActivityModel extends DetailedActivity {
   double get averageSpeed => average_speed;
 
   @override
-  double get averageWatts => average_watts;
+  Option<double> get averageWattsOption => optionOf(average_watts);
 
   @override
   int get commentCount => comment_count;
 
   @override
-  String get deviceName => device_name;
-
-  @override
-  bool get deviceWatts => device_watts;
+  Option<bool> get deviceWattsOption => optionOf(device_watts);
 
   @override
   int get elapsedTime => elapsed_time;
@@ -149,16 +160,13 @@ class DetailedActivityModel extends DetailedActivity {
   double get elevLow => elev_low;
 
   @override
-  String get embedToken => embed_token;
-
-  @override
   Tuple2<double, double> get endLatlng => tuple2(end_latlng[0], end_latlng[1]);
 
   @override
-  String get externalId => external_id;
+  Option<String> get externalIdOption => optionOf(external_id);
 
   @override
-  String get gearId => gear_id;
+  Option<String> get gearIdOption => optionOf(gear_id);
 
   @override
   bool get hasKudoed => has_kudoed;
@@ -170,7 +178,7 @@ class DetailedActivityModel extends DetailedActivity {
   double get maxSpeed => max_speed;
 
   @override
-  int get maxWatts => max_watts;
+  Option<int> get maxWattsOption => optionOf(max_watts);
 
   @override
   int get movingTime => moving_time;
@@ -198,11 +206,44 @@ class DetailedActivityModel extends DetailedActivity {
   String get uploadIdStr => upload_id_str;
 
   @override
-  int get utcOffset => utc_offset;
-
-  @override
   int get weightedAverageWatts => weighted_average_watts;
 
   @override
   int get workoutType => workout_type;
+
+  @override
+  int get totalPhotoCount => total_photo_count;
+
+  @override
+  bool get displayHideHeartrateOption => display_hide_heartrate_option;
+
+  @override
+  bool get fromAcceptedTag => from_accepted_tag;
+
+  @override
+  bool get hasHeartrate => has_heartrate;
+
+  @override
+  bool get heartrateOptOut => heartrate_opt_out;
+
+  @override
+  Option<String> get locationCityOption => optionOf(location_city);
+
+  @override
+  Option<String> get locationCountryOption => optionOf(location_country);
+
+  @override
+  Option<String> get locationStateOption => optionOf(location_state);
+
+  @override
+  int get prCount => pr_count;
+
+  @override
+  int get resourceState => resource_state;
+
+  @override
+  double get utcOffset => utc_offset;
+
+  @override
+  Option<double> get kilojoulesOption => optionOf(kilojoules);
 }

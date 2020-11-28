@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/activity/complex_activity.dart';
+import 'package:mobile_polimi_project/app/goal/domain/entities/complex_activity.dart';
 import 'package:mobile_polimi_project/core/enums/goal_operation.dart';
 
 abstract class ComposeActivity extends Equatable implements ComplexActivity {

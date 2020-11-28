@@ -8,11 +8,11 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import 'app/activity/data/datasource/remote/activity_remote_data_source.dart';
+import 'app/activity/domain/activity_repository.dart';
+import 'app/activity/data/repository/activity_repository_impl.dart';
 import 'app/data/datasources/api/api_constants.dart';
 import 'app/domain/repository/example_repository.dart';
-import 'app/data/datasources/remote/goal_remote_data_source.dart';
-import 'app/goal/domain/goal_repository.dart';
-import 'app/data/repository/goal_repository_impl.dart';
 import 'app/domain/repository/example_repository.rc.dart';
 import 'app/data/datasources/api/api_client.dart';
 
@@ -28,11 +28,12 @@ GetIt $initGetIt(
   final registerDioClient = _$RegisterDioClient();
   gh.factory<ApiConstants>(() => ApiConstantsProduction());
   gh.factory<Dio>(() => registerDioClient.dioClient);
-  gh.factory<GoalRemoteDataSource>(() => GoalRemoteDataSource(get<Dio>()));
-  gh.factory<GoalRepository>(
-      () => GoalRepositoryImpl(get<GoalRemoteDataSource>()));
   gh.factory<MakeRequestRepo>(
       () => MakeRequestRepo(exampleRepository: get<ExampleRepository>()));
+  gh.factory<ActivityRemoteDataSource>(
+      () => ActivityRemoteDataSource(get<Dio>()));
+  gh.factory<ActivityRepository>(
+      () => ActivityRepositoryImpl(get<ActivityRemoteDataSource>()));
   return get;
 }
 

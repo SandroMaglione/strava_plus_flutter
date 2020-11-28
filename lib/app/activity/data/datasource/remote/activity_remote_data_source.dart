@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/detailed_activity_model.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/summary_activity_model.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/detailed_activity_model.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/summary_activity_model.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'goal_remote_data_source.g.dart';
+part 'activity_remote_data_source.g.dart';
 
 @injectable
 @RestApi()
-abstract class GoalRemoteDataSource {
+abstract class ActivityRemoteDataSource {
   /// Factory constructor
   @factoryMethod
-  factory GoalRemoteDataSource(Dio dio) = _GoalRemoteDataSource;
+  factory ActivityRemoteDataSource(Dio dio) = _ActivityRemoteDataSource;
 
   @GET('activities/{id}')
   Future<DetailedActivityModel> getActivityById(

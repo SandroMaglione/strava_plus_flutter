@@ -11,7 +11,6 @@ part of 'summary_activity_model.dart';
 SummaryActivityModel _$SummaryActivityModelFromJson(Map<String, dynamic> json) {
   return SummaryActivityModel(
     id: json['id'] as int,
-    external_id: json['external_id'] as String,
     upload_id: json['upload_id'] as int,
     athlete: json['athlete'] == null
         ? null
@@ -47,18 +46,31 @@ SummaryActivityModel _$SummaryActivityModelFromJson(Map<String, dynamic> json) {
     average_speed: (json['average_speed'] as num)?.toDouble(),
     max_speed: (json['max_speed'] as num)?.toDouble(),
     has_kudoed: json['has_kudoed'] as bool,
-    gear_id: json['gear_id'] as String,
-    kilojoules: (json['kilojoules'] as num)?.toDouble(),
-    average_watts: (json['average_watts'] as num)?.toDouble(),
-    device_watts: json['device_watts'] as bool,
-    max_watts: json['max_watts'] as int,
-    weighted_average_watts: json['weighted_average_watts'] as int,
     start_latlng: (json['start_latlng'] as List)
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
     end_latlng: (json['end_latlng'] as List)
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
+    display_hide_heartrate_option:
+        json['display_hide_heartrate_option'] as bool,
+    from_accepted_tag: json['from_accepted_tag'] as bool,
+    has_heartrate: json['has_heartrate'] as bool,
+    heartrate_opt_out: json['heartrate_opt_out'] as bool,
+    pr_count: json['pr_count'] as int,
+    resource_state: json['resource_state'] as int,
+    utc_offset: (json['utc_offset'] as num)?.toDouble(),
+    visibility: json['visibility'] as String,
+    gear_id: json['gear_id'] as String,
+    external_id: json['external_id'] as String,
+    location_city: json['location_city'] as String,
+    location_country: json['location_country'] as String,
+    location_state: json['location_state'] as String,
+    kilojoules: (json['kilojoules'] as num)?.toDouble(),
+    average_watts: (json['average_watts'] as num)?.toDouble(),
+    device_watts: json['device_watts'] as bool,
+    max_watts: json['max_watts'] as int,
+    weighted_average_watts: json['weighted_average_watts'] as int,
   );
 }
 
@@ -104,6 +116,17 @@ Map<String, dynamic> _$SummaryActivityModelToJson(
       'weighted_average_watts': instance.weighted_average_watts,
       'start_latlng': instance.start_latlng,
       'end_latlng': instance.end_latlng,
+      'display_hide_heartrate_option': instance.display_hide_heartrate_option,
+      'from_accepted_tag': instance.from_accepted_tag,
+      'has_heartrate': instance.has_heartrate,
+      'heartrate_opt_out': instance.heartrate_opt_out,
+      'location_city': instance.location_city,
+      'location_country': instance.location_country,
+      'location_state': instance.location_state,
+      'pr_count': instance.pr_count,
+      'resource_state': instance.resource_state,
+      'utc_offset': instance.utc_offset,
+      'visibility': instance.visibility,
     };
 
 T _$enumDecode<T>(

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/complex_activity_model.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/data_activity_model.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/activity/complex_activity.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/activity/data_activity.dart';
+import 'package:mobile_polimi_project/app/goal/domain/entities/complex_activity.dart';
+import 'package:mobile_polimi_project/app/goal/domain/entities/data_activity.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import 'shared.dart';
