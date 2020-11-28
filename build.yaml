@@ -1,0 +1,26 @@
+targets:
+  $default:
+    sources:
+        include:
+          - assets/i18n/**
+          - lib/**
+    builders:
+      source_gen|combining_builder:
+          options:
+            ignore_for_file:
+              - implicit_dynamic_parameter
+              - always_declare_return_types
+              - public_member_api_docs
+      json_serializable:
+        options:
+          explicit_to_json: true
+      injectable_generator:injectable_builder:
+        options:
+          ignore_for_file:
+            - implicit_dynamic_parameter
+          auto_register: true
+          # Auto register any class with a name matches the given pattern
+          class_name_pattern:
+            "Service$|RepositoryImpl$|LocalDataSourceImpl$|Repo$|Guard$"
+          # Auto register any class inside a file with a name matches the given pattern
+          file_name_pattern: "_service$|_repository_impl$|_bloc$|_cubit$"

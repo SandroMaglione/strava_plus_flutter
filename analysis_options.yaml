@@ -1,0 +1,68 @@
+linter:
+  rules:
+    avoid_print: true
+    always_declare_return_types: true
+    no_duplicate_case_values: true
+    always_put_required_named_parameters_first: true
+    always_require_non_null_named_parameters: true
+    annotate_overrides: true
+    avoid_unnecessary_containers: true
+    avoid_unused_constructor_parameters: true
+    camel_case_extensions: true #optional
+    camel_case_types: true #optional
+    file_names: true
+    prefer_adjacent_string_concatenation: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_final_fields: true
+    prefer_interpolation_to_compose_strings: true # optional
+    prefer_is_empty: true # optional
+    prefer_is_not_operator: true # optional
+    public_member_api_docs: false # optional
+    sort_child_properties_last: true
+    unnecessary_await_in_return: true
+    unnecessary_parenthesis: true # optional
+    sort_unnamed_constructors_first: true # optional
+    diagnostic_describe_all_properties: false
+
+analyzer:
+  exclude:
+    - build/**
+    - lib/**/*.g.dart
+    - lib/**/*.chopper.dart
+    - lib/**/*.freezed.dart
+    - lib/**/*.gr.dart
+    - lib/**/*.rc.dart
+    - lib/**/*.i18n.dart
+    - lib/injectable.config.dart
+  strong-mode:
+    # Always declare the variable type
+    implicit-casts: false
+    # No dynamic by default
+    implicit-dynamic: false
+  errors:
+    missing_required_param: error
+    avoid_print: info
+    diagnostic_describe_all_properties: info
+    always_declare_return_types: error
+    no_duplicate_case_values: error
+    always_put_required_named_parameters_first: info
+    always_require_non_null_named_parameters: error
+    annotate_overrides: error
+    avoid_unnecessary_containers: error
+    avoid_unused_constructor_parameters: warning
+    camel_case_extensions: info #optional
+    camel_case_types: info #optional
+    file_names: warning
+    prefer_adjacent_string_concatenation: warning
+    prefer_const_constructors: warning
+    prefer_const_declarations: warning
+    prefer_final_fields: warning
+    prefer_interpolation_to_compose_strings: info # optional
+    prefer_is_empty: info # optional
+    prefer_is_not_operator: info # optional
+    public_member_api_docs: info
+    sort_child_properties_last: info
+    unnecessary_await_in_return: warning
+    unnecessary_parenthesis: info # optional
+    sort_unnamed_constructors_first: info # optional

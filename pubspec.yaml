@@ -1,0 +1,115 @@
+name: mobile_polimi_project
+description: Flutter project for course of Design and Implementation of Mobile Applications 2020-2021
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Internazionalization
+  intl: any
+
+  # .env files
+  envify: any
+
+  # Compare objects based on their values
+  equatable: any
+
+  # Http client generator (datasources)
+  retrofit: any
+  dio: any
+
+  # Functional programming (Either, Task)
+  dartz: any
+
+  # Navigation and routing
+  auto_route: any
+
+  # Code generator for unions/pattern-matching/copy
+  freezed: any
+
+  # json serialization
+  json_serializable: any
+
+  # Dependency Injection auto-generated
+  injectable: any
+
+  # Usecase class generator
+  repo_case: any
+
+  # Status bar theme
+  flutter_statusbar_manager: any
+
+  # Strava API auth
+  oauth2: ^1.6.3
+
+  # Strava auth code on browser
+  webview_flutter: ^1.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Package required to auto-generate code
+  build_runner: any
+
+  # .env files
+  envify_generator: any
+
+  # Generator for http client
+  retrofit_generator: any
+  pretty_dio_logger: any
+
+  # Generator for auto_route
+  auto_route_generator: any
+
+  # Generator annotation for freezed
+  freezed_annotation: any
+
+  # Generator for json_serializable
+  json_serializable_generator: any
+  json_annotation: any
+
+  # Generator for injectable
+  injectable_generator: any
+
+  # Create testing mock classes
+  mockito: any
+
+  # Usecase class generator
+  repo_case_generator: any
+
+  # App icon generator
+  flutter_launcher_icons: any
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/fonts/
+    # - assets/icon/
+    # - assets/i18n/
+
+  fonts:
+    - family: Amble
+      fonts:
+        - asset: assets/fonts/Amble-Regular.ttf
+        - asset: assets/fonts/Amble-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Amble-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Amble-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Amble-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Amble-Bold.ttf
+          weight: 600
+        - asset: assets/fonts/Amble-BoldItalic.ttf
+          weight: 600
+          style: italic

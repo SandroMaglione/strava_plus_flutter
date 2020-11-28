@@ -1,0 +1,12 @@
+{
+  "metricLogic": "and",
+  "goalMetricList": [
+    {
+      "complexActivity": {
+        "activityId": "id1"
+      },
+      "goalComparator": "equal",
+      "value": 10
+    }
+  ]
+}
