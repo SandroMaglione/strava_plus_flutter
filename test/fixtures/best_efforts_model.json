@@ -1,0 +1,22 @@
+{
+  "id": 5877736223,
+  "resource_state": 2,
+  "name": "400m",
+  "activity": {
+    "id": 2778055056,
+    "resource_state": 1
+  },
+  "athlete": {
+    "id": 44062778,
+    "resource_state": 1
+  },
+  "elapsed_time": 113,
+  "moving_time": 114,
+  "start_date": "2019-10-10T16:06:46Z",
+  "start_date_local": "2019-10-10T18:06:46Z",
+  "distance": 400,
+  "start_index": 635,
+  "end_index": 749,
+  "pr_rank": null,
+  "achievements": []
+}

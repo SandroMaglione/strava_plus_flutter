@@ -26,7 +26,7 @@ class TrendModel extends Trend {
 
   factory TrendModel.fromJson(Map<String, dynamic> json) =>
       _$TrendModelFromJson(json);
-  // Map<String, dynamic> toJson() => _$TrendModelToJson(this);
+  Map<String, dynamic> toJson() => _$TrendModelToJson(this);
 
   @override
   int get currentActivityIndex => current_activity_index;

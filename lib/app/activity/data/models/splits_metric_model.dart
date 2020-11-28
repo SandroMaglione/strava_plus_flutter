@@ -30,7 +30,7 @@ class SplitsMetricModel extends SplitsMetric {
 
   factory SplitsMetricModel.fromJson(Map<String, dynamic> json) =>
       _$SplitsMetricModelFromJson(json);
-  // Map<String, dynamic> toJson() => _$SplitsMetricModelToJson(this);
+  Map<String, dynamic> toJson() => _$SplitsMetricModelToJson(this);
 
   @override
   double get averageGradeAdjustedSpeed => average_grade_adjusted_speed;

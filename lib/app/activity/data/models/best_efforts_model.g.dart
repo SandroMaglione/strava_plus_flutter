@@ -13,7 +13,9 @@ BestEffortsModel _$BestEffortsModelFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     resource_state: json['resource_state'] as int,
     name: json['name'] as String,
-    activity: _$enumDecodeNullable(_$ActivityTypeEnumMap, json['activity']),
+    activity: json['activity'] == null
+        ? null
+        : MetaAthleteModel.fromJson(json['activity'] as Map<String, dynamic>),
     athlete: json['athlete'] == null
         ? null
         : MetaAthleteModel.fromJson(json['athlete'] as Map<String, dynamic>),
@@ -39,7 +41,7 @@ Map<String, dynamic> _$BestEffortsModelToJson(BestEffortsModel instance) =>
       'id': instance.id,
       'resource_state': instance.resource_state,
       'name': instance.name,
-      'activity': _$ActivityTypeEnumMap[instance.activity],
+      'activity': instance.activity?.toJson(),
       'athlete': instance.athlete?.toJson(),
       'elapsed_time': instance.elapsed_time,
       'moving_time': instance.moving_time,
@@ -51,75 +53,3 @@ Map<String, dynamic> _$BestEffortsModelToJson(BestEffortsModel instance) =>
       'pr_rank': instance.pr_rank,
       'achievements': instance.achievements,
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$ActivityTypeEnumMap = {
-  ActivityType.AlpineSki: 'AlpineSki',
-  ActivityType.BackcountrySki: 'BackcountrySki',
-  ActivityType.Canoeing: 'Canoeing',
-  ActivityType.Crossfit: 'Crossfit',
-  ActivityType.EBikeRide: 'EBikeRide',
-  ActivityType.Elliptical: 'Elliptical',
-  ActivityType.Golf: 'Golf',
-  ActivityType.Handcycle: 'Handcycle',
-  ActivityType.Hike: 'Hike',
-  ActivityType.IceSkate: 'IceSkate',
-  ActivityType.InlineSkate: 'InlineSkate',
-  ActivityType.Kayaking: 'Kayaking',
-  ActivityType.Kitesurf: 'Kitesurf',
-  ActivityType.NordicSki: 'NordicSki',
-  ActivityType.Ride: 'Ride',
-  ActivityType.RockClimbing: 'RockClimbing',
-  ActivityType.RollerSki: 'RollerSki',
-  ActivityType.Rowing: 'Rowing',
-  ActivityType.Run: 'Run',
-  ActivityType.Sail: 'Sail',
-  ActivityType.Skateboard: 'Skateboard',
-  ActivityType.Snowboard: 'Snowboard',
-  ActivityType.Snowshoe: 'Snowshoe',
-  ActivityType.Soccer: 'Soccer',
-  ActivityType.StairStepper: 'StairStepper',
-  ActivityType.StandUpPaddling: 'StandUpPaddling',
-  ActivityType.Surfing: 'Surfing',
-  ActivityType.Swim: 'Swim',
-  ActivityType.Velomobile: 'Velomobile',
-  ActivityType.VirtualRide: 'VirtualRide',
-  ActivityType.VirtualRun: 'VirtualRun',
-  ActivityType.Walk: 'Walk',
-  ActivityType.WeightTraining: 'WeightTraining',
-  ActivityType.Wheelchair: 'Wheelchair',
-  ActivityType.Windsurf: 'Windsurf',
-  ActivityType.Workout: 'Workout',
-  ActivityType.Yoga: 'Yoga',
-};

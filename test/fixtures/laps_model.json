@@ -1,0 +1,26 @@
+{
+  "id": 9112691652,
+  "resource_state": 2,
+  "name": "Lap 1",
+  "activity": {
+    "id": 2778055056,
+    "resource_state": 1
+  },
+  "athlete": {
+    "id": 44062778,
+    "resource_state": 1
+  },
+  "elapsed_time": 860,
+  "moving_time": 856,
+  "start_date": "2019-10-10T15:54:52Z",
+  "start_date_local": "2019-10-10T17:54:52Z",
+  "distance": 2810.0,
+  "start_index": 0,
+  "end_index": 772,
+  "total_elevation_gain": 33.0,
+  "average_speed": 3.28,
+  "max_speed": 4.4,
+  "lap_index": 1,
+  "split": 1,
+  "pace_zone": 0
+}

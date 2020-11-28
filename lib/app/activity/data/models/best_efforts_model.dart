@@ -15,7 +15,7 @@ class BestEffortsModel extends BestEfforts {
   @override
   final String name;
   @override
-  final ActivityType activity;
+  final MetaAthleteModel activity;
   @override
   final MetaAthleteModel athlete;
   final int elapsed_time;
@@ -48,7 +48,7 @@ class BestEffortsModel extends BestEfforts {
 
   factory BestEffortsModel.fromJson(Map<String, dynamic> json) =>
       _$BestEffortsModelFromJson(json);
-  // Map<String, dynamic> toJson() => _$BestEffortsModelToJson(this);
+  Map<String, dynamic> toJson() => _$BestEffortsModelToJson(this);
 
   @override
   IList<int> get achievementsList => ilist(achievements);
@@ -63,9 +63,6 @@ class BestEffortsModel extends BestEfforts {
   int get movingTime => moving_time;
 
   @override
-  String get prRank => pr_rank;
-
-  @override
   int get resourceState => resource_state;
 
   @override
@@ -76,4 +73,7 @@ class BestEffortsModel extends BestEfforts {
 
   @override
   int get startIndex => start_index;
+
+  @override
+  Option<String> get prRankOption => optionOf(pr_rank);
 }

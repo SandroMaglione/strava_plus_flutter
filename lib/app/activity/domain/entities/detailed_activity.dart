@@ -7,6 +7,7 @@ import 'package:mobile_polimi_project/app/activity/domain/entities/similar_activ
 import 'package:mobile_polimi_project/app/activity/domain/entities/splits_metric.dart';
 import 'package:mobile_polimi_project/app/goal/domain/entities/strava/meta_athlete.dart';
 import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2.dart';
+import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
 /// Single activity from Strava API
 /// https://developers.strava.com/docs/reference/#api-models-DetailedActivity
@@ -16,24 +17,20 @@ abstract class DetailedActivity extends Equatable {
   int get resourceState;
   MetaAthlete get athlete;
   String get name;
-  int get distance;
+  double get distance;
   int get movingTime;
   int get elapsedTime;
   double get totalElevationGain;
-  String get type;
+  ActivityType get type;
   int get workoutType;
   int get id;
-  String get externalId;
   int get uploadId;
   DateTime get startDate;
   DateTime get startDateLocal;
   String get timezone;
-  int get utcOffset;
+  double get utcOffset;
   List2<double> get startLatlng;
   List2<double> get endLatlng;
-  String get locationCity;
-  String get locationState;
-  String get locationCountry;
   double get startLatitude;
   double get startLongitude;
   int get achievementCount;
@@ -48,7 +45,6 @@ abstract class DetailedActivity extends Equatable {
   bool get private;
   String get visibility;
   bool get flagged;
-  String get gearId;
   bool get fromAcceptedTag;
   String get uploadIdStr;
   double get averageSpeed;
@@ -61,9 +57,8 @@ abstract class DetailedActivity extends Equatable {
   int get prCount;
   int get totalPhotoCount;
   bool get hasKudoed;
-  String get description;
-  int get calories;
-  int get perceivedExertion;
+  double get calories;
+  double get perceivedExertion;
   bool get preferPerceivedExertion;
   IList<int> get segmentEfforts;
   IList<SplitsMetric> get splitsMetric;
@@ -75,6 +70,13 @@ abstract class DetailedActivity extends Equatable {
   String get embedToken;
   SimilarActivities get similarActivities;
   IList<int> get availableZones;
+
+  Option<String> get externalIdOption;
+  Option<String> get locationCityOption;
+  Option<String> get locationStateOption;
+  Option<String> get locationCountryOption;
+  Option<String> get gearIdOption;
+  Option<String> get descriptionOption;
 
   @override
   List<Object> get props => [id];

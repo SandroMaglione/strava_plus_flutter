@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/trend.dart';
 
@@ -9,10 +10,10 @@ abstract class SimilarActivities extends Equatable {
   double get minAverageSpeed;
   double get midAverageSpeed;
   double get maxAverageSpeed;
-  String get prRank;
-  String get frequencyMilestone;
   Trend get trend;
   int get resourceState;
+  Option<String> get prRankOption;
+  Option<String> get frequencyMilestoneOption;
 
   @override
   List<Object> get props => [
@@ -21,8 +22,8 @@ abstract class SimilarActivities extends Equatable {
         minAverageSpeed,
         midAverageSpeed,
         maxAverageSpeed,
-        prRank,
-        frequencyMilestone,
+        prRankOption,
+        frequencyMilestoneOption,
         trend,
         resourceState,
       ];

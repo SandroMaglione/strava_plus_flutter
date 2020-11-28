@@ -16,14 +16,13 @@ DetailedActivityModel _$DetailedActivityModelFromJson(
         ? null
         : MetaAthleteModel.fromJson(json['athlete'] as Map<String, dynamic>),
     name: json['name'] as String,
-    distance: json['distance'] as int,
+    distance: (json['distance'] as num)?.toDouble(),
     moving_time: json['moving_time'] as int,
     elapsed_time: json['elapsed_time'] as int,
     total_elevation_gain: (json['total_elevation_gain'] as num)?.toDouble(),
-    type: json['type'] as String,
+    type: _$enumDecodeNullable(_$ActivityTypeEnumMap, json['type']),
     workout_type: json['workout_type'] as int,
     id: json['id'] as int,
-    external_id: json['external_id'] as String,
     upload_id: json['upload_id'] as int,
     start_date: json['start_date'] == null
         ? null
@@ -32,16 +31,13 @@ DetailedActivityModel _$DetailedActivityModelFromJson(
         ? null
         : DateTime.parse(json['start_date_local'] as String),
     timezone: json['timezone'] as String,
-    utc_offset: json['utc_offset'] as int,
+    utc_offset: (json['utc_offset'] as num)?.toDouble(),
     start_latlng: (json['start_latlng'] as List)
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
     end_latlng: (json['end_latlng'] as List)
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
-    location_city: json['location_city'] as String,
-    location_state: json['location_state'] as String,
-    location_country: json['location_country'] as String,
     start_latitude: (json['start_latitude'] as num)?.toDouble(),
     start_longitude: (json['start_longitude'] as num)?.toDouble(),
     achievement_count: json['achievement_count'] as int,
@@ -55,7 +51,6 @@ DetailedActivityModel _$DetailedActivityModelFromJson(
     private: json['private'] as bool,
     visibility: json['visibility'] as String,
     flagged: json['flagged'] as bool,
-    gear_id: json['gear_id'] as String,
     from_accepted_tag: json['from_accepted_tag'] as bool,
     upload_id_str: json['upload_id_str'] as String,
     average_speed: (json['average_speed'] as num)?.toDouble(),
@@ -69,9 +64,8 @@ DetailedActivityModel _$DetailedActivityModelFromJson(
     pr_count: json['pr_count'] as int,
     total_photo_count: json['total_photo_count'] as int,
     has_kudoed: json['has_kudoed'] as bool,
-    description: json['description'] as String,
-    calories: json['calories'] as int,
-    perceived_exertion: json['perceived_exertion'] as int,
+    calories: (json['calories'] as num)?.toDouble(),
+    perceived_exertion: (json['perceived_exertion'] as num)?.toDouble(),
     prefer_perceived_exertion: json['prefer_perceived_exertion'] as bool,
     segment_efforts:
         (json['segment_efforts'] as List)?.map((e) => e as int)?.toList(),
@@ -105,6 +99,12 @@ DetailedActivityModel _$DetailedActivityModelFromJson(
             json['similar_activities'] as Map<String, dynamic>),
     available_zones:
         (json['available_zones'] as List)?.map((e) => e as int)?.toList(),
+    external_id: json['external_id'] as String,
+    location_city: json['location_city'] as String,
+    location_state: json['location_state'] as String,
+    location_country: json['location_country'] as String,
+    gear_id: json['gear_id'] as String,
+    description: json['description'] as String,
   );
 }
 
@@ -118,7 +118,7 @@ Map<String, dynamic> _$DetailedActivityModelToJson(
       'moving_time': instance.moving_time,
       'elapsed_time': instance.elapsed_time,
       'total_elevation_gain': instance.total_elevation_gain,
-      'type': instance.type,
+      'type': _$ActivityTypeEnumMap[instance.type],
       'workout_type': instance.workout_type,
       'id': instance.id,
       'external_id': instance.external_id,
@@ -175,3 +175,75 @@ Map<String, dynamic> _$DetailedActivityModelToJson(
       'similar_activities': instance.similar_activities?.toJson(),
       'available_zones': instance.available_zones,
     };
+
+T _$enumDecode<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError('A value must be provided. Supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+
+  final value = enumValues.entries
+      .singleWhere((e) => e.value == source, orElse: () => null)
+      ?.key;
+
+  if (value == null && unknownValue == null) {
+    throw ArgumentError('`$source` is not one of the supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+  return value ?? unknownValue;
+}
+
+T _$enumDecodeNullable<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$ActivityTypeEnumMap = {
+  ActivityType.AlpineSki: 'AlpineSki',
+  ActivityType.BackcountrySki: 'BackcountrySki',
+  ActivityType.Canoeing: 'Canoeing',
+  ActivityType.Crossfit: 'Crossfit',
+  ActivityType.EBikeRide: 'EBikeRide',
+  ActivityType.Elliptical: 'Elliptical',
+  ActivityType.Golf: 'Golf',
+  ActivityType.Handcycle: 'Handcycle',
+  ActivityType.Hike: 'Hike',
+  ActivityType.IceSkate: 'IceSkate',
+  ActivityType.InlineSkate: 'InlineSkate',
+  ActivityType.Kayaking: 'Kayaking',
+  ActivityType.Kitesurf: 'Kitesurf',
+  ActivityType.NordicSki: 'NordicSki',
+  ActivityType.Ride: 'Ride',
+  ActivityType.RockClimbing: 'RockClimbing',
+  ActivityType.RollerSki: 'RollerSki',
+  ActivityType.Rowing: 'Rowing',
+  ActivityType.Run: 'Run',
+  ActivityType.Sail: 'Sail',
+  ActivityType.Skateboard: 'Skateboard',
+  ActivityType.Snowboard: 'Snowboard',
+  ActivityType.Snowshoe: 'Snowshoe',
+  ActivityType.Soccer: 'Soccer',
+  ActivityType.StairStepper: 'StairStepper',
+  ActivityType.StandUpPaddling: 'StandUpPaddling',
+  ActivityType.Surfing: 'Surfing',
+  ActivityType.Swim: 'Swim',
+  ActivityType.Velomobile: 'Velomobile',
+  ActivityType.VirtualRide: 'VirtualRide',
+  ActivityType.VirtualRun: 'VirtualRun',
+  ActivityType.Walk: 'Walk',
+  ActivityType.WeightTraining: 'WeightTraining',
+  ActivityType.Wheelchair: 'Wheelchair',
+  ActivityType.Windsurf: 'Windsurf',
+  ActivityType.Workout: 'Workout',
+  ActivityType.Yoga: 'Yoga',
+};

@@ -16,12 +16,12 @@ SimilarActivitiesModel _$SimilarActivitiesModelFromJson(
     min_average_speed: (json['min_average_speed'] as num)?.toDouble(),
     mid_average_speed: (json['mid_average_speed'] as num)?.toDouble(),
     max_average_speed: (json['max_average_speed'] as num)?.toDouble(),
-    pr_rank: json['pr_rank'] as String,
-    frequency_milestone: json['frequency_milestone'] as String,
     trend: json['trend'] == null
         ? null
         : TrendModel.fromJson(json['trend'] as Map<String, dynamic>),
     resource_state: json['resource_state'] as int,
+    pr_rank: json['pr_rank'] as String,
+    frequency_milestone: json['frequency_milestone'] as String,
   );
 }
 

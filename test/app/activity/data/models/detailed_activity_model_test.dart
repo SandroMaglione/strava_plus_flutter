@@ -15,7 +15,7 @@ void main() {
     expect(Shared.detailedActivityModel, isA<DetailedActivity>());
   });
 
-  test('should be equals based on its parameters', () async {
+  test('should be equals based on its id only', () async {
     expect(Shared.detailedActivityModel, Shared.detailedActivityModelCopy);
   });
 

@@ -10,8 +10,8 @@ part of 'photos_model.dart';
 
 PhotosModel _$PhotosModelFromJson(Map<String, dynamic> json) {
   return PhotosModel(
-    primary: json['primary'] as String,
     count: json['count'] as int,
+    primary: json['primary'] as String,
   );
 }
 

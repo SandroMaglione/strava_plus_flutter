@@ -52,7 +52,6 @@ class SummaryActivityModel extends SummaryActivity {
   final double max_speed;
   final bool has_kudoed;
   final String gear_id;
-  @override
   final double kilojoules;
   final double average_watts;
   final bool device_watts;
@@ -130,7 +129,7 @@ class SummaryActivityModel extends SummaryActivity {
 
   factory SummaryActivityModel.fromJson(Map<String, dynamic> json) =>
       _$SummaryActivityModelFromJson(json);
-  // Map<String, dynamic> toJson() => _$SummaryActivityModelToJson(this);
+  Map<String, dynamic> toJson() => _$SummaryActivityModelToJson(this);
 
   @override
   int get achievementCount => achievement_count;

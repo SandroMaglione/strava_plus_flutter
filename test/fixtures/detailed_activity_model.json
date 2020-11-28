@@ -70,26 +70,6 @@
       "average_speed": 3.19,
       "average_grade_adjusted_speed": 3.16,
       "pace_zone": 0
-    },
-    {
-      "distance": 1000.7,
-      "elapsed_time": 303,
-      "elevation_difference": 20.5,
-      "moving_time": 303,
-      "split": 2,
-      "average_speed": 3.3,
-      "average_grade_adjusted_speed": 3.52,
-      "pace_zone": 0
-    },
-    {
-      "distance": 808.7,
-      "elapsed_time": 243,
-      "elevation_difference": -2.8,
-      "moving_time": 239,
-      "split": 3,
-      "average_speed": 3.38,
-      "average_grade_adjusted_speed": 3.4,
-      "pace_zone": 0
     }
   ],
   "splits_standard": [
@@ -101,16 +81,6 @@
       "split": 1,
       "average_speed": 3.22,
       "average_grade_adjusted_speed": 3.28,
-      "pace_zone": 0
-    },
-    {
-      "distance": 1198.0,
-      "elapsed_time": 359,
-      "elevation_difference": 5.2,
-      "moving_time": 355,
-      "split": 2,
-      "average_speed": 3.37,
-      "average_grade_adjusted_speed": 3.46,
       "pace_zone": 0
     }
   ],
@@ -162,72 +132,6 @@
       "distance": 400,
       "start_index": 635,
       "end_index": 749,
-      "pr_rank": null,
-      "achievements": []
-    },
-    {
-      "id": 5877736224,
-      "resource_state": 2,
-      "name": "1/2 mile",
-      "activity": {
-        "id": 2778055056,
-        "resource_state": 1
-      },
-      "athlete": {
-        "id": 44062778,
-        "resource_state": 1
-      },
-      "elapsed_time": 230,
-      "moving_time": 231,
-      "start_date": "2019-10-10T16:04:33Z",
-      "start_date_local": "2019-10-10T18:04:33Z",
-      "distance": 805,
-      "start_index": 507,
-      "end_index": 733,
-      "pr_rank": null,
-      "achievements": []
-    },
-    {
-      "id": 5877736225,
-      "resource_state": 2,
-      "name": "1k",
-      "activity": {
-        "id": 2778055056,
-        "resource_state": 1
-      },
-      "athlete": {
-        "id": 44062778,
-        "resource_state": 1
-      },
-      "elapsed_time": 290,
-      "moving_time": 290,
-      "start_date": "2019-10-10T16:04:04Z",
-      "start_date_local": "2019-10-10T18:04:04Z",
-      "distance": 1000,
-      "start_index": 483,
-      "end_index": 762,
-      "pr_rank": null,
-      "achievements": []
-    },
-    {
-      "id": 5877736226,
-      "resource_state": 2,
-      "name": "1 mile",
-      "activity": {
-        "id": 2778055056,
-        "resource_state": 1
-      },
-      "athlete": {
-        "id": 44062778,
-        "resource_state": 1
-      },
-      "elapsed_time": 478,
-      "moving_time": 479,
-      "start_date": "2019-10-10T16:00:40Z",
-      "start_date_local": "2019-10-10T18:00:40Z",
-      "distance": 1609,
-      "start_index": 306,
-      "end_index": 748,
       "pr_rank": null,
       "achievements": []
     }

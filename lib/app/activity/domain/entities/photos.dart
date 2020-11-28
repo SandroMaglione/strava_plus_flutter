@@ -1,14 +1,15 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class Photos extends Equatable {
   const Photos();
 
-  String get primary;
+  Option<String> get primaryOption;
   int get count;
 
   @override
   List<Object> get props => [
-        primary,
+        primaryOption,
         count,
       ];
 }

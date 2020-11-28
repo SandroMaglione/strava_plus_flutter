@@ -14,7 +14,7 @@ class LapsModel extends Laps {
   @override
   final String name;
   @override
-  final ActivityType activity;
+  final MetaAthleteModel activity;
   @override
   final MetaAthleteModel athlete;
   final int elapsed_time;
@@ -22,10 +22,10 @@ class LapsModel extends Laps {
   final DateTime start_date;
   final DateTime start_date_local;
   @override
-  final int distance;
+  final double distance;
   final int start_index;
   final int end_index;
-  final int total_elevation_gain;
+  final double total_elevation_gain;
   final double average_speed;
   final double max_speed;
   final int lap_index;
@@ -57,7 +57,7 @@ class LapsModel extends Laps {
 
   factory LapsModel.fromJson(Map<String, dynamic> json) =>
       _$LapsModelFromJson(json);
-  // Map<String, dynamic> toJson() => _$LapsModelToJson(this);
+  Map<String, dynamic> toJson() => _$LapsModelToJson(this);
 
   @override
   double get averageSpeed => average_speed;
@@ -90,5 +90,5 @@ class LapsModel extends Laps {
   int get startIndex => start_index;
 
   @override
-  int get totalElevationGain => total_elevation_gain;
+  double get totalElevationGain => total_elevation_gain;
 }

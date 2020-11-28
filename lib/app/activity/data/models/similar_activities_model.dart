@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/trend_model.dart';
@@ -24,15 +25,15 @@ class SimilarActivitiesModel extends SimilarActivities {
     @required this.min_average_speed,
     @required this.mid_average_speed,
     @required this.max_average_speed,
-    @required this.pr_rank,
-    @required this.frequency_milestone,
     @required this.trend,
     @required this.resource_state,
+    this.pr_rank,
+    this.frequency_milestone,
   });
 
   factory SimilarActivitiesModel.fromJson(Map<String, dynamic> json) =>
       _$SimilarActivitiesModelFromJson(json);
-  // Map<String, dynamic> toJson() => _$SimilarActivitiesModelToJson(this);
+  Map<String, dynamic> toJson() => _$SimilarActivitiesModelToJson(this);
 
   @override
   double get averageSpeed => average_speed;
@@ -41,7 +42,7 @@ class SimilarActivitiesModel extends SimilarActivities {
   int get effortCount => effort_count;
 
   @override
-  String get frequencyMilestone => frequency_milestone;
+  Option<String> get frequencyMilestoneOption => optionOf(frequency_milestone);
 
   @override
   double get maxAverageSpeed => max_average_speed;
@@ -53,7 +54,7 @@ class SimilarActivitiesModel extends SimilarActivities {
   double get minAverageSpeed => min_average_speed;
 
   @override
-  String get prRank => pr_rank;
+  Option<String> get prRankOption => optionOf(pr_rank);
 
   @override
   int get resourceState => resource_state;

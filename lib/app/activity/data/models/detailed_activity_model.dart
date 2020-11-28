@@ -25,12 +25,12 @@ class DetailedActivityModel extends DetailedActivity {
   @override
   final String name;
   @override
-  final int distance;
+  final double distance;
   final int moving_time;
   final int elapsed_time;
   final double total_elevation_gain;
   @override
-  final String type;
+  final ActivityType type;
   final int workout_type;
   @override
   final int id;
@@ -40,7 +40,7 @@ class DetailedActivityModel extends DetailedActivity {
   final DateTime start_date_local;
   @override
   final String timezone;
-  final int utc_offset;
+  final double utc_offset;
   final List<double> start_latlng;
   final List<double> end_latlng;
   final String location_city;
@@ -79,11 +79,10 @@ class DetailedActivityModel extends DetailedActivity {
   final int pr_count;
   final int total_photo_count;
   final bool has_kudoed;
-  @override
   final String description;
   @override
-  final int calories;
-  final int perceived_exertion;
+  final double calories;
+  final double perceived_exertion;
   final bool prefer_perceived_exertion;
   final List<int> segment_efforts;
   final List<SplitsMetricModel> splits_metric;
@@ -108,7 +107,6 @@ class DetailedActivityModel extends DetailedActivity {
     @required this.type,
     @required this.workout_type,
     @required this.id,
-    @required this.external_id,
     @required this.upload_id,
     @required this.start_date,
     @required this.start_date_local,
@@ -116,9 +114,6 @@ class DetailedActivityModel extends DetailedActivity {
     @required this.utc_offset,
     @required this.start_latlng,
     @required this.end_latlng,
-    @required this.location_city,
-    @required this.location_state,
-    @required this.location_country,
     @required this.start_latitude,
     @required this.start_longitude,
     @required this.achievement_count,
@@ -132,7 +127,6 @@ class DetailedActivityModel extends DetailedActivity {
     @required this.private,
     @required this.visibility,
     @required this.flagged,
-    @required this.gear_id,
     @required this.from_accepted_tag,
     @required this.upload_id_str,
     @required this.average_speed,
@@ -145,7 +139,6 @@ class DetailedActivityModel extends DetailedActivity {
     @required this.pr_count,
     @required this.total_photo_count,
     @required this.has_kudoed,
-    @required this.description,
     @required this.calories,
     @required this.perceived_exertion,
     @required this.prefer_perceived_exertion,
@@ -159,6 +152,12 @@ class DetailedActivityModel extends DetailedActivity {
     @required this.embed_token,
     @required this.similar_activities,
     @required this.available_zones,
+    this.external_id,
+    this.location_city,
+    this.location_state,
+    this.location_country,
+    this.gear_id,
+    this.description,
   });
 
   factory DetailedActivityModel.fromJson(Map<String, dynamic> json) =>
@@ -205,13 +204,13 @@ class DetailedActivityModel extends DetailedActivity {
   List2<double> get endLatlng => List2(end_latlng);
 
   @override
-  String get externalId => external_id;
+  Option<String> get externalIdOption => optionOf(external_id);
 
   @override
   bool get fromAcceptedTag => from_accepted_tag;
 
   @override
-  String get gearId => gear_id;
+  Option<String> get gearIdOption => optionOf(gear_id);
 
   @override
   bool get hasHeartrate => has_heartrate;
@@ -229,13 +228,13 @@ class DetailedActivityModel extends DetailedActivity {
   IList<Laps> get lapsList => ilist(laps);
 
   @override
-  String get locationCity => location_city;
+  Option<String> get locationCityOption => optionOf(location_city);
 
   @override
-  String get locationCountry => location_country;
+  Option<String> get locationCountryOption => optionOf(location_country);
 
   @override
-  String get locationState => location_state;
+  Option<String> get locationStateOption => optionOf(location_state);
 
   @override
   double get maxSpeed => max_speed;
@@ -244,7 +243,7 @@ class DetailedActivityModel extends DetailedActivity {
   int get movingTime => moving_time;
 
   @override
-  int get perceivedExertion => perceived_exertion;
+  double get perceivedExertion => perceived_exertion;
 
   @override
   int get photoCount => photo_count;
@@ -298,8 +297,11 @@ class DetailedActivityModel extends DetailedActivity {
   String get uploadIdStr => upload_id_str;
 
   @override
-  int get utcOffset => utc_offset;
+  double get utcOffset => utc_offset;
 
   @override
   int get workoutType => workout_type;
+
+  @override
+  Option<String> get descriptionOption => optionOf(description);
 }
