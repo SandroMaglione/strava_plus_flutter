@@ -4,41 +4,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_polimi_project/app/login/presentation/controllers/cubit/login_cubit.dart';
 import 'package:mobile_polimi_project/core/routes/router.gr.dart';
 import 'package:mobile_polimi_project/core/utils/async_state.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:auto_route/auto_route.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BlocConsumer<LoginCubit, AsyncState<Unit>>(
+        body: BlocListener<LoginCubit, AsyncState<Unit>>(
           listener: _listenLogin,
-          builder: (context, state) => state.maybeWhen(
-            success: (_) => const Center(
-              child: const Text(
-                "Success",
-              ),
-            ),
-            orElse: () => WebView(
-              initialUrl:
-                  "https://www.strava.com/oauth/authorize?client_id=56765&response_type=code&redirect_uri=http://nuklex.com/&approval_prompt=force&scope=profile:read_all,activity:read_all",
-              onPageStarted: (route) => _getAuthToken(context, route),
-            ),
+          child: const Center(
+            child: const CircularProgressIndicator(),
           ),
         ),
       ),
     );
   }
 
-  void _getAuthToken(BuildContext context, String route) {
-    context.read<LoginCubit>().getAuthToken(route);
-  }
-
   void _listenLogin(BuildContext context, AsyncState<Unit> state) {
     if (state is SuccessAsyncState<Unit>) {
       context.navigator.pushAndRemoveUntil(
         Routes.HomeScreen,
+        (route) => false,
+      );
+    } else if (state is ErrorAsyncState<Unit>) {
+      context.navigator.pushAndRemoveUntil(
+        Routes.LoginScreen,
         (route) => false,
       );
     }

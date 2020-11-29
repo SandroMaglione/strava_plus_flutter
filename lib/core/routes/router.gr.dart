@@ -12,13 +12,16 @@ import 'package:flutter/material.dart';
 
 import '../../app/activity/presentation/screens/detailed_activity_screen.dart';
 import '../../app/goal/presentation/screens/home_screen.dart';
+import '../../app/goal/presentation/screens/loading_screen.dart';
 import '../../app/login/presentation/screens/login_screen.dart';
 
 class Routes {
-  static const String LoginScreen = '/';
+  static const String LoadingScreen = '/';
+  static const String LoginScreen = '/login-screen';
   static const String HomeScreen = '/home-screen';
   static const String DetailedActivityScreen = '/detailed-activity-screen';
   static const all = <String>{
+    LoadingScreen,
     LoginScreen,
     HomeScreen,
     DetailedActivityScreen,
@@ -29,6 +32,7 @@ class Router extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
+    RouteDef(Routes.LoadingScreen, page: LoadingScreen),
     RouteDef(Routes.LoginScreen, page: LoginScreen),
     RouteDef(Routes.HomeScreen, page: HomeScreen),
     RouteDef(Routes.DetailedActivityScreen, page: DetailedActivityScreen),
@@ -36,6 +40,12 @@ class Router extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
+    LoadingScreen: (data) {
+      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
+        builder: (context) => LoadingScreen(),
+        settings: data,
+      );
+    },
     LoginScreen: (data) {
       return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
         builder: (context) => LoginScreen(),

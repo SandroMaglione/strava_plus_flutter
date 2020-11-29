@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/summary_activity.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/core/routes/router.gr.dart';
 
 class SummaryActivityCard extends StatelessWidget {
@@ -13,6 +15,8 @@ class SummaryActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.watch<ThemeCubit>().state;
+
     return InkWell(
       onTap: () => _openDetailedActivity(context),
       child: Card(
@@ -23,16 +27,11 @@ class SummaryActivityCard extends StatelessWidget {
             children: [
               Text(
                 summaryActivity.startDateLocalFormat,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w300,
-                ),
+                style: theme.customTextTheme.textTheme.subtitle1,
               ),
               Text(
                 summaryActivity.name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
+                style: theme.customTextTheme.textTheme.headline4,
               ),
               const Divider(),
               Text('Avg speed: ${summaryActivity.averageSpeed}'),
