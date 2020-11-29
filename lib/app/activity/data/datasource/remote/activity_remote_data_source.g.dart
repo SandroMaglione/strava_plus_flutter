@@ -28,7 +28,8 @@ class _ActivityRemoteDataSource implements ActivityRemoteDataSource {
       r'include_all_efforts': includeAllEfforts
     };
     final _data = <String, dynamic>{};
-    final _result = await _dio.request<Map<String, dynamic>>('activities/$id',
+    final _result = await _dio.request<Map<String, dynamic>>(
+        'https://www.strava.com/api/v3/activities/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',

@@ -48,8 +48,8 @@ class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
           (token) async => ilist(
             await _activityRemoteDataSource.getLoggedInAthleteActivities(
               token,
-              before?.millisecondsSinceEpoch,
-              after?.millisecondsSinceEpoch,
+              before != null ? '${before.millisecondsSinceEpoch / 1000}' : '',
+              after != null ? '${after.millisecondsSinceEpoch / 1000}' : '',
               page,
               30,
             ),

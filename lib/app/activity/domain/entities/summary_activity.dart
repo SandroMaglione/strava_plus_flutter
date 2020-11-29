@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile_polimi_project/app/goal/domain/entities/strava/meta_athlete.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
@@ -72,6 +73,11 @@ abstract class SummaryActivity extends Equatable {
   Option<double> get averageWattsOption;
   Option<bool> get deviceWattsOption;
   Option<int> get maxWattsOption;
+
+  String get startDateFormat =>
+      DateFormat('dd MMMM yyyy - HH:mm').format(startDate);
+  String get startDateLocalFormat =>
+      DateFormat('dd MMMM yyyy - HH:mm').format(startDateLocal);
 
   @override
   List<Object> get props => [id];

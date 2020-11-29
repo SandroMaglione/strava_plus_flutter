@@ -13,7 +13,7 @@ abstract class ActivityRemoteDataSource {
   @factoryMethod
   factory ActivityRemoteDataSource(Dio dio) = _ActivityRemoteDataSource;
 
-  @GET('activities/{id}')
+  @GET('https://www.strava.com/api/v3/activities/{id}')
   Future<DetailedActivityModel> getActivityById(
     @Path() int id,
     @Header('Authorization') String token,
@@ -23,8 +23,8 @@ abstract class ActivityRemoteDataSource {
   @GET('https://www.strava.com/api/v3/athlete/activities')
   Future<List<SummaryActivityModel>> getLoggedInAthleteActivities(
     @Header('Authorization') String token,
-    @Query('before') int before,
-    @Query('after') int after,
+    @Query('before') String before,
+    @Query('after') String after,
     @Query('page') int page,
     @Query('per_page') int per_page,
   );

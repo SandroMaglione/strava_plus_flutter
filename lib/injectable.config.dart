@@ -14,6 +14,7 @@ import 'app/activity/data/datasource/remote/activity_remote_data_source.dart';
 import 'app/activity/domain/activity_repository.dart';
 import 'app/activity/data/repository/activity_repository_impl.dart';
 import 'app/data/datasources/api/api_constants.dart';
+import 'app/activity/presentation/controllers/cubit/detailed_activity_cubit.dart';
 import 'app/activity/domain/activity_repository.rc.dart';
 import 'app/login/domain/login_repository.rc.dart';
 import 'app/goal/domain/goal_repository.dart';
@@ -62,6 +63,8 @@ GetIt $initGetIt(
       () => LoginCubit(get<GetAuthTokenRepo>(), get<GetUserAccountInfoRepo>()));
   gh.factory<ActivityListCubit>(
       () => ActivityListCubit(get<GetLoggedInAthleteActivitiesRepo>()));
+  gh.factory<DetailedActivityCubit>(
+      () => DetailedActivityCubit(get<GetActivityByIdRepo>()));
   return get;
 }
 
