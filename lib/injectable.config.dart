@@ -5,6 +5,7 @@
 // **************************************************************************
 
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -26,15 +27,20 @@ GetIt $initGetIt(
 }) {
   final gh = GetItHelper(get, environment, environmentFilter);
   final registerDioClient = _$RegisterDioClient();
+  final registerFlutterSecureStorage = _$RegisterFlutterSecureStorage();
   gh.factory<ApiConstants>(() => ApiConstantsProduction());
   gh.factory<Dio>(() => registerDioClient.dioClient);
+  gh.factory<FlutterSecureStorage>(
+      () => registerFlutterSecureStorage.flutterSecureStorage);
   gh.factory<MakeRequestRepo>(
       () => MakeRequestRepo(exampleRepository: get<ExampleRepository>()));
   gh.factory<ActivityRemoteDataSource>(
       () => ActivityRemoteDataSource(get<Dio>()));
-  gh.factory<ActivityRepository>(
-      () => ActivityRepositoryImpl(get<ActivityRemoteDataSource>()));
+  gh.factory<ActivityRepository>(() => ActivityRepositoryImpl(
+      get<ActivityRemoteDataSource>(), get<FlutterSecureStorage>()));
   return get;
 }
 
 class _$RegisterDioClient extends RegisterDioClient {}
+
+class _$RegisterFlutterSecureStorage extends RegisterFlutterSecureStorage {}

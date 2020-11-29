@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobile_polimi_project/env/env_reader.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -27,4 +28,11 @@ abstract class RegisterDioClient {
             ),
           ],
         );
+}
+
+/// Register injectable [FlutterSecureStorage]
+@module
+abstract class RegisterFlutterSecureStorage {
+  /// Get sync [FlutterSecureStorage]
+  FlutterSecureStorage get flutterSecureStorage => const FlutterSecureStorage();
 }

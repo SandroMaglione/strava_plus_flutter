@@ -66,6 +66,36 @@ abstract class Shared {
     priority: GoalPriority.high,
     metrics: composeMetricModel,
   );
+  static final userGoalModelNested = UserGoalModel(
+    id: 'id',
+    goalName: 'name',
+    createdDate: dateTime,
+    lastEditDate: dateTime,
+    startDate: dateTime,
+    endDate: endDateTime,
+    color: 0,
+    priority: GoalPriority.high,
+    metrics: const ComposeMetricModel(
+      metricLogic: MetricLogic.and,
+      goalMetricList: [
+        finalMetricModel,
+        const ComposeMetricModel(
+          metricLogic: MetricLogic.or,
+          goalMetricList: [
+            finalMetricModel,
+            finalMetricModel,
+            const ComposeMetricModel(
+              metricLogic: MetricLogic.and,
+              goalMetricList: [
+                finalMetricModel,
+                finalMetricModel,
+              ],
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
   static final userGoalModelInvalid = UserGoalModel(
     id: 'id',
     goalName: 'aa',

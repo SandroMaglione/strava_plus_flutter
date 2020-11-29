@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobile_polimi_project/app/activity/data/datasource/remote/activity_remote_data_source.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/summary_activity.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/detailed_activity.dart';
@@ -8,12 +9,17 @@ import 'package:mobile_polimi_project/app/activity/domain/activity_repository.da
 import 'package:mobile_polimi_project/core/errors/failure.dart';
 import 'package:mobile_polimi_project/core/extensions/dartz_extension.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mobile_polimi_project/core/mixins/token_mixin.dart';
 
 @Injectable(as: ActivityRepository)
-class ActivityRepositoryImpl implements ActivityRepository {
+class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
   final ActivityRemoteDataSource _activityRemoteDataSource;
+  final FlutterSecureStorage _flutterSecureStorage;
 
-  ActivityRepositoryImpl(this._activityRemoteDataSource);
+  ActivityRepositoryImpl(
+    this._activityRemoteDataSource,
+    this._flutterSecureStorage,
+  );
 
   @override
   Future<Either<Failure, DetailedActivity>> getActivityById(
@@ -21,10 +27,13 @@ class ActivityRepositoryImpl implements ActivityRepository {
     bool includeAllEfforts = false,
   }) async =>
       Task(
-        () async => _activityRemoteDataSource.getActivityById(
-          id,
-          'token',
-          includeAllEfforts,
+        () async => tokenRequest(
+          (token) => _activityRemoteDataSource.getActivityById(
+            id,
+            token,
+            includeAllEfforts,
+          ),
+          _flutterSecureStorage,
         ),
       ).runAll();
 
@@ -35,14 +44,17 @@ class ActivityRepositoryImpl implements ActivityRepository {
     DateTime after,
   }) async =>
       Task(
-        () async => ilist(
-          await _activityRemoteDataSource.getLoggedInAthleteActivities(
-            'token',
-            before?.millisecondsSinceEpoch,
-            after?.millisecondsSinceEpoch,
-            page,
-            30,
+        () async => tokenRequest<IList<SummaryActivity>>(
+          (token) async => ilist(
+            await _activityRemoteDataSource.getLoggedInAthleteActivities(
+              token,
+              before?.millisecondsSinceEpoch,
+              after?.millisecondsSinceEpoch,
+              page,
+              30,
+            ),
           ),
+          _flutterSecureStorage,
         ),
       ).runAll();
 }

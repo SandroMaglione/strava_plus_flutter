@@ -16,6 +16,8 @@ void main() {
   final jsonMapComposeMetric =
       json.decode(fixture("user_goal_model_compose_metric.json"))
           as Map<String, dynamic>;
+  final jsonMapNested = json.decode(fixture("user_goal_model_nested.json"))
+      as Map<String, dynamic>;
 
   test('should be of type UserGoal', () async {
     expect(Shared.userGoalModelFinalMetric, isA<UserGoal>());
@@ -46,6 +48,11 @@ void main() {
     test('should convert correctly to json with ComposeMetric', () async {
       expect(UserGoalModel.fromJson(jsonMapComposeMetric),
           Shared.userGoalModelComposeMetric);
+    });
+
+    test('should convert correctly to json a complex nested UserGoal',
+        () async {
+      expect(UserGoalModel.fromJson(jsonMapNested), Shared.userGoalModelNested);
     });
   });
 

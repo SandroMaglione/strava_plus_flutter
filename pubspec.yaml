@@ -51,6 +51,9 @@ dependencies:
   # Strava auth code on browser
   webview_flutter: ^1.0.7
 
+  # Secure local token storage
+  flutter_secure_storage: ^3.3.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
