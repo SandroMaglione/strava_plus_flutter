@@ -4,10 +4,12 @@ import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/best_efforts_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/laps_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/photos_model.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/segment_efforts_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/similar_activities_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/splits_metric_model.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/best_efforts.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/laps.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/segment_efforts.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/similar_activities.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/splits_metric.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
@@ -84,7 +86,7 @@ class DetailedActivityModel extends DetailedActivity {
   final double calories;
   final double perceived_exertion;
   final bool prefer_perceived_exertion;
-  final List<int> segment_efforts;
+  final List<SegmentEffortsModel> segment_efforts;
   final List<SplitsMetricModel> splits_metric;
   final List<SplitsMetricModel> splits_standard;
   final List<LapsModel> laps;
@@ -258,7 +260,7 @@ class DetailedActivityModel extends DetailedActivity {
   int get resourceState => resource_state;
 
   @override
-  IList<int> get segmentEfforts => ilist(segment_efforts);
+  IList<SegmentEfforts> get segmentEfforts => ilist(segment_efforts);
 
   @override
   SimilarActivities get similarActivities => similar_activities;

@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/photo_primary.dart';
 
 abstract class Photos extends Equatable {
   const Photos();
 
-  Option<String> get primaryOption;
+  Option<PhotoPrimary> get primaryOption;
   int get count;
 
   @override

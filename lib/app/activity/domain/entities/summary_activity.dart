@@ -10,7 +10,7 @@ abstract class SummaryActivity extends Equatable {
 
   int get resourceState;
   int get id;
-  int get uploadId;
+  num get uploadId;
   MetaAthlete get athlete;
   String get name;
   double get distance;

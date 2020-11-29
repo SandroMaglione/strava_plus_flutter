@@ -11,7 +11,7 @@ part of 'summary_activity_model.dart';
 SummaryActivityModel _$SummaryActivityModelFromJson(Map<String, dynamic> json) {
   return SummaryActivityModel(
     id: json['id'] as int,
-    upload_id: json['upload_id'] as int,
+    upload_id: json['upload_id'] as num,
     athlete: json['athlete'] == null
         ? null
         : MetaAthleteModel.fromJson(json['athlete'] as Map<String, dynamic>),

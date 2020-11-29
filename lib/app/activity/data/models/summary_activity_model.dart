@@ -12,7 +12,7 @@ class SummaryActivityModel extends SummaryActivity {
   @override
   final int id;
   final String external_id;
-  final int upload_id;
+  final num upload_id;
   @override
   final MetaAthleteModel athlete;
   @override
@@ -199,7 +199,7 @@ class SummaryActivityModel extends SummaryActivity {
   double get totalElevationGain => total_elevation_gain;
 
   @override
-  int get uploadId => upload_id;
+  num get uploadId => upload_id;
 
   @override
   String get uploadIdStr => upload_id_str;

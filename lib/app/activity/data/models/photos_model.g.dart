@@ -11,12 +11,14 @@ part of 'photos_model.dart';
 PhotosModel _$PhotosModelFromJson(Map<String, dynamic> json) {
   return PhotosModel(
     count: json['count'] as int,
-    primary: json['primary'] as String,
+    primary: json['primary'] == null
+        ? null
+        : PhotoPrimaryModel.fromJson(json['primary'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$PhotosModelToJson(PhotosModel instance) =>
     <String, dynamic>{
-      'primary': instance.primary,
+      'primary': instance.primary?.toJson(),
       'count': instance.count,
     };

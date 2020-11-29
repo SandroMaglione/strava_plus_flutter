@@ -1,0 +1,47 @@
+{
+  "id": 12345678987654320,
+  "resource_state": 2,
+  "name": "Tunnel Rd.",
+  "activity": {
+    "id": 12345678987654320,
+    "resource_state": 1
+  },
+  "athlete": {
+    "id": 134815,
+    "resource_state": 1
+  },
+  "elapsed_time": 2038,
+  "moving_time": 2038,
+  "start_date": "2018-02-16T14:56:25Z",
+  "start_date_local": "2018-02-16T06:56:25Z",
+  "distance": 9434.8,
+  "start_index": 211,
+  "end_index": 2246,
+  "average_cadence": 78.6,
+  "device_watts": true,
+  "average_watts": 237.6,
+  "segment": {
+    "id": 673683,
+    "resource_state": 2,
+    "name": "Tunnel Rd.",
+    "activity_type": "Ride",
+    "distance": 9220.7,
+    "average_grade": 4.2,
+    "maximum_grade": 25.8,
+    "elevation_high": 426.5,
+    "elevation_low": 43.4,
+    "start_latlng": [37.8346153, -122.2520872],
+    "end_latlng": [37.8476261, -122.2008944],
+    "climb_category": 3,
+    "city": "Oakland",
+    "state": "CA",
+    "country": "United States",
+    "private": false,
+    "hazardous": false,
+    "starred": false
+  },
+  "kom_rank": null,
+  "pr_rank": null,
+  "achievements": [],
+  "hidden": false
+}

@@ -1,12 +1,14 @@
+import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
-import 'package:mobile_polimi_project/app/activity/domain/entities/laps.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/segment_model.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/segment_efforts.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
 
-part 'laps_model.g.dart';
+part 'segment_efforts_model.g.dart';
 
 @JsonSerializable()
-class LapsModel extends Laps {
+class SegmentEffortsModel extends SegmentEfforts {
   @override
   final int id;
   final int resource_state;
@@ -24,16 +26,18 @@ class LapsModel extends Laps {
   final double distance;
   final int start_index;
   final int end_index;
-  final double total_elevation_gain;
-  final double average_speed;
-  final double max_speed;
-  final int lap_index;
+  final double average_cadence;
+  final bool device_watts;
+  final double average_watts;
   @override
-  final int split;
+  final SegmentModel segment;
+  final String kom_rank;
+  final String pr_rank;
+  final List<int> achievements;
   @override
-  final int paceZone;
+  final bool hidden;
 
-  const LapsModel({
+  const SegmentEffortsModel({
     @required this.id,
     @required this.resource_state,
     @required this.name,
@@ -46,20 +50,31 @@ class LapsModel extends Laps {
     @required this.distance,
     @required this.start_index,
     @required this.end_index,
-    @required this.total_elevation_gain,
-    @required this.average_speed,
-    @required this.max_speed,
-    @required this.lap_index,
-    @required this.split,
-    @required this.paceZone,
+    @required this.average_cadence,
+    @required this.device_watts,
+    @required this.average_watts,
+    @required this.segment,
+    @required this.kom_rank,
+    @required this.pr_rank,
+    @required this.achievements,
+    @required this.hidden,
   });
 
-  factory LapsModel.fromJson(Map<String, dynamic> json) =>
-      _$LapsModelFromJson(json);
-  Map<String, dynamic> toJson() => _$LapsModelToJson(this);
+  factory SegmentEffortsModel.fromJson(Map<String, dynamic> json) =>
+      _$SegmentEffortsModelFromJson(json);
+  Map<String, dynamic> toJson() => _$SegmentEffortsModelToJson(this);
 
   @override
-  double get averageSpeed => average_speed;
+  IList<int> get achievementsList => ilist(achievements);
+
+  @override
+  double get averageCadence => average_cadence;
+
+  @override
+  double get averageWatts => average_watts;
+
+  @override
+  bool get deviceWatts => device_watts;
 
   @override
   int get elapsedTime => elapsed_time;
@@ -68,13 +83,13 @@ class LapsModel extends Laps {
   int get endIndex => end_index;
 
   @override
-  int get lapIndex => lap_index;
-
-  @override
-  double get maxSpeed => max_speed;
+  String get komRank => kom_rank;
 
   @override
   int get movingTime => moving_time;
+
+  @override
+  String get prRank => pr_rank;
 
   @override
   int get resourceState => resource_state;
@@ -87,7 +102,4 @@ class LapsModel extends Laps {
 
   @override
   int get startIndex => start_index;
-
-  @override
-  double get totalElevationGain => total_elevation_gain;
 }

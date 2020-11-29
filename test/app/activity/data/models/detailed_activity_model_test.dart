@@ -10,6 +10,9 @@ import 'shared.dart';
 void main() {
   final jsonMap = json.decode(fixture("detailed_activity_model.json"))
       as Map<String, dynamic>;
+  final jsonMapPlayground =
+      json.decode(fixture("detailed_activity_model_playground.json"))
+          as Map<String, dynamic>;
 
   test('should be of type DetailedActivity', () async {
     expect(Shared.detailedActivityModel, isA<DetailedActivity>());
@@ -23,6 +26,12 @@ void main() {
     test('should convert correctly to json', () async {
       expect(DetailedActivityModel.fromJson(jsonMap),
           Shared.detailedActivityModel);
+    });
+
+    test('should convert correctly to json a model from Strava playgroud',
+        () async {
+      expect(DetailedActivityModel.fromJson(jsonMapPlayground),
+          isA<DetailedActivityModel>());
     });
   });
 }

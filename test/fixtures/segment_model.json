@@ -1,0 +1,20 @@
+{
+  "id": 673683,
+  "resource_state": 2,
+  "name": "Tunnel Rd.",
+  "activity_type": "Ride",
+  "distance": 9220.7,
+  "average_grade": 4.2,
+  "maximum_grade": 25.8,
+  "elevation_high": 426.5,
+  "elevation_low": 43.4,
+  "start_latlng": [37.8346153, -122.2520872],
+  "end_latlng": [37.8476261, -122.2008944],
+  "climb_category": 3,
+  "city": "Oakland",
+  "state": "CA",
+  "country": "United States",
+  "private": false,
+  "hazardous": false,
+  "starred": false
+}

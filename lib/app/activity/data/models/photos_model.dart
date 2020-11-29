@@ -1,13 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/photo_primary_model.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/photo_primary.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/photos.dart';
 
 part 'photos_model.g.dart';
 
 @JsonSerializable()
 class PhotosModel extends Photos {
-  final String primary;
+  final PhotoPrimaryModel primary;
   @override
   final int count;
 
@@ -21,5 +23,5 @@ class PhotosModel extends Photos {
   Map<String, dynamic> toJson() => _$PhotosModelToJson(this);
 
   @override
-  Option<String> get primaryOption => optionOf(primary);
+  Option<PhotoPrimary> get primaryOption => optionOf(primary);
 }

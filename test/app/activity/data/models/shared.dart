@@ -1,7 +1,10 @@
 import 'package:mobile_polimi_project/app/activity/data/models/best_efforts_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/detailed_activity_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/laps_model.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/photo_primary_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/photos_model.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/segment_efforts_model.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/segment_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/similar_activities_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/splits_metric_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/summary_activity_model.dart';
@@ -12,6 +15,107 @@ import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 abstract class Shared {
   static const metaAthleteModel = MetaAthleteModel(id: 44062778);
   static const activityModel = MetaAthleteModel(id: 2778055056);
+  static const photoPrimaryModel = PhotoPrimaryModel(
+    id: null,
+    unique_id: "3FDGKL3-204E-4867-9E8D-89FC79EAAE17",
+    urls: {
+      "100":
+          "https://dgtzuqphqg23d.cloudfront.net/Bv93zv5t_mr57v0wXFbY_JyvtucgmU5Ym6N9z_bKeUI-128x96.jpg",
+      "600":
+          "https://dgtzuqphqg23d.cloudfront.net/Bv93zv5t_mr57v0wXFbY_JyvtucgmU5Ym6N9z_bKeUI-768x576.jpg"
+    },
+    source: 1,
+  );
+  static const photoPrimaryModelCopy = PhotoPrimaryModel(
+    id: null,
+    unique_id: "3FDGKL3-204E-4867-9E8D-89FC79EAAE17",
+    urls: {},
+    source: 10,
+  );
+  static const segmentModel = SegmentModel(
+    id: 673683,
+    resource_state: 2,
+    name: "Tunnel Rd.",
+    activity_type: ActivityType.Ride,
+    distance: 9220.7,
+    average_grade: 4.2,
+    maximum_grade: 25.8,
+    elevation_high: 426.5,
+    elevation_low: 43.4,
+    start_latlng: [37.8346153, -122.2520872],
+    end_latlng: [37.8476261, -122.2008944],
+    climb_category: 3,
+    city: "Oakland",
+    state: "CA",
+    country: "United States",
+    private: false,
+    hazardous: false,
+    starred: false,
+  );
+  static const segmentModelCopy = SegmentModel(
+    id: 673683,
+    resource_state: 22,
+    name: "Tunnel Rd. State",
+    activity_type: ActivityType.BackcountrySki,
+    distance: 92220.7,
+    average_grade: 4.2,
+    maximum_grade: 25.8,
+    elevation_high: 426.5,
+    elevation_low: 43.4,
+    start_latlng: [37.8346153, -122.2520872],
+    end_latlng: [37.8476261, -122.2008944],
+    climb_category: 3,
+    city: "Oakland",
+    state: "CA",
+    country: "United States",
+    private: false,
+    hazardous: false,
+    starred: false,
+  );
+  static final segmentEffortsModel = SegmentEffortsModel(
+    id: 12345678987654320,
+    resource_state: 2,
+    name: "Tunnel Rd.",
+    activity: const MetaAthleteModel(id: 12345678987654320),
+    athlete: const MetaAthleteModel(id: 134815),
+    elapsed_time: 2038,
+    moving_time: 2038,
+    start_date: DateTime(2018, 2, 16, 14, 56, 25),
+    start_date_local: DateTime(2018, 2, 16, 6, 56, 25),
+    distance: 9434.8,
+    start_index: 211,
+    end_index: 2246,
+    average_cadence: 78.6,
+    device_watts: true,
+    average_watts: 237.6,
+    segment: segmentModel,
+    kom_rank: null,
+    pr_rank: null,
+    achievements: [],
+    hidden: false,
+  );
+  static final segmentEffortsModelCopy = SegmentEffortsModel(
+    id: 12345678987654320,
+    resource_state: 22,
+    name: "Tunnel Rd. State",
+    activity: const MetaAthleteModel(id: 12678987654320),
+    athlete: const MetaAthleteModel(id: 1348145),
+    elapsed_time: 2038,
+    moving_time: 20338,
+    start_date: DateTime(2018, 2, 16, 14, 56, 25),
+    start_date_local: DateTime(2018, 2, 16, 6, 56, 25),
+    distance: 9434.8,
+    start_index: 211,
+    end_index: 22346,
+    average_cadence: 78.6,
+    device_watts: true,
+    average_watts: 237.6,
+    segment: segmentModel,
+    kom_rank: null,
+    pr_rank: null,
+    achievements: [],
+    hidden: false,
+  );
   static const trendModel = TrendModel(
     speeds: [3.282710280373832],
     current_activity_index: 0,

@@ -67,8 +67,11 @@ DetailedActivityModel _$DetailedActivityModelFromJson(
     calories: (json['calories'] as num)?.toDouble(),
     perceived_exertion: (json['perceived_exertion'] as num)?.toDouble(),
     prefer_perceived_exertion: json['prefer_perceived_exertion'] as bool,
-    segment_efforts:
-        (json['segment_efforts'] as List)?.map((e) => e as int)?.toList(),
+    segment_efforts: (json['segment_efforts'] as List)
+        ?.map((e) => e == null
+            ? null
+            : SegmentEffortsModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     splits_metric: (json['splits_metric'] as List)
         ?.map((e) => e == null
             ? null
@@ -162,7 +165,8 @@ Map<String, dynamic> _$DetailedActivityModelToJson(
       'calories': instance.calories,
       'perceived_exertion': instance.perceived_exertion,
       'prefer_perceived_exertion': instance.prefer_perceived_exertion,
-      'segment_efforts': instance.segment_efforts,
+      'segment_efforts':
+          instance.segment_efforts?.map((e) => e?.toJson())?.toList(),
       'splits_metric':
           instance.splits_metric?.map((e) => e?.toJson())?.toList(),
       'splits_standard':

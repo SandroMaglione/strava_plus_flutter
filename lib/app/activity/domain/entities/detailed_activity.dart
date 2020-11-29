@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/best_efforts.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/laps.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/photos.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/segment_efforts.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/similar_activities.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/splits_metric.dart';
 import 'package:mobile_polimi_project/app/goal/domain/entities/strava/meta_athlete.dart';
@@ -60,7 +61,7 @@ abstract class DetailedActivity extends Equatable {
   double get calories;
   double get perceivedExertion;
   bool get preferPerceivedExertion;
-  IList<int> get segmentEfforts;
+  IList<SegmentEfforts> get segmentEfforts;
   IList<SplitsMetric> get splitsMetric;
   IList<SplitsMetric> get splitsStandard;
   IList<Laps> get lapsList;
