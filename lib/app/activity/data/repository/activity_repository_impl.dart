@@ -16,7 +16,7 @@ class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
   final ActivityRemoteDataSource _activityRemoteDataSource;
   final FlutterSecureStorage _flutterSecureStorage;
 
-  ActivityRepositoryImpl(
+  const ActivityRepositoryImpl(
     this._activityRemoteDataSource,
     this._flutterSecureStorage,
   );
