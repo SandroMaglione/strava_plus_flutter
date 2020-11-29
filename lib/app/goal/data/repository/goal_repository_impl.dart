@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: GoalRepository)
 class GoalRepositoryImpl implements GoalRepository {
-  const GoalRepositoryImpl();
+  GoalRepositoryImpl();
 
   @override
   Future<Either<Failure, Unit>> createGoal(UserGoal userGoal) {

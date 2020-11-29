@@ -22,7 +22,7 @@ abstract class DetailedAthlete extends Equatable {
   int get friendCount;
   String get measurementPreference;
   int get ftp;
-  int get weight;
+  double get weight;
   // int get clubs;
   // int get bikes;
   // int get shoes;

@@ -56,7 +56,8 @@ class _ActivityRemoteDataSource implements ActivityRemoteDataSource {
       r'per_page': per_page
     };
     final _data = <String, dynamic>{};
-    final _result = await _dio.request<List<dynamic>>('athlete/activities',
+    final _result = await _dio.request<List<dynamic>>(
+        'https://www.strava.com/api/v3/athlete/activities',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',

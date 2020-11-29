@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mobile_polimi_project/app/login/data/models/auth_token.dart';
 
 mixin TokenMixin {
   /// Key of the locally stored token to access Stava API
@@ -18,29 +21,32 @@ mixin TokenMixin {
           () => throw Exception(
             "Missing token, impossible to complete the request",
           ),
-          id,
+          (authToken) => '${authToken.token_type} ${authToken.access_token}',
         ),
       );
 
   /// Read token from local storage
-  Future<Option<String>> getToken(
+  Future<Option<AuthToken>> getToken(
     FlutterSecureStorage flutterSecureStorage,
   ) async =>
       optionOf(
-        await flutterSecureStorage.read(
-          key: stravaApiTokenKey,
+        AuthToken.fromJson(
+          json.decode(
+            await flutterSecureStorage.read(
+              key: stravaApiTokenKey,
+            ),
+          ) as Map<String, dynamic>,
         ),
       );
 
-  /// Write token in local storage
-  Future<Unit> setToken(
-    String token,
+  Future<Unit> saveToken(
+    AuthToken authToken,
     FlutterSecureStorage flutterSecureStorage,
-  ) async =>
+  ) =>
       flutterSecureStorage
           .write(
             key: stravaApiTokenKey,
-            value: token,
+            value: json.encode(authToken.toJson()),
           )
           .then((_) => unit);
 }

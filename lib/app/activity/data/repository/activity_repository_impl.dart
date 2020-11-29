@@ -16,16 +16,16 @@ class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
   final ActivityRemoteDataSource _activityRemoteDataSource;
   final FlutterSecureStorage _flutterSecureStorage;
 
-  const ActivityRepositoryImpl(
+  ActivityRepositoryImpl(
     this._activityRemoteDataSource,
     this._flutterSecureStorage,
   );
 
   @override
   Future<Either<Failure, DetailedActivity>> getActivityById(
-    int id, {
-    bool includeAllEfforts = false,
-  }) async =>
+    int id,
+    bool includeAllEfforts,
+  ) async =>
       Task(
         () async => tokenRequest(
           (token) => _activityRemoteDataSource.getActivityById(
@@ -39,10 +39,10 @@ class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
 
   @override
   Future<Either<Failure, IList<SummaryActivity>>> getLoggedInAthleteActivities(
-    int page, {
+    int page,
     DateTime before,
     DateTime after,
-  }) async =>
+  ) async =>
       Task(
         () async => tokenRequest<IList<SummaryActivity>>(
           (token) async => ilist(

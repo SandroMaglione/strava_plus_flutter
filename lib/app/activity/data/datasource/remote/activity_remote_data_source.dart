@@ -20,7 +20,7 @@ abstract class ActivityRemoteDataSource {
     @Query('include_all_efforts') bool includeAllEfforts,
   );
 
-  @GET('athlete/activities')
+  @GET('https://www.strava.com/api/v3/athlete/activities')
   Future<List<SummaryActivityModel>> getLoggedInAthleteActivities(
     @Header('Authorization') String token,
     @Query('before') int before,
