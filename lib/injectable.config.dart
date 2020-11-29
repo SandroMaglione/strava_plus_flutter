@@ -24,6 +24,7 @@ import 'app/login/data/datasource/remote/login_remote_data_source.dart';
 import 'app/login/domain/login_repository.dart';
 import 'app/login/data/repository/login_repository_impl.dart';
 import 'app/data/datasources/api/api_client.dart';
+import 'core/services/token_manager.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -42,29 +43,31 @@ GetIt $initGetIt(
       () => registerFlutterSecureStorage.flutterSecureStorage);
   gh.factory<GoalRepository>(() => GoalRepositoryImpl());
   gh.factory<LoginRemoteDataSource>(() => LoginRemoteDataSource(get<Dio>()));
-  gh.factory<LoginRepository>(() => LoginRepositoryImpl(
-      get<LoginRemoteDataSource>(), get<FlutterSecureStorage>()));
+  gh.factory<TokenManager>(() => TokenManagerFlutterSecureStorage(
+      get<FlutterSecureStorage>(), get<LoginRemoteDataSource>()));
   gh.factory<ActivityRemoteDataSource>(
       () => ActivityRemoteDataSource(get<Dio>()));
   gh.factory<ActivityRepository>(() => ActivityRepositoryImpl(
-      get<ActivityRemoteDataSource>(), get<FlutterSecureStorage>()));
+      get<ActivityRemoteDataSource>(), get<TokenManager>()));
   gh.factory<GetActivityByIdRepo>(
       () => GetActivityByIdRepo(activityRepository: get<ActivityRepository>()));
-  gh.factory<GetAuthTokenRepo>(
-      () => GetAuthTokenRepo(loginRepository: get<LoginRepository>()));
   gh.factory<GetLoggedInAthleteActivitiesRepo>(() =>
       GetLoggedInAthleteActivitiesRepo(
           activityRepository: get<ActivityRepository>()));
+  gh.factory<LoginRepository>(() =>
+      LoginRepositoryImpl(get<LoginRemoteDataSource>(), get<TokenManager>()));
+  gh.factory<ActivityListCubit>(
+      () => ActivityListCubit(get<GetLoggedInAthleteActivitiesRepo>()));
+  gh.factory<DetailedActivityCubit>(
+      () => DetailedActivityCubit(get<GetActivityByIdRepo>()));
+  gh.factory<GetAuthTokenRepo>(
+      () => GetAuthTokenRepo(loginRepository: get<LoginRepository>()));
   gh.factory<GetUserAccountInfoRepo>(
       () => GetUserAccountInfoRepo(loginRepository: get<LoginRepository>()));
   gh.factory<GetUserAccountStatsRepo>(
       () => GetUserAccountStatsRepo(loginRepository: get<LoginRepository>()));
   gh.factory<LoginCubit>(
       () => LoginCubit(get<GetAuthTokenRepo>(), get<GetUserAccountInfoRepo>()));
-  gh.factory<ActivityListCubit>(
-      () => ActivityListCubit(get<GetLoggedInAthleteActivitiesRepo>()));
-  gh.factory<DetailedActivityCubit>(
-      () => DetailedActivityCubit(get<GetActivityByIdRepo>()));
   return get;
 }
 

@@ -1,24 +1,24 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mobile_polimi_project/app/activity/data/datasource/remote/activity_remote_data_source.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/summary_activity.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/detailed_activity.dart';
 import 'package:mobile_polimi_project/app/activity/domain/activity_repository.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
+import 'package:mobile_polimi_project/core/errors/login_failure.dart';
 import 'package:mobile_polimi_project/core/extensions/dartz_extension.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile_polimi_project/core/mixins/token_mixin.dart';
+import 'package:mobile_polimi_project/core/services/token_manager.dart';
 
 @Injectable(as: ActivityRepository)
-class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
+class ActivityRepositoryImpl implements ActivityRepository {
   final ActivityRemoteDataSource _activityRemoteDataSource;
-  final FlutterSecureStorage _flutterSecureStorage;
+  final TokenManager _tokenManager;
 
   ActivityRepositoryImpl(
     this._activityRemoteDataSource,
-    this._flutterSecureStorage,
+    this._tokenManager,
   );
 
   @override
@@ -27,13 +27,15 @@ class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
     bool includeAllEfforts,
   ) async =>
       Task(
-        () async => tokenRequest(
-          (token) => _activityRemoteDataSource.getActivityById(
-            id,
-            token,
-            includeAllEfforts,
+        () async => _tokenManager.tokenRequest(
+          (token) => token.fold(
+            () => throw const LoginFailure(0, null),
+            (token) => _activityRemoteDataSource.getActivityById(
+              id,
+              token,
+              includeAllEfforts,
+            ),
           ),
-          _flutterSecureStorage,
         ),
       ).runAll();
 
@@ -44,17 +46,19 @@ class ActivityRepositoryImpl with TokenMixin implements ActivityRepository {
     DateTime after,
   ) async =>
       Task(
-        () async => tokenRequest<IList<SummaryActivity>>(
-          (token) async => ilist(
-            await _activityRemoteDataSource.getLoggedInAthleteActivities(
-              token,
-              before != null ? '${before.millisecondsSinceEpoch / 1000}' : '',
-              after != null ? '${after.millisecondsSinceEpoch / 1000}' : '',
-              page,
-              30,
+        () async => _tokenManager.tokenRequest<IList<SummaryActivity>>(
+          (token) async => token.fold(
+            () => throw const LoginFailure(0, null),
+            (token) async => ilist(
+              await _activityRemoteDataSource.getLoggedInAthleteActivities(
+                token,
+                before != null ? '${before.millisecondsSinceEpoch / 1000}' : '',
+                after != null ? '${after.millisecondsSinceEpoch / 1000}' : '',
+                page,
+                30,
+              ),
             ),
           ),
-          _flutterSecureStorage,
         ),
       ).runAll();
 }

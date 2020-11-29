@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile_polimi_project/app/activity/data/models/detailed_activity_model.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/detailed_athlete_model.dart';
 import 'package:mobile_polimi_project/app/login/data/models/auth_token.dart';
 import 'package:retrofit/retrofit.dart';
@@ -18,6 +17,14 @@ abstract class LoginRemoteDataSource {
     @Query('client_id') int clientId,
     @Query('client_secret') String clientSecret,
     @Query('code') String code,
+    @Query('grant_type') String grantType,
+  );
+
+  @POST('https://www.strava.com/oauth/token')
+  Future<AuthToken> getRefreshToken(
+    @Query('client_id') int clientId,
+    @Query('client_secret') String clientSecret,
+    @Query('refresh_token') String refreshToken,
     @Query('grant_type') String grantType,
   );
 
