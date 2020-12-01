@@ -80,10 +80,5 @@ void main() {
     test('should contain invalid name from the model', () async {
       expect(Shared.userGoalInvalid.name.name, none<String>());
     });
-
-    test('should throw UnimplementedError when accessing progress (TODO)',
-        () async {
-      expect(() => Shared.userGoal.progress, throwsUnimplementedError);
-    });
   });
 }

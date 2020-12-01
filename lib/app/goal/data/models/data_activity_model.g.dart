@@ -52,6 +52,12 @@ T _$enumDecodeNullable<T>(
 }
 
 const _$ActivityIdEnumMap = {
-  ActivityId.id1: 'id1',
-  ActivityId.id2: 'id2',
+  ActivityId.distance: 'distance',
+  ActivityId.movingTime: 'movingTime',
+  ActivityId.elapsedTime: 'elapsedTime',
+  ActivityId.totalElevationGain: 'totalElevationGain',
+  ActivityId.achievementCount: 'achievementCount',
+  ActivityId.kudosCount: 'kudosCount',
+  ActivityId.commentCount: 'commentCount',
+  ActivityId.athleteCount: 'athleteCount',
 };

@@ -1,2 +1,11 @@
 /// Possible activities to use as [UserGoal] metrics
-enum ActivityId { id1, id2 }
+enum ActivityId {
+  distance,
+  movingTime,
+  elapsedTime,
+  totalElevationGain,
+  achievementCount,
+  kudosCount,
+  commentCount,
+  athleteCount,
+}

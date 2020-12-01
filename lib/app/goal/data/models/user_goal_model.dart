@@ -44,9 +44,6 @@ class UserGoalModel extends UserGoal {
   Map<String, dynamic> toJson() => _$UserGoalModelToJson(this);
 
   @override
-  double get progress => throw UnimplementedError();
-
-  @override
   List2Datetime get targetDates => List2Datetime(startDate, endDate);
 
   @override

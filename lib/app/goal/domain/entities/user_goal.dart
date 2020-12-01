@@ -14,7 +14,6 @@ abstract class UserGoal extends Equatable {
   DateTime get lastEditDate;
   GoalPriority get priority;
   int get color;
-  double get progress;
   GoalMetric get metrics;
 
   @override

@@ -12,9 +12,9 @@
     "goalMetricList": [
       {
         "complexActivity": {
-          "activityId": "id1"
+          "activityId": "distance"
         },
-        "goalComparator": "equal",
+        "goalComparator": "greater",
         "value": 10
       },
       {
@@ -22,16 +22,16 @@
         "goalMetricList": [
           {
             "complexActivity": {
-              "activityId": "id1"
+              "activityId": "distance"
             },
-            "goalComparator": "equal",
+            "goalComparator": "greater",
             "value": 10
           },
           {
             "complexActivity": {
-              "activityId": "id1"
+              "activityId": "distance"
             },
-            "goalComparator": "equal",
+            "goalComparator": "greater",
             "value": 10
           },
           {
@@ -39,16 +39,16 @@
             "goalMetricList": [
               {
                 "complexActivity": {
-                  "activityId": "id1"
+                  "activityId": "distance"
                 },
-                "goalComparator": "equal",
+                "goalComparator": "greater",
                 "value": 10
               },
               {
                 "complexActivity": {
-                  "activityId": "id1"
+                  "activityId": "distance"
                 },
-                "goalComparator": "equal",
+                "goalComparator": "greater",
                 "value": 10
               }
             ]

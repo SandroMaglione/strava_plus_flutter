@@ -57,6 +57,9 @@ dependencies:
   # State management
   flutter_bloc: ^6.1.1
 
+  # Lists
+  dartx: ^0.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

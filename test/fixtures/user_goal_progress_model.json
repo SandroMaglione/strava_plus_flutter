@@ -1,0 +1,78 @@
+{
+  "userGoal": {
+    "id": "id",
+    "goalName": "name",
+    "createdDate": "2020-10-10T00:00:00.000",
+    "lastEditDate": "2020-10-10T00:00:00.000",
+    "startDate": "2020-10-10T00:00:00.000",
+    "endDate": "2020-10-20T00:00:00.000",
+    "color": 0,
+    "priority": "high",
+    "metrics": {
+      "complexActivity": {
+        "activityId": "distance"
+      },
+      "goalComparator": "greater",
+      "value": 10
+    }
+  },
+  "activities": [
+    {
+      "resource_state": 2,
+      "athlete": {
+        "id": 44062778,
+        "resource_state": 1
+      },
+      "name": "Afternoon Run",
+      "distance": 2810.0,
+      "moving_time": 856,
+      "elapsed_time": 860,
+      "total_elevation_gain": 31.6,
+      "type": "Run",
+      "workout_type": 0,
+      "id": 2778055056,
+      "external_id": null,
+      "upload_id": 2943823984,
+      "start_date": "2019-10-10T15:54:52Z",
+      "start_date_local": "2019-10-10T17:54:52Z",
+      "timezone": "(GMT+01:00) Europe/Rome",
+      "utc_offset": 7200.0,
+      "start_latlng": [45.74461, 9.112155],
+      "end_latlng": [45.750954, 9.129207],
+      "location_city": null,
+      "location_state": null,
+      "location_country": null,
+      "start_latitude": 45.74461,
+      "start_longitude": 9.112155,
+      "achievement_count": 0,
+      "kudos_count": 1,
+      "comment_count": 0,
+      "athlete_count": 1,
+      "photo_count": 0,
+      "map": {
+        "id": "a2778055056",
+        "summary_polyline": "ynevG}urv@DG?GDHDCHHf@t@JBBCv@uBZu@R]H]L[X[NYZg@^a@DOIc@BICYYmAGi@]qAq@qAKYe@u@U}@MOK[w@sAQe@e@e@k@u@[Ok@mAWU]o@]QQUQu@Si@GWOqACyAIy@@a@NYr@aAVc@p@_BZe@DMCO_@YeAi@q@QQKWK]Iw@WuA[U?w@GYGUOaAKq@Aw@Kk@GW?Q@c@Kw@GQIk@Iy@_@s@U]Go@Y_@Ii@Ee@Ik@Yc@K[CQCU?eBB]B]CcA?]I]As@FQF[TG?CSO[Ik@?c@Mo@Ca@?wBEa@BuBI{@@a@Gs@AaBBQPm@Hg@Rk@^s@V]d@g@RId@Gh@@bAQXBXCVD~ABPAd@DRDRGV?PCr@?DB",
+        "resource_state": 2
+      },
+      "trainer": false,
+      "commute": false,
+      "manual": false,
+      "private": false,
+      "visibility": "everyone",
+      "flagged": false,
+      "gear_id": null,
+      "from_accepted_tag": false,
+      "upload_id_str": "2943823984",
+      "average_speed": 3.283,
+      "max_speed": 4.4,
+      "has_heartrate": false,
+      "heartrate_opt_out": false,
+      "display_hide_heartrate_option": false,
+      "elev_high": 337.3,
+      "elev_low": 313.2,
+      "pr_count": 0,
+      "total_photo_count": 0,
+      "has_kudoed": false
+    }
+  ]
+}

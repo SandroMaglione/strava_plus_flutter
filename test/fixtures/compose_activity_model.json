@@ -1,9 +1,9 @@
 {
   "activity1": {
-    "activityId": "id1"
+    "activityId": "distance"
   },
   "activity2": {
-    "activityId": "id1"
+    "activityId": "distance"
   },
   "operation": "addition"
 }
