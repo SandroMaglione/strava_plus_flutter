@@ -66,6 +66,12 @@ dependencies:
   # Local storage
   hive: ^1.4.4+1
 
+  # Calendar
+  table_calendar: ^2.3.1
+
+  # Linear indicator
+  step_progress_indicator: ^0.2.4+7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

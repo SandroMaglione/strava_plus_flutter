@@ -1,17 +1,22 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_polimi_project/app/activity/domain/entities/summary_activity.dart';
 import 'package:mobile_polimi_project/app/activity/presentation/controllers/cubit/activity_list_cubit.dart';
-import 'package:mobile_polimi_project/app/goal/presentation/widgets/summary_activity_card.dart';
+import 'package:mobile_polimi_project/app/goal/presentation/views/calendar_view.dart';
+import 'package:mobile_polimi_project/app/goal/presentation/views/profile_view.dart';
+import 'package:mobile_polimi_project/app/goal/presentation/views/stats_view.dart';
+import 'package:mobile_polimi_project/app/goal/presentation/views/summary_activity_view.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/widgets/build_provider.dart';
-import 'package:mobile_polimi_project/core/routes/router.gr.dart';
-import 'package:mobile_polimi_project/core/utils/async_state.dart';
 import 'package:mobile_polimi_project/injectable.dart';
-import 'package:auto_route/auto_route.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int tabIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,32 +30,14 @@ class HomeScreen extends StatelessWidget {
           final theme = context.watch<ThemeCubit>().state;
 
           return Scaffold(
-            body: BlocBuilder<ActivityListCubit,
-                AsyncState<IList<SummaryActivity>>>(
-              builder: (context, state) => state.maybeWhen(
-                orElse: () => const Center(
-                  child: const CircularProgressIndicator(),
-                ),
-                success: (activityList) => ListView(
-                  padding: const EdgeInsets.all(15),
-                  children: [
-                    ...activityList
-                        .map(
-                          (summaryActivity) => SummaryActivityCard(
-                            summaryActivity: summaryActivity,
-                          ),
-                        )
-                        .toIterable(),
-                  ],
-                ),
-              ),
-            ),
+            body: _currentView,
             bottomNavigationBar: BottomNavigationBar(
+              currentIndex: tabIndex,
               backgroundColor: theme.customColorTheme.primaryColor,
               selectedItemColor: theme.customColorTheme.accentColor,
               unselectedItemColor:
                   theme.customColorTheme.primaryColorExtraLight,
-              onTap: (index) => context.navigator.push(Routes.CreateGoalScreen),
+              onTap: (index) => setState(() => tabIndex = index),
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.ac_unit),
@@ -74,5 +61,20 @@ class HomeScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget get _currentView {
+    switch (tabIndex) {
+      case 0:
+        return const SummaryActivityView();
+      case 1:
+        return const CalendarView();
+      case 2:
+        return const StatsView();
+      case 3:
+        return const ProfileView();
+      default:
+        return const SummaryActivityView();
+    }
   }
 }

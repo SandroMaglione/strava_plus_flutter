@@ -20,6 +20,7 @@ import 'app/activity/presentation/controllers/cubit/detailed_activity_cubit.dart
 import 'app/login/domain/login_repository.rc.dart';
 import 'app/domain/setting_repository.rc.dart';
 import 'app/activity/domain/activity_repository.rc.dart';
+import 'app/goal/data/datasource/local/goal_local_data_source.dart';
 import 'app/goal/domain/goal_repository.dart';
 import 'app/goal/data/repository/goal_repository_impl.dart';
 import 'app/login/presentation/controllers/cubit/login_cubit.dart';
@@ -49,7 +50,8 @@ GetIt $initGetIt(
   gh.factory<Dio>(() => registerDioClient.dioClient);
   gh.factory<FlutterSecureStorage>(
       () => registerFlutterSecureStorage.flutterSecureStorage);
-  gh.factory<GoalRepository>(() => GoalRepositoryImpl());
+  gh.factory<GoalRepository>(
+      () => GoalRepositoryImpl(get<GoalLocalDataSource>()));
   gh.factory<LoginRemoteDataSource>(() => LoginRemoteDataSource(get<Dio>()));
   gh.factory<SettingLocalDataSource>(() => SettingLocalDataSourceImpl(
       flutterSecureStorage: get<FlutterSecureStorage>()));

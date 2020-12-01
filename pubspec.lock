@@ -641,6 +641,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
+  simple_gesture_detector:
+    dependency: transitive
+    description:
+      name: simple_gesture_detector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -681,6 +688,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0-nullsafety.1"
+  step_progress_indicator:
+    dependency: "direct main"
+    description:
+      name: step_progress_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.4+7"
   stream_channel:
     dependency: transitive
     description:
@@ -702,6 +716,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety.1"
+  table_calendar:
+    dependency: "direct main"
+    description:
+      name: table_calendar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.1"
   term_glyph:
     dependency: transitive
     description:
