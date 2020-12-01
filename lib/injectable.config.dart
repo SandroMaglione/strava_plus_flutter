@@ -14,6 +14,7 @@ import 'app/activity/data/datasource/remote/activity_remote_data_source.dart';
 import 'app/activity/domain/activity_repository.dart';
 import 'app/activity/data/repository/activity_repository_impl.dart';
 import 'app/data/datasources/api/api_constants.dart';
+import 'app/goal/presentation/controllers/cubit/create_goal_cubit.dart';
 import 'app/activity/presentation/controllers/cubit/detailed_activity_cubit.dart';
 import 'app/login/domain/login_repository.rc.dart';
 import 'app/domain/setting_repository.rc.dart';
@@ -43,6 +44,7 @@ GetIt $initGetIt(
   final registerDioClient = _$RegisterDioClient();
   final registerFlutterSecureStorage = _$RegisterFlutterSecureStorage();
   gh.factory<ApiConstants>(() => ApiConstantsProduction());
+  gh.factory<CreateGoalCubit>(() => CreateGoalCubit());
   gh.factory<Dio>(() => registerDioClient.dioClient);
   gh.factory<FlutterSecureStorage>(
       () => registerFlutterSecureStorage.flutterSecureStorage);

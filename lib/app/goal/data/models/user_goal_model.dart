@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/goal/data/models/goal_metric_model.dart';
@@ -18,7 +20,6 @@ class UserGoalModel extends UserGoal {
   final DateTime lastEditDate;
   @override
   final GoalPriority priority;
-  @override
   final int color;
   @override
   final GoalMetricModel metrics;
@@ -48,4 +49,7 @@ class UserGoalModel extends UserGoal {
 
   @override
   GoalName get name => GoalName(goalName);
+
+  @override
+  Color get colorObj => Color(color);
 }

@@ -11,6 +11,7 @@ import 'package:auto_route/auto_route_annotations.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/activity/presentation/screens/detailed_activity_screen.dart';
+import '../../app/goal/presentation/screens/create_goal_screen.dart';
 import '../../app/goal/presentation/screens/home_screen.dart';
 import '../../app/goal/presentation/screens/loading_screen.dart';
 import '../../app/login/presentation/screens/login_screen.dart';
@@ -19,11 +20,13 @@ class Routes {
   static const String LoadingScreen = '/';
   static const String LoginScreen = '/login-screen';
   static const String HomeScreen = '/home-screen';
+  static const String CreateGoalScreen = '/create-goal-screen';
   static const String DetailedActivityScreen = '/detailed-activity-screen';
   static const all = <String>{
     LoadingScreen,
     LoginScreen,
     HomeScreen,
+    CreateGoalScreen,
     DetailedActivityScreen,
   };
 }
@@ -35,6 +38,7 @@ class Router extends RouterBase {
     RouteDef(Routes.LoadingScreen, page: LoadingScreen),
     RouteDef(Routes.LoginScreen, page: LoginScreen),
     RouteDef(Routes.HomeScreen, page: HomeScreen),
+    RouteDef(Routes.CreateGoalScreen, page: CreateGoalScreen),
     RouteDef(Routes.DetailedActivityScreen, page: DetailedActivityScreen),
   ];
   @override
@@ -55,6 +59,12 @@ class Router extends RouterBase {
     HomeScreen: (data) {
       return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
         builder: (context) => HomeScreen(),
+        settings: data,
+      );
+    },
+    CreateGoalScreen: (data) {
+      return buildAdaptivePageRoute<AdaptiveRoute<dynamic>>(
+        builder: (context) => CreateGoalScreen(),
         settings: data,
       );
     },

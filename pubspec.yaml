@@ -60,6 +60,9 @@ dependencies:
   # Lists
   dartx: ^0.5.0
 
+  # Date picker
+  date_picker_timeline: ^1.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
