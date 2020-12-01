@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:mobile_polimi_project/app/goal/domain/entities/user_goal.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
+import 'package:repo_case/repo_case.dart';
 
+@repoCase
 abstract class GoalRepository {
   const GoalRepository();
 

@@ -63,6 +63,9 @@ dependencies:
   # Date picker
   date_picker_timeline: ^1.2.1
 
+  # Local storage
+  hive: ^1.4.4+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

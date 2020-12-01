@@ -8,7 +8,7 @@ abstract class FinalMetric extends Equatable implements GoalMetric {
 
   ComplexActivity get complexActivity;
   GoalComparator get goalComparator;
-  double get value; // Positive (>= 0)
+  double get value;
 
   @override
   List<Object> get props => [

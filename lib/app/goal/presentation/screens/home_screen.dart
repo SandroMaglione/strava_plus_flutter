@@ -6,8 +6,10 @@ import 'package:mobile_polimi_project/app/activity/presentation/controllers/cubi
 import 'package:mobile_polimi_project/app/goal/presentation/widgets/summary_activity_card.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/widgets/build_provider.dart';
+import 'package:mobile_polimi_project/core/routes/router.gr.dart';
 import 'package:mobile_polimi_project/core/utils/async_state.dart';
 import 'package:mobile_polimi_project/injectable.dart';
+import 'package:auto_route/auto_route.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -48,6 +50,7 @@ class HomeScreen extends StatelessWidget {
               selectedItemColor: theme.customColorTheme.accentColor,
               unselectedItemColor:
                   theme.customColorTheme.primaryColorExtraLight,
+              onTap: (index) => context.navigator.push(Routes.CreateGoalScreen),
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.ac_unit),

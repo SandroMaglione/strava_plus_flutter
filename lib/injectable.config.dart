@@ -15,6 +15,7 @@ import 'app/activity/domain/activity_repository.dart';
 import 'app/activity/data/repository/activity_repository_impl.dart';
 import 'app/data/datasources/api/api_constants.dart';
 import 'app/goal/presentation/controllers/cubit/create_goal_cubit.dart';
+import 'app/goal/domain/goal_repository.rc.dart';
 import 'app/activity/presentation/controllers/cubit/detailed_activity_cubit.dart';
 import 'app/login/domain/login_repository.rc.dart';
 import 'app/domain/setting_repository.rc.dart';
@@ -58,14 +59,24 @@ GetIt $initGetIt(
       () => StoreLocalSettingRepo(settingRepository: get<SettingRepository>()));
   gh.factory<TokenManager>(() => TokenManagerFlutterSecureStorage(
       get<FlutterSecureStorage>(), get<LoginRemoteDataSource>()));
+  gh.factory<UpdateGoalFromIdRepo>(
+      () => UpdateGoalFromIdRepo(goalRepository: get<GoalRepository>()));
   gh.factory<ActivityRemoteDataSource>(
       () => ActivityRemoteDataSource(get<Dio>()));
   gh.factory<ActivityRepository>(() => ActivityRepositoryImpl(
       get<ActivityRemoteDataSource>(), get<TokenManager>()));
   gh.factory<ClearLocalSettingRepo>(
       () => ClearLocalSettingRepo(settingRepository: get<SettingRepository>()));
+  gh.factory<CreateGoalRepo>(
+      () => CreateGoalRepo(goalRepository: get<GoalRepository>()));
+  gh.factory<DeleteGoalByIdRepo>(
+      () => DeleteGoalByIdRepo(goalRepository: get<GoalRepository>()));
   gh.factory<GetActivityByIdRepo>(
       () => GetActivityByIdRepo(activityRepository: get<ActivityRepository>()));
+  gh.factory<GetCompletedGoalListRepo>(
+      () => GetCompletedGoalListRepo(goalRepository: get<GoalRepository>()));
+  gh.factory<GetInProgressGoalListRepo>(
+      () => GetInProgressGoalListRepo(goalRepository: get<GoalRepository>()));
   gh.factory<GetLocalSettingRepo>(
       () => GetLocalSettingRepo(settingRepository: get<SettingRepository>()));
   gh.factory<GetLoggedInAthleteActivitiesRepo>(() =>
