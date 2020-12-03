@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/laps.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
+import 'package:mobile_polimi_project/app/athlete/data/models/meta_athlete_model.dart';
 
 part 'laps_model.g.dart';
 

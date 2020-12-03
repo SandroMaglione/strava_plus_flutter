@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
+import 'package:mobile_polimi_project/app/athlete/data/models/meta_athlete_model.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/summary_activity.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
@@ -130,6 +130,50 @@ class SummaryActivityModel extends SummaryActivity {
   factory SummaryActivityModel.fromJson(Map<String, dynamic> json) =>
       _$SummaryActivityModelFromJson(json);
   Map<String, dynamic> toJson() => _$SummaryActivityModelToJson(this);
+
+  @override
+  SummaryActivityModel get toModel => SummaryActivityModel(
+        id: id,
+        upload_id: upload_id,
+        athlete: athlete,
+        name: name,
+        distance: distance,
+        moving_time: moving_time,
+        elapsed_time: elapsed_time,
+        total_elevation_gain: total_elevation_gain,
+        elev_high: elev_high,
+        elev_low: elev_low,
+        type: type,
+        start_date: start_date,
+        start_date_local: start_date_local,
+        timezone: timezone,
+        total_photo_count: total_photo_count,
+        achievement_count: achievement_count,
+        kudos_count: kudos_count,
+        comment_count: comment_count,
+        athlete_count: athlete_count,
+        photo_count: photo_count,
+        trainer: trainer,
+        commute: commute,
+        manual: manual,
+        private: private,
+        flagged: flagged,
+        workout_type: workout_type,
+        upload_id_str: upload_id_str,
+        average_speed: average_speed,
+        max_speed: max_speed,
+        has_kudoed: has_kudoed,
+        start_latlng: start_latlng,
+        end_latlng: end_latlng,
+        display_hide_heartrate_option: display_hide_heartrate_option,
+        from_accepted_tag: from_accepted_tag,
+        has_heartrate: has_heartrate,
+        heartrate_opt_out: heartrate_opt_out,
+        pr_count: pr_count,
+        resource_state: resource_state,
+        utc_offset: utc_offset,
+        visibility: visibility,
+      );
 
   @override
   int get achievementCount => achievement_count;

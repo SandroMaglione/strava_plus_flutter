@@ -7,9 +7,9 @@ import 'package:meta/meta.dart';
 // RepoCaseGenerator
 // **************************************************************************
 
-import 'package:mobile_polimi_project/app/goal/domain/entities/strava/activity_stats.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/entities/detailed_athlete.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/entities/activity_stats.dart';
 import 'package:dartz/dartz.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/strava/detailed_athlete.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
 import 'package:mobile_polimi_project/app/login/domain/login_repository.dart';
 

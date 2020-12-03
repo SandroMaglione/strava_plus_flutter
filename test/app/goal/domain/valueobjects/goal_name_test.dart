@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/goal_name.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/goal_name.dart';
 
 void main() {
   const validName = 'abcd';

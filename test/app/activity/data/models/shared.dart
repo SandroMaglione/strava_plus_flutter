@@ -9,7 +9,7 @@ import 'package:mobile_polimi_project/app/activity/data/models/similar_activitie
 import 'package:mobile_polimi_project/app/activity/data/models/splits_metric_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/summary_activity_model.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/trend_model.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
+import 'package:mobile_polimi_project/app/athlete/data/models/meta_athlete_model.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
 abstract class Shared {

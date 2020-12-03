@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_polimi_project/app/activity/presentation/controllers/cubit/activity_list_cubit.dart';
 import 'package:mobile_polimi_project/app/login/presentation/controllers/cubit/login_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/widgets/build_provider.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<LoginCubit>(
           create: (context) => getIt<LoginCubit>()..init(),
+        ),
+        BlocProvider<ActivityListCubit>(
+          create: (context) => getIt<ActivityListCubit>(),
         ),
       ],
       builder: (context) {

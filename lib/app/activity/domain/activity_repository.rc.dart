@@ -8,7 +8,8 @@ import 'package:meta/meta.dart';
 // **************************************************************************
 
 import 'package:dartz/dartz.dart';
-import 'package:mobile_polimi_project/app/activity/domain/entities/summary_activity.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/composed_summary_activity.dart';
+import 'package:mobile_polimi_project/app/activity/domain/entities/extra_stats.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/detailed_activity.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
 import 'package:mobile_polimi_project/app/activity/domain/activity_repository.dart';
@@ -39,16 +40,16 @@ class GetActivityByIdRepoParams {
   });
 }
 
-class GetLoggedInAthleteActivitiesRepo {
+class GetComposedSummaryActivityListRepo {
   final ActivityRepository activityRepository;
 
-  const GetLoggedInAthleteActivitiesRepo({
+  const GetComposedSummaryActivityListRepo({
     @required this.activityRepository,
   });
 
-  Future<Either<Failure, IList<SummaryActivity>>> call(
-      GetLoggedInAthleteActivitiesRepoParams params) async {
-    return activityRepository.getLoggedInAthleteActivities(
+  Future<Either<Failure, IList<ComposedSummaryActivity>>> call(
+      GetComposedSummaryActivityListRepoParams params) async {
+    return activityRepository.getComposedSummaryActivityList(
       params.page,
       params.before,
       params.after,
@@ -56,14 +57,39 @@ class GetLoggedInAthleteActivitiesRepo {
   }
 }
 
-class GetLoggedInAthleteActivitiesRepoParams {
+class GetComposedSummaryActivityListRepoParams {
   final int page;
   final DateTime before;
   final DateTime after;
 
-  const GetLoggedInAthleteActivitiesRepoParams({
+  const GetComposedSummaryActivityListRepoParams({
     @required this.page,
     @required this.before,
     @required this.after,
+  });
+}
+
+class SaveExtraStatsRepo {
+  final ActivityRepository activityRepository;
+
+  const SaveExtraStatsRepo({
+    @required this.activityRepository,
+  });
+
+  Future<Either<Failure, Unit>> call(SaveExtraStatsRepoParams params) async {
+    return activityRepository.saveExtraStats(
+      params.id,
+      params.extraStats,
+    );
+  }
+}
+
+class SaveExtraStatsRepoParams {
+  final int id;
+  final ExtraStats extraStats;
+
+  const SaveExtraStatsRepoParams({
+    @required this.id,
+    @required this.extraStats,
   });
 }

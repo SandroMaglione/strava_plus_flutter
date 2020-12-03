@@ -65,6 +65,7 @@ dependencies:
 
   # Local storage
   hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
 
   # Calendar
   table_calendar: ^2.3.1

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/detailed_athlete_model.dart';
+import 'package:mobile_polimi_project/app/athlete/data/models/detailed_athlete_model.dart';
 import 'package:mobile_polimi_project/app/login/data/models/auth_token.dart';
 import 'package:retrofit/retrofit.dart';
 

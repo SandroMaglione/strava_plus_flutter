@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mobile_polimi_project/core/services/hive_manager.dart';
 import 'package:mobile_polimi_project/env/env_reader.dart';
 import 'package:mobile_polimi_project/env/environment_setup.dart';
 import 'package:mobile_polimi_project/injectable.dart';
@@ -18,6 +19,9 @@ Future<void> mainCommon(
 
   // Initialize injectable dependency injection objects (injectable)
   configureInjectable();
+
+  // Initialize Hive boxes
+  getIt<HiveManager>().initialize();
 
   /// Extra functions to run based on the environment
   await runSetup();

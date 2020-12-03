@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/strava/meta_athlete.dart';
+import 'package:mobile_polimi_project/app/activity/data/models/summary_activity_model.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/entities/meta_athlete.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
 /// Summary activity when getting list of activities
@@ -73,6 +74,8 @@ abstract class SummaryActivity extends Equatable {
   Option<double> get averageWattsOption;
   Option<bool> get deviceWattsOption;
   Option<int> get maxWattsOption;
+
+  SummaryActivityModel get toModel;
 
   String get startDateFormat =>
       DateFormat('dd MMMM yyyy - HH:mm').format(startDate);

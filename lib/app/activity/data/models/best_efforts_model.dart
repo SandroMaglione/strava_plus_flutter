@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/best_efforts.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
+import 'package:mobile_polimi_project/app/athlete/data/models/meta_athlete_model.dart';
 
 part 'best_efforts_model.g.dart';
 

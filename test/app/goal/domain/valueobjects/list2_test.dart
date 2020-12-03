@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/list2.dart';
 
 void main() {
   const element0 = 1;

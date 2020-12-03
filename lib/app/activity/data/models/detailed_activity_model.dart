@@ -12,9 +12,9 @@ import 'package:mobile_polimi_project/app/activity/domain/entities/laps.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/segment_efforts.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/similar_activities.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/splits_metric.dart';
-import 'package:mobile_polimi_project/app/goal/data/models/meta_athlete_model.dart';
+import 'package:mobile_polimi_project/app/athlete/data/models/meta_athlete_model.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/detailed_activity.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/list2.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
 part 'detailed_activity_model.g.dart';

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/segment.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/strava/meta_athlete.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/entities/meta_athlete.dart';
 
 abstract class SegmentEfforts extends Equatable {
   const SegmentEfforts();

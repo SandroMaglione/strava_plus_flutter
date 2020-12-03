@@ -6,8 +6,8 @@ import 'package:mobile_polimi_project/app/activity/domain/entities/photos.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/segment_efforts.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/similar_activities.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/splits_metric.dart';
-import 'package:mobile_polimi_project/app/goal/domain/entities/strava/meta_athlete.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/entities/meta_athlete.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/list2.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
 /// Single activity from Strava API

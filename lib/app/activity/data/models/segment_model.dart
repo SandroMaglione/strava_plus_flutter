@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/segment.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/list2.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
 part 'segment_model.g.dart';

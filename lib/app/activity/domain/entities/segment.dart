@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/list2.dart';
 import 'package:mobile_polimi_project/core/enums/activity_type.dart';
 
 abstract class Segment extends Equatable {

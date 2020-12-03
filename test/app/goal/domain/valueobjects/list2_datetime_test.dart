@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2.dart';
-import 'package:mobile_polimi_project/app/goal/domain/valueobjects/list2_datetime.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/list2.dart';
+import 'package:mobile_polimi_project/app/athlete/domain/valueobjects/list2_datetime.dart';
 
 void main() {
   final startDate = DateTime(2020, 10, 10);
