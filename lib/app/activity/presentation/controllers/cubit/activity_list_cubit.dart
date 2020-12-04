@@ -5,7 +5,6 @@ import 'package:mobile_polimi_project/app/activity/data/models/extra_stats_model
 import 'package:mobile_polimi_project/app/activity/domain/activity_repository.rc.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/composed_summary_activity.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/extra_stats.dart';
-import 'package:mobile_polimi_project/core/enums/workout_scope.dart';
 import 'package:mobile_polimi_project/core/utils/async_state.dart';
 
 class ActivityListCubit
@@ -82,7 +81,7 @@ class ActivityListCubit
         id, extraStatsById(id).copyWith(lastMealValueNew: value).toModel);
   }
 
-  void updateWorkoutScope(int id, WorkoutScope value) {
+  void updateWorkoutScope(int id, int value) {
     _updateValue(
         id, extraStatsById(id).copyWith(workoutScopeValueNew: value).toModel);
   }

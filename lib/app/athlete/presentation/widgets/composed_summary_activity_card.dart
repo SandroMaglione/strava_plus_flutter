@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_polimi_project/app/activity/domain/entities/composed_summary_activity.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/widgets/value_range_label.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/core/routes/router.gr.dart';
 
@@ -34,25 +35,46 @@ class ComposedSummaryActivityCard extends StatelessWidget {
                 style: theme.customTextTheme.textTheme.headline4,
               ),
               const Divider(),
-              Text(
-                '${composedSummaryActivity.extraStats.rpe.label}',
-                style: theme.customTextTheme.textTheme.headline6,
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.rpe,
               ),
-              Text(
-                '${composedSummaryActivity.extraStats.mood.label}',
-                style: theme.customTextTheme.textTheme.headline6,
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.mood,
               ),
-              Text(
-                  'Avg speed: ${composedSummaryActivity.summaryActivity.averageSpeed}'),
-              Text(
-                  'Duration: ${composedSummaryActivity.summaryActivity.elapsedTime}'),
-              Text(
-                  'Distance: ${composedSummaryActivity.summaryActivity.distance}m'),
-              Text(
-                  'Max speed: ${composedSummaryActivity.summaryActivity.maxSpeed}'),
-              Text('Activity: ${composedSummaryActivity.summaryActivity.type}'),
-              Text(
-                  'Elevation gain: ${composedSummaryActivity.summaryActivity.totalElevationGain}'),
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.experience,
+              ),
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.temperature,
+              ),
+              SelectionValueLabel(
+                selectionValue:
+                    composedSummaryActivity.extraStats.humorPostWorkout,
+              ),
+              SelectionValueLabel(
+                selectionValue:
+                    composedSummaryActivity.extraStats.motivationPreWorkout,
+              ),
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.lastMeal,
+              ),
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.workoutScope,
+              ),
+              SelectionValueLabel(
+                selectionValue:
+                    composedSummaryActivity.extraStats.withStretching,
+              ),
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.isSpecial,
+              ),
+              SelectionValueLabel(
+                selectionValue: composedSummaryActivity.extraStats.isSupervised,
+              ),
+              SelectionValueLabel(
+                selectionValue:
+                    composedSummaryActivity.extraStats.isEspeciallyBad,
+              ),
             ],
           ),
         ),

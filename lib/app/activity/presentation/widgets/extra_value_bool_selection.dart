@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_polimi_project/app/activity/domain/valueobjects/range_value.dart';
+import 'package:mobile_polimi_project/app/activity/domain/valueobjects/bool_value.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 
-class ExtraValueSelection extends StatelessWidget {
-  final RangeValue rangeValue;
-  final void Function(int) updateValue;
+class ExtraValueBoolSelection extends StatelessWidget {
+  final BoolValue boolValue;
+  final void Function(bool) updateValue;
 
-  const ExtraValueSelection({
-    @required this.rangeValue,
+  const ExtraValueBoolSelection({
+    @required this.boolValue,
     @required this.updateValue,
     Key key,
   }) : super(key: key);
@@ -23,7 +23,7 @@ class ExtraValueSelection extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              rangeValue.name,
+              boolValue.name,
               style: theme.customTextTheme.textTheme.headline5,
             ),
             const Divider(),
@@ -32,9 +32,9 @@ class ExtraValueSelection extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  ...rangeValue.messagesKeys.map(
+                  ...[true, false].map(
                     (e) {
-                      final isSelected = rangeValue.isSelected(e);
+                      final isSelected = boolValue.isSelected(e);
                       return InkWell(
                         onTap: () => updateValue(e),
                         child: Chip(
@@ -42,12 +42,15 @@ class ExtraValueSelection extends StatelessWidget {
                               ? theme.customColorTheme.accentColor
                               : theme.customColorTheme.primaryColor,
                           label: Text(
-                            rangeValue.messages[e],
+                            boolValue.messages[e],
                             style:
                                 theme.customTextTheme.textTheme.button.copyWith(
                               color: isSelected
                                   ? theme.customColorTheme.primaryColor
                                   : theme.customColorTheme.accentColor,
+                              fontWeight: isSelected
+                                  ? FontWeight.w900
+                                  : FontWeight.w300,
                             ),
                           ),
                         ),

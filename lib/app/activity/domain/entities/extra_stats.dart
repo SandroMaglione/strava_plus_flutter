@@ -1,14 +1,17 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/extra_stats_model.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/experience_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/humor_post_workout_value.dart';
+import 'package:mobile_polimi_project/app/activity/domain/valueobjects/is_especially_bad_value.dart';
+import 'package:mobile_polimi_project/app/activity/domain/valueobjects/is_special_value.dart';
+import 'package:mobile_polimi_project/app/activity/domain/valueobjects/is_supervised_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/last_meal_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/mood_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/motivation_pre_workout_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/rpe_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/temperature_value.dart';
-import 'package:mobile_polimi_project/core/enums/workout_scope.dart';
+import 'package:mobile_polimi_project/app/activity/domain/valueobjects/with_stretching_value.dart';
+import 'package:mobile_polimi_project/app/activity/domain/valueobjects/workout_scope_value.dart';
 
 abstract class ExtraStats extends Equatable {
   const ExtraStats();
@@ -20,11 +23,11 @@ abstract class ExtraStats extends Equatable {
   HumorPostWorkoutValue get humorPostWorkout;
   MotivationPreWorkoutValue get motivationPreWorkout;
   LastMealValue get lastMeal;
-  Option<WorkoutScope> get workoutScope;
-  Option<bool> get withStretching;
-  Option<bool> get isSpecial;
-  Option<bool> get isSupervised;
-  Option<bool> get isEspeciallyBad;
+  WorkoutScopeValue get workoutScope;
+  WithStretchingValue get withStretching;
+  IsSpecialValue get isSpecial;
+  IsSupervisedValue get isSupervised;
+  IsEspeciallyBadValue get isEspeciallyBad;
 
   static ExtraStatsModel get empty => const ExtraStatsModel();
   ExtraStatsModel get toModel;
@@ -36,11 +39,11 @@ abstract class ExtraStats extends Equatable {
     int humorPostWorkoutValueNew,
     int motivationPreWorkoutValueNew,
     int lastMealValueNew,
+    int workoutScopeValueNew,
     bool withStretchingValueNew,
     bool isSpecialValueNew,
     bool isSupervisedValueNew,
     bool isEspeciallyBadValueNew,
-    WorkoutScope workoutScopeValueNew,
   });
 
   @override

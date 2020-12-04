@@ -17,8 +17,7 @@ ExtraStatsModel _$ExtraStatsModelFromJson(Map<String, dynamic> json) {
     humorPostWorkoutValue: json['humorPostWorkoutValue'] as int,
     motivationPreWorkoutValue: json['motivationPreWorkoutValue'] as int,
     lastMealValue: json['lastMealValue'] as int,
-    workoutScopeValue:
-        _$enumDecodeNullable(_$WorkoutScopeEnumMap, json['workoutScopeValue']),
+    workoutScopeValue: json['workoutScopeValue'] as int,
     withStretchingValue: json['withStretchingValue'] as bool,
     isSpecialValue: json['isSpecialValue'] as bool,
     isSupervisedValue: json['isSupervisedValue'] as bool,
@@ -35,48 +34,9 @@ Map<String, dynamic> _$ExtraStatsModelToJson(ExtraStatsModel instance) =>
       'humorPostWorkoutValue': instance.humorPostWorkoutValue,
       'motivationPreWorkoutValue': instance.motivationPreWorkoutValue,
       'lastMealValue': instance.lastMealValue,
+      'workoutScopeValue': instance.workoutScopeValue,
       'withStretchingValue': instance.withStretchingValue,
       'isSpecialValue': instance.isSpecialValue,
       'isSupervisedValue': instance.isSupervisedValue,
       'isEspeciallyBadValue': instance.isEspeciallyBadValue,
-      'workoutScopeValue': _$WorkoutScopeEnumMap[instance.workoutScopeValue],
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$WorkoutScopeEnumMap = {
-  WorkoutScope.endurance: 'endurance',
-  WorkoutScope.strenght: 'strenght',
-  WorkoutScope.high_intensity: 'high_intensity',
-  WorkoutScope.recovery: 'recovery',
-};
