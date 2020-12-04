@@ -35,11 +35,11 @@ class ComposedSummaryActivityCard extends StatelessWidget {
               ),
               const Divider(),
               Text(
-                '${composedSummaryActivity.extraStats.rpe.rpe.getOrElse(() => -1)}',
+                '${composedSummaryActivity.extraStats.rpe.label}',
                 style: theme.customTextTheme.textTheme.headline6,
               ),
               Text(
-                '${composedSummaryActivity.extraStats.mood.mood.getOrElse(() => -1)}',
+                '${composedSummaryActivity.extraStats.mood.label}',
                 style: theme.customTextTheme.textTheme.headline6,
               ),
               Text(

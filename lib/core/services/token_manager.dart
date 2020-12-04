@@ -44,21 +44,25 @@ class TokenManagerFlutterSecureStorage implements TokenManager {
 
   @override
   Future<Option<AuthToken>> getToken() async {
-    final authToken = AuthToken.fromJson(
-      json.decode(
-        await _flutterSecureStorage.read(
-          key: TokenManager.stravaApiTokenKey,
-        ),
-      ) as Map<String, dynamic>,
+    final localToken = await _flutterSecureStorage.read(
+      key: TokenManager.stravaApiTokenKey,
     );
 
-    if (authToken.expires_at < DateTime.now().millisecondsSinceEpoch / 1000) {
-      return (await refreshToken(authToken.refresh_token)).fold(
-        (failure) => none(),
-        (authToken) => some(authToken),
-      );
+    if (localToken == null) {
+      return none();
     } else {
-      return some(authToken);
+      final authToken = AuthToken.fromJson(
+        json.decode(localToken) as Map<String, dynamic>,
+      );
+
+      if (authToken.expires_at < DateTime.now().millisecondsSinceEpoch / 1000) {
+        return (await refreshToken(authToken.refresh_token)).fold(
+          (failure) => none(),
+          (authToken) => some(authToken),
+        );
+      } else {
+        return some(authToken);
+      }
     }
   }
 

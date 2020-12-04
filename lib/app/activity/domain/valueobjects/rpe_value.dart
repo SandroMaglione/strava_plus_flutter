@@ -1,13 +1,22 @@
 import 'package:dartz/dartz.dart';
+import 'package:mobile_polimi_project/app/activity/domain/valueobjects/range_value.dart';
 
-/// Contains value of rpe stats (1-11)
-class RpeValue {
-  final Option<int> rpe;
+class RpeValue extends RangeValue {
+  factory RpeValue(int value) => RpeValue._(RangeValue.factory(value, max: 11));
+  const RpeValue._(Option<int> value) : super(value);
 
-  factory RpeValue(int rpe) {
-    assert(rpe != null, "[RpeValue]: Rpe value cannot be null");
-    return RpeValue._(option(rpe >= 1 && rpe <= 11, rpe));
-  }
-
-  const RpeValue._(this.rpe);
+  @override
+  Map<int, String> get messages => {
+        1: 'No extertion',
+        2: 'Idle',
+        3: 'Relax',
+        4: 'Really easy',
+        5: 'Easy',
+        6: 'Standard',
+        7: 'Difficult',
+        8: 'Hard',
+        9: 'Really hard',
+        10: 'Extreme',
+        11: 'Impossible',
+      };
 }
