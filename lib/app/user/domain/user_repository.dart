@@ -8,7 +8,7 @@ import 'package:repo_case/repo_case.dart';
 abstract class UserRepository {
   Future<Either<Failure, IList<WeightData>>> getWeightList();
   Future<Either<Failure, WeightData>> updateWeight(double weight);
-  Future<Either<Failure, IList<SleepData>>> getSleepList();
-  Future<Either<Failure, SleepData>> updateSleep(
-      DateTime goToBed, DateTime wakeUp);
+  Future<Either<Failure, IMap<DateTime, SleepData>>> getSleepList();
+  Future<Either<Failure, Tuple2<DateTime, SleepData>>> updateSleep(
+      DateTime date, SleepData sleepData);
 }

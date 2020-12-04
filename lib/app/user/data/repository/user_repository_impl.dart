@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:mobile_polimi_project/app/user/data/datasource/local/user_local_data_source.dart';
-import 'package:mobile_polimi_project/app/user/data/models/sleep_data_model.dart';
 import 'package:mobile_polimi_project/app/user/data/models/weight_data_model.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/user_repository.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mobile_polimi_project/core/errors/login_failure.dart';
 import 'package:mobile_polimi_project/core/extensions/dartz_extension.dart';
 
 @Injectable(as: UserRepository)
@@ -33,19 +33,22 @@ class UserRepositoryImpl implements UserRepository {
       ).runAll();
 
   @override
-  Future<Either<Failure, IList<SleepData>>> getSleepList() async => Task(
-        () async => ilist(await _userLocalDataSourceImpl.getSleepList()),
+  Future<Either<Failure, IMap<DateTime, SleepData>>> getSleepList() async =>
+      Task(
+        () async => _userLocalDataSourceImpl.getSleepList(),
       ).runAll();
 
   @override
-  Future<Either<Failure, SleepData>> updateSleep(
-          DateTime goToBed, DateTime wakeUp) async =>
+  Future<Either<Failure, Tuple2<DateTime, SleepData>>> updateSleep(
+          DateTime date, SleepData sleepData) async =>
       Task(
-        () async => _userLocalDataSourceImpl.updateSleep(
-          SleepDataModel(
-            wakeUp: wakeUp,
-            goToBed: goToBed,
-          ),
-        ),
+        () async {
+          if (sleepData.sleepTime.sleepOption.isNone()) {
+            throw const LoginFailure(0, null);
+          } else {
+            return _userLocalDataSourceImpl.updateSleep(
+                date, sleepData.toModel);
+          }
+        },
       ).runAll();
 }

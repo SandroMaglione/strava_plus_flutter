@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:mobile_polimi_project/app/user/data/models/sleep_data_model.dart';
 import 'package:mobile_polimi_project/app/user/data/models/weight_data_model.dart';
 import 'package:mobile_polimi_project/core/services/hive_manager.dart';
@@ -22,22 +23,29 @@ class UserLocalDataSourceImpl {
         )
       ];
 
-  Future<SleepDataModel> getSleep(DateTime dateTime) async =>
+  Future<SleepDataModel> getSleep(DateTime date) async =>
       SleepDataModel.fromJson(
-        json.decode(_hiveManager.sleepBox.get(dateTime))
-            as Map<String, dynamic>,
+        json.decode(_hiveManager.sleepBox.get(date)) as Map<String, dynamic>,
       );
 
-  Future<SleepDataModel> updateSleep(SleepDataModel sleepDataModel) async =>
+  Future<Tuple2<DateTime, SleepDataModel>> updateSleep(
+          DateTime date, SleepDataModel sleepDataModel) async =>
       _hiveManager.sleepBox
-          .put(sleepDataModel.wakeUp, json.encode(sleepDataModel.toJson()))
-          .then((_) => sleepDataModel);
+          .put(date, json.encode(sleepDataModel.toJson()))
+          .then((_) => tuple2(date, sleepDataModel));
 
-  Future<List<SleepDataModel>> getSleepList() async => [
-        ..._hiveManager.sleepBox.values.map(
-          (e) => SleepDataModel.fromJson(
-            json.decode(e) as Map<String, dynamic>,
-          ),
-        )
-      ];
+  Future<IMap<DateTime, SleepDataModel>> getSleepList() async => imap(
+        _hiveManager.sleepBox
+            .toMap()
+            .entries
+            .fold<Map<DateTime, SleepDataModel>>(
+          {},
+          (prev, e) => {
+            ...prev,
+            e.key as DateTime: SleepDataModel.fromJson(
+              json.decode(e.value) as Map<String, dynamic>,
+            ),
+          },
+        ),
+      );
 }

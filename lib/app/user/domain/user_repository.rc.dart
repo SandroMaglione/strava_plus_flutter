@@ -55,7 +55,7 @@ class GetSleepListRepo {
     @required this.userRepository,
   });
 
-  Future<Either<Failure, IList<SleepData>>> call() async {
+  Future<Either<Failure, IMap<DateTime, SleepData>>> call() async {
     return userRepository.getSleepList();
   }
 }
@@ -67,20 +67,21 @@ class UpdateSleepRepo {
     @required this.userRepository,
   });
 
-  Future<Either<Failure, SleepData>> call(UpdateSleepRepoParams params) async {
+  Future<Either<Failure, Tuple2<DateTime, SleepData>>> call(
+      UpdateSleepRepoParams params) async {
     return userRepository.updateSleep(
-      params.goToBed,
-      params.wakeUp,
+      params.date,
+      params.sleepData,
     );
   }
 }
 
 class UpdateSleepRepoParams {
-  final DateTime goToBed;
-  final DateTime wakeUp;
+  final DateTime date;
+  final SleepData sleepData;
 
   const UpdateSleepRepoParams({
-    @required this.goToBed,
-    @required this.wakeUp,
+    @required this.date,
+    @required this.sleepData,
   });
 }

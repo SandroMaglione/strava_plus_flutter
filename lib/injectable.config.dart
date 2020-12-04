@@ -28,6 +28,7 @@ import 'app/data/datasources/api/api_client.dart';
 import 'app/data/datasources/local/setting_local_data_source.dart';
 import 'app/domain/setting_repository.dart';
 import 'app/data/repository/setting_repository_impl.dart';
+import 'app/user/presentation/controllers/cubit/sleep_cubit.dart';
 import 'app/activity/data/datasource/local/stats_activity_local_data_source.dart';
 import 'app/presentation/controller/cubit/theme_cubit.dart';
 import 'core/services/token_manager.dart';
@@ -111,6 +112,8 @@ GetIt $initGetIt(
       () => GetUserAccountStatsRepo(loginRepository: get<LoginRepository>()));
   gh.factory<LoginCubit>(
       () => LoginCubit(get<GetAuthTokenRepo>(), get<GetUserAccountInfoRepo>()));
+  gh.factory<SleepCubit>(
+      () => SleepCubit(get<GetSleepListRepo>(), get<UpdateSleepRepo>()));
   return get;
 }
 
