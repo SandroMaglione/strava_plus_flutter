@@ -9,6 +9,7 @@ import 'package:meta/meta.dart';
 
 import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
 import 'package:dartz/dartz.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
 import 'package:mobile_polimi_project/app/user/domain/user_repository.dart';
 
@@ -44,5 +45,42 @@ class UpdateWeightRepoParams {
 
   const UpdateWeightRepoParams({
     @required this.weight,
+  });
+}
+
+class GetSleepListRepo {
+  final UserRepository userRepository;
+
+  const GetSleepListRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, IList<SleepData>>> call() async {
+    return userRepository.getSleepList();
+  }
+}
+
+class UpdateSleepRepo {
+  final UserRepository userRepository;
+
+  const UpdateSleepRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, SleepData>> call(UpdateSleepRepoParams params) async {
+    return userRepository.updateSleep(
+      params.goToBed,
+      params.wakeUp,
+    );
+  }
+}
+
+class UpdateSleepRepoParams {
+  final DateTime goToBed;
+  final DateTime wakeUp;
+
+  const UpdateSleepRepoParams({
+    @required this.goToBed,
+    @required this.wakeUp,
   });
 }

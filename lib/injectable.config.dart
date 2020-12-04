@@ -83,6 +83,8 @@ GetIt $initGetIt(
           activityRepository: get<ActivityRepository>()));
   gh.factory<GetLocalSettingRepo>(
       () => GetLocalSettingRepo(settingRepository: get<SettingRepository>()));
+  gh.factory<GetSleepListRepo>(
+      () => GetSleepListRepo(userRepository: get<UserRepository>()));
   gh.factory<GetWeightListRepo>(
       () => GetWeightListRepo(userRepository: get<UserRepository>()));
   gh.factory<LoginRepository>(() =>
@@ -91,6 +93,8 @@ GetIt $initGetIt(
       () => SaveExtraStatsRepo(activityRepository: get<ActivityRepository>()));
   gh.factory<ThemeCubit>(() =>
       ThemeCubit(get<GetLocalSettingRepo>(), get<StoreLocalSettingRepo>()));
+  gh.factory<UpdateSleepRepo>(
+      () => UpdateSleepRepo(userRepository: get<UserRepository>()));
   gh.factory<UpdateWeightRepo>(
       () => UpdateWeightRepo(userRepository: get<UserRepository>()));
   gh.factory<WeightCubit>(

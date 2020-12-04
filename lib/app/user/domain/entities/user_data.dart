@@ -7,7 +7,8 @@ abstract class UserData<T> extends Equatable {
   DateTime get dateTime;
   T get value;
 
-  String get dateTimeFormat => DateFormat("dd MMM yyyy").format(dateTime);
+  String get dateTimeFormat =>
+      DateFormat("dd MMM yyyy, HH:mm:ss").format(dateTime);
 
   @override
   List<Object> get props => [

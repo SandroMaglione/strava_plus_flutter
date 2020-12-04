@@ -5,6 +5,7 @@ import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cu
 import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/weight_cubit.dart';
 import 'package:mobile_polimi_project/core/utils/async_state.dart';
+import 'package:mobile_polimi_project/core/extensions/ilist_user_data_extension.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key key}) : super(key: key);
@@ -43,6 +44,12 @@ class ProfileView extends StatelessWidget {
                   ],
                 ),
               ),
+              const Text('Avg'),
+              Text('${weightList.average()}'),
+              const Text('Max'),
+              Text('${weightList.max()}'),
+              const Text('Min'),
+              Text('${weightList.min()}'),
             ],
           ),
         ),

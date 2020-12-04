@@ -10,12 +10,16 @@ class HiveManager {
   /// Box contains weight history
   static const _weightBoxKey = "WEIGHT_BOX_KEY";
 
+  /// Box contains sleeping history
+  static const _sleepBoxKey = "SLEEP_BOX_KEY";
+
   const HiveManager();
 
   Future<void> initialize() async {
     await Hive.initFlutter();
     await Hive.openBox<String>(HiveManager._statsActivitiesBoxKey);
     await Hive.openBox<String>(HiveManager._weightBoxKey);
+    await Hive.openBox<String>(HiveManager._sleepBoxKey);
   }
 
   /// Get reference to box for Strava activities stats
@@ -24,4 +28,7 @@ class HiveManager {
 
   /// Get reference to box for weight history
   Box<String> get weightBox => Hive.box<String>(HiveManager._weightBoxKey);
+
+  /// Get reference to box for sleeping history
+  Box<String> get sleepBox => Hive.box<String>(HiveManager._sleepBoxKey);
 }
