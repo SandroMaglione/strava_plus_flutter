@@ -13,6 +13,9 @@ class HiveManager {
   /// Box contains sleeping history
   static const _sleepBoxKey = "SLEEP_BOX_KEY";
 
+  /// Box contains diet history
+  static const _dietBoxKey = "DIET_BOX_KEY";
+
   const HiveManager();
 
   Future<void> initialize() async {
@@ -20,6 +23,7 @@ class HiveManager {
     await Hive.openBox<String>(HiveManager._statsActivitiesBoxKey);
     await Hive.openBox<String>(HiveManager._weightBoxKey);
     await Hive.openBox<String>(HiveManager._sleepBoxKey);
+    await Hive.openBox<String>(HiveManager._dietBoxKey);
   }
 
   /// Get reference to box for Strava activities stats
@@ -31,4 +35,7 @@ class HiveManager {
 
   /// Get reference to box for sleeping history
   Box<String> get sleepBox => Hive.box<String>(HiveManager._sleepBoxKey);
+
+  /// Get reference to box for diet history
+  Box<String> get dietBox => Hive.box<String>(HiveManager._dietBoxKey);
 }

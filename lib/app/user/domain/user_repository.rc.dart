@@ -7,9 +7,10 @@ import 'package:meta/meta.dart';
 // RepoCaseGenerator
 // **************************************************************************
 
-import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/diet_data.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
 import 'package:mobile_polimi_project/app/user/domain/user_repository.dart';
 
@@ -83,5 +84,43 @@ class UpdateSleepRepoParams {
   const UpdateSleepRepoParams({
     @required this.date,
     @required this.sleepData,
+  });
+}
+
+class GetDietListRepo {
+  final UserRepository userRepository;
+
+  const GetDietListRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, IMap<DateTime, DietData>>> call() async {
+    return userRepository.getDietList();
+  }
+}
+
+class UpdateDietRepo {
+  final UserRepository userRepository;
+
+  const UpdateDietRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, Tuple2<DateTime, DietData>>> call(
+      UpdateDietRepoParams params) async {
+    return userRepository.updateDiet(
+      params.date,
+      params.dietData,
+    );
+  }
+}
+
+class UpdateDietRepoParams {
+  final DateTime date;
+  final DietData dietData;
+
+  const UpdateDietRepoParams({
+    @required this.date,
+    @required this.dietData,
   });
 }

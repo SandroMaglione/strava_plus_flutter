@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_polimi_project/app/activity/presentation/controllers/cubit/activity_list_cubit.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/calendar_view.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/views/diet_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/profile_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/stats_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/summary_activity_view.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/widgets/build_provider.dart';
+import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/diet_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/sleep_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/weight_cubit.dart';
 import 'package:mobile_polimi_project/injectable.dart';
@@ -38,6 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
           BlocProvider<SleepCubit>(
             create: (context) => getIt<SleepCubit>()..init(),
           ),
+          BlocProvider<DietCubit>(
+            create: (context) => getIt<DietCubit>()..init(),
+          ),
         ],
         builder: (context) => Scaffold(
           body: _currentView,
@@ -50,19 +55,23 @@ class _HomeScreenState extends State<HomeScreen> {
             items: [
               const BottomNavigationBarItem(
                 icon: const Icon(Icons.ac_unit),
-                label: 'Goals',
+                label: 'Strava',
               ),
               const BottomNavigationBarItem(
                 icon: const Icon(Icons.sanitizer_rounded),
-                label: 'Create',
+                label: 'Diet',
+              ),
+              const BottomNavigationBarItem(
+                icon: const Icon(Icons.no_drinks_rounded),
+                label: 'Water',
               ),
               const BottomNavigationBarItem(
                 icon: const Icon(Icons.king_bed),
-                label: 'Activities',
+                label: 'Sleep',
               ),
               const BottomNavigationBarItem(
                 icon: const Icon(Icons.receipt_long_outlined),
-                label: 'Profile',
+                label: 'Weight',
               ),
             ],
           ),
@@ -76,10 +85,10 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return const SummaryActivityView();
       case 1:
-        return const CalendarView();
-      case 2:
-        return const StatsView();
+        return const DietView();
       case 3:
+        return const StatsView();
+      case 4:
         return const ProfileView();
       default:
         return const SummaryActivityView();

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:mobile_polimi_project/app/user/data/datasource/local/user_local_data_source.dart';
 import 'package:mobile_polimi_project/app/user/data/models/weight_data_model.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/diet_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/user_repository.dart';
@@ -47,8 +48,25 @@ class UserRepositoryImpl implements UserRepository {
             throw const LoginFailure(0, null);
           } else {
             return _userLocalDataSourceImpl.updateSleep(
-                date, sleepData.toModel);
+              date,
+              sleepData.toModel,
+            );
           }
         },
+      ).runAll();
+
+  @override
+  Future<Either<Failure, IMap<DateTime, DietData>>> getDietList() async => Task(
+        () async => _userLocalDataSourceImpl.getDietList(),
+      ).runAll();
+
+  @override
+  Future<Either<Failure, Tuple2<DateTime, DietData>>> updateDiet(
+          DateTime date, DietData dietData) async =>
+      Task(
+        () async => _userLocalDataSourceImpl.updateDiet(
+          date,
+          dietData.toModel,
+        ),
       ).runAll();
 }

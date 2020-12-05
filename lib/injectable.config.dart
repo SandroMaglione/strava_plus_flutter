@@ -15,6 +15,7 @@ import 'app/activity/domain/activity_repository.dart';
 import 'app/activity/data/repository/activity_repository_impl.dart';
 import 'app/data/datasources/api/api_constants.dart';
 import 'app/activity/presentation/controllers/cubit/detailed_activity_cubit.dart';
+import 'app/user/presentation/controllers/cubit/diet_cubit.dart';
 import 'app/login/domain/login_repository.rc.dart';
 import 'app/activity/domain/activity_repository.rc.dart';
 import 'app/domain/setting_repository.rc.dart';
@@ -82,6 +83,8 @@ GetIt $initGetIt(
   gh.factory<GetComposedSummaryActivityListRepo>(() =>
       GetComposedSummaryActivityListRepo(
           activityRepository: get<ActivityRepository>()));
+  gh.factory<GetDietListRepo>(
+      () => GetDietListRepo(userRepository: get<UserRepository>()));
   gh.factory<GetLocalSettingRepo>(
       () => GetLocalSettingRepo(settingRepository: get<SettingRepository>()));
   gh.factory<GetSleepListRepo>(
@@ -94,6 +97,8 @@ GetIt $initGetIt(
       () => SaveExtraStatsRepo(activityRepository: get<ActivityRepository>()));
   gh.factory<ThemeCubit>(() =>
       ThemeCubit(get<GetLocalSettingRepo>(), get<StoreLocalSettingRepo>()));
+  gh.factory<UpdateDietRepo>(
+      () => UpdateDietRepo(userRepository: get<UserRepository>()));
   gh.factory<UpdateSleepRepo>(
       () => UpdateSleepRepo(userRepository: get<UserRepository>()));
   gh.factory<UpdateWeightRepo>(
@@ -104,6 +109,8 @@ GetIt $initGetIt(
       get<GetComposedSummaryActivityListRepo>(), get<SaveExtraStatsRepo>()));
   gh.factory<DetailedActivityCubit>(
       () => DetailedActivityCubit(get<GetActivityByIdRepo>()));
+  gh.factory<DietCubit>(
+      () => DietCubit(get<GetDietListRepo>(), get<UpdateDietRepo>()));
   gh.factory<GetAuthTokenRepo>(
       () => GetAuthTokenRepo(loginRepository: get<LoginRepository>()));
   gh.factory<GetUserAccountInfoRepo>(
