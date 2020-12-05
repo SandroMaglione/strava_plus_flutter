@@ -73,6 +73,9 @@ dependencies:
   # Linear indicator
   step_progress_indicator: ^0.2.4+7
 
+  # Utils
+  # flutter_hooks: ^0.15.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

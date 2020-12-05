@@ -23,7 +23,7 @@ abstract class Failure extends Equatable {
 
   /// Used in subclasses to return custom error message in case of [DioErrorType.RESPONSE]
   String customErrorMessage(String Function() customError) =>
-      dioErrorType == DioErrorType.RESPONSE ? customError() : errorMessage;
+      dioErrorType == DioErrorType.RESPONSE ? customError() : 'errorMessage';
 
   @override
   List<Object> get props => [statusCode];

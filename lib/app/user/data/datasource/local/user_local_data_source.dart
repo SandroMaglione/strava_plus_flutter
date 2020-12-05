@@ -31,8 +31,13 @@ class UserLocalDataSourceImpl {
   Future<Tuple2<DateTime, SleepDataModel>> updateSleep(
           DateTime date, SleepDataModel sleepDataModel) async =>
       _hiveManager.sleepBox
-          .put(date, json.encode(sleepDataModel.toJson()))
-          .then((_) => tuple2(date, sleepDataModel));
+          .put(
+            date.toString(),
+            json.encode(sleepDataModel.toJson()),
+          )
+          .then(
+            (_) => tuple2(date, sleepDataModel),
+          );
 
   Future<IMap<DateTime, SleepDataModel>> getSleepList() async => imap(
         _hiveManager.sleepBox
@@ -42,7 +47,7 @@ class UserLocalDataSourceImpl {
           {},
           (prev, e) => {
             ...prev,
-            e.key as DateTime: SleepDataModel.fromJson(
+            DateTime.parse(e.key as String): SleepDataModel.fromJson(
               json.decode(e.value) as Map<String, dynamic>,
             ),
           },

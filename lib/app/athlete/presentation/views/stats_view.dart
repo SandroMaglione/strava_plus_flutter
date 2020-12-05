@@ -2,64 +2,151 @@ import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_polimi_project/app/activity/domain/entities/composed_summary_activity.dart';
-import 'package:mobile_polimi_project/app/activity/presentation/controllers/cubit/activity_list_cubit.dart';
+import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
+import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/sleep_cubit.dart';
 import 'package:mobile_polimi_project/core/utils/async_state.dart';
 
-class StatsView extends StatefulWidget {
+class StatsView extends StatelessWidget {
   const StatsView({Key key}) : super(key: key);
 
   @override
-  _StatsViewState createState() => _StatsViewState();
-}
-
-class _StatsViewState extends State<StatsView> {
-  DateTime startDateFilter =
-      DateTime(2019, 10).subtract(const Duration(days: 30));
-  DateTime endDateFilter = DateTime(2019, 10);
-
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ActivityListCubit,
-        AsyncState<dartz.IList<ComposedSummaryActivity>>>(
-      builder: (context, state) => state.maybeWhen(
-        orElse: () => const Center(
-          child: const CircularProgressIndicator(),
-        ),
-        success: (activityList) {
-          final listDateRange = activityList.filter(
-            (a) =>
-                a.summaryActivity.startDate.isBefore(endDateFilter) &&
-                a.summaryActivity.startDate.isAfter(startDateFilter),
-          );
+    final theme = context.watch<ThemeCubit>().state;
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'From ${DateFormat('dd MMMM yyyy').format(startDateFilter)} - To ${DateFormat('dd MMMM yyyy').format(endDateFilter)}',
+    return BlocBuilder<SleepCubit, AsyncState<dartz.IMap<DateTime, SleepData>>>(
+      builder: (context, state) => state.maybeWhen(
+        orElse: () => const Center(child: const CircularProgressIndicator()),
+        error: (failure) => Center(
+          child: Text(failure.errorMessage),
+        ),
+        success: (sleepList) {
+          final today = DateTime.now();
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(20),
+            itemBuilder: (context, index) {
+              final date = DateTime(today.year, today.month, today.day, 0, 0, 0)
+                  .subtract(Duration(days: index));
+              final sleepData = sleepList.get(date);
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                    horizontal: 25,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(DateFormat('dd MMMM yyyy').format(date)),
+                      const Divider(),
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              OutlineButton(
+                                onPressed: () => _selectDateTime(
+                                  context,
+                                  initialDate:
+                                      date.subtract(const Duration(days: 1)),
+                                  firstDate:
+                                      date.subtract(const Duration(days: 1)),
+                                  lastDate: date,
+                                  initialTime:
+                                      const TimeOfDay(hour: 22, minute: 0),
+                                  onComplete: (dateTime) =>
+                                      context.read<SleepCubit>().updateGoToBed(
+                                            date,
+                                            dateTime,
+                                          ),
+                                ),
+                                child: Text(
+                                  sleepData.fold(
+                                    () => '---',
+                                    (a) => a.sleepTime.goToBed.fold(
+                                      () => '---',
+                                      (a) =>
+                                          DateFormat('dd MMM, HH:mm').format(a),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              OutlineButton(
+                                onPressed: () => _selectDateTime(
+                                  context,
+                                  initialDate: date,
+                                  firstDate:
+                                      date.subtract(const Duration(days: 1)),
+                                  lastDate: date,
+                                  initialTime:
+                                      const TimeOfDay(hour: 7, minute: 0),
+                                  onComplete: (dateTime) =>
+                                      context.read<SleepCubit>().updateWakeUp(
+                                            date,
+                                            dateTime,
+                                          ),
+                                ),
+                                child: Text(
+                                  sleepData.fold(
+                                    () => '---',
+                                    (a) => a.sleepTime.wakeUp.fold(
+                                      () => '---',
+                                      (a) =>
+                                          DateFormat('dd MMM, HH:mm').format(a),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                const Divider(),
-                Text('Num activities: ${listDateRange.length()}'),
-                Text(
-                  'Mean avg speed: ${listDateRange.foldLeft<double>(0, (previous, a) => previous + a.summaryActivity.averageSpeed) / listDateRange.length()}',
-                ),
-                Text(
-                  'Mean distance: ${listDateRange.foldLeft<double>(0, (previous, a) => previous + a.summaryActivity.distance) / listDateRange.length()}',
-                ),
-                Text(
-                  'Mean elapsed time: ${listDateRange.foldLeft<double>(0, (previous, a) => previous + a.summaryActivity.elapsedTime) / listDateRange.length()}',
-                ),
-                Text(
-                  'Total elapsed time: ${listDateRange.foldLeft<double>(0, (previous, a) => previous + a.summaryActivity.elapsedTime)}',
-                ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),
     );
   }
+
+  Future<void> _selectDateTime(
+    BuildContext context, {
+    @required DateTime initialDate,
+    @required DateTime firstDate,
+    @required DateTime lastDate,
+    @required TimeOfDay initialTime,
+    @required void Function(DateTime) onComplete,
+  }) async =>
+      showDatePicker(
+        context: context,
+        initialDate: initialDate,
+        firstDate: firstDate,
+        lastDate: lastDate,
+      ).then(
+        (dateSelected) {
+          if (dateSelected != null) {
+            return showTimePicker(
+              context: context,
+              initialTime: initialTime,
+            ).then(
+              (timeSelected) {
+                if (timeSelected != null) {
+                  onComplete(
+                    DateTime(
+                      dateSelected.year,
+                      dateSelected.month,
+                      dateSelected.day,
+                      timeSelected.hour,
+                      timeSelected.minute,
+                    ),
+                  );
+                }
+              },
+            );
+          }
+        },
+      );
 }

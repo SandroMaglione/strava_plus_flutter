@@ -7,6 +7,7 @@ import 'package:mobile_polimi_project/app/athlete/presentation/views/stats_view.
 import 'package:mobile_polimi_project/app/athlete/presentation/views/summary_activity_view.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/widgets/build_provider.dart';
+import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/sleep_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/weight_cubit.dart';
 import 'package:mobile_polimi_project/injectable.dart';
 
@@ -33,7 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
         providers: [
           BlocProvider<WeightCubit>(
             create: (context) => getIt<WeightCubit>()..init(),
-          )
+          ),
+          BlocProvider<SleepCubit>(
+            create: (context) => getIt<SleepCubit>()..init(),
+          ),
         ],
         builder: (context) => Scaffold(
           body: _currentView,
