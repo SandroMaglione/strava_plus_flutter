@@ -1,9 +1,11 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_polimi_project/app/activity/presentation/controllers/cubit/activity_list_cubit.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/diet_view.dart';
-import 'package:mobile_polimi_project/app/athlete/presentation/views/profile_view.dart';
-import 'package:mobile_polimi_project/app/athlete/presentation/views/stats_view.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/views/weight_view.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/views/sleep_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/summary_activity_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/water_view.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
@@ -20,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int tabIndex = 0;
+  int _tabIndex = 2;
 
   @override
   void initState() {
@@ -50,34 +52,24 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         builder: (context) => Scaffold(
           body: _currentView,
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: tabIndex,
-            backgroundColor: theme.customColorTheme.primaryColor,
-            selectedItemColor: theme.customColorTheme.accentColor,
-            unselectedItemColor: theme.customColorTheme.primaryColorExtraLight,
-            onTap: (index) => setState(() => tabIndex = index),
-            items: [
-              const BottomNavigationBarItem(
-                icon: const Icon(Icons.ac_unit),
-                label: 'Strava',
-              ),
-              const BottomNavigationBarItem(
-                icon: const Icon(Icons.sanitizer_rounded),
-                label: 'Diet',
-              ),
-              const BottomNavigationBarItem(
-                icon: const Icon(Icons.no_drinks_rounded),
-                label: 'Water',
-              ),
-              const BottomNavigationBarItem(
-                icon: const Icon(Icons.king_bed),
-                label: 'Sleep',
-              ),
-              const BottomNavigationBarItem(
-                icon: const Icon(Icons.receipt_long_outlined),
-                label: 'Weight',
-              ),
+          bottomNavigationBar: AnimatedBottomNavigationBar(
+            icons: [
+              FontAwesomeIcons.weight,
+              FontAwesomeIcons.utensils,
+              FontAwesomeIcons.strava,
+              FontAwesomeIcons.tint,
+              FontAwesomeIcons.bed,
             ],
+            activeIndex: _tabIndex,
+            gapLocation: GapLocation.none,
+            notchSmoothness: NotchSmoothness.verySmoothEdge,
+            leftCornerRadius: 32,
+            rightCornerRadius: 32,
+            backgroundColor: theme.customColorTheme.primaryColor,
+            splashColor: theme.customColorTheme.primaryColorExtraLight,
+            activeColor: theme.customColorTheme.scaffoldBackgroundColorLight,
+            inactiveColor: theme.customColorTheme.primaryColorLight,
+            onTap: (index) => setState(() => _tabIndex = index),
           ),
         ),
       ),
@@ -85,17 +77,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget get _currentView {
-    switch (tabIndex) {
+    switch (_tabIndex) {
       case 0:
-        return const SummaryActivityView();
+        return const WeightView();
       case 1:
         return const DietView();
       case 2:
-        return const WaterView();
+        return const SummaryActivityView();
       case 3:
-        return const StatsView();
+        return const WaterView();
       case 4:
-        return const ProfileView();
+        return const SleepView();
       default:
         return const SummaryActivityView();
     }

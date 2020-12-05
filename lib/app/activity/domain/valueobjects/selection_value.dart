@@ -1,12 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:recase/recase.dart';
 
 /// Selection of value from given list
 abstract class SelectionValue<T> extends Equatable {
   final Option<T> valueOption;
 
   /// Name of the value to select
-  String get name => this.runtimeType.toString();
+  String get name =>
+      this.runtimeType.toString().replaceAll('Value', '').titleCase;
 
   /// Message/Status associated with each value
   Map<T, String> get messages;

@@ -51,7 +51,6 @@ class SleepCubit extends Cubit<AsyncState<IMap<DateTime, SleepData>>> {
     state.maybeWhen(
       orElse: () {},
       success: (sleepMap) async {
-        emit(const AsyncState.loading());
         emit(
           (await _updateSleepRepo(
             UpdateSleepRepoParams(

@@ -17,17 +17,19 @@ class SelectionValueLabel extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            selectionValue.name,
-            style: theme.customTextTheme.textTheme.overline,
+            '${selectionValue.name}: ',
+            style: theme.customTextTheme.textTheme.caption,
           ),
           Text(
             selectionValue.label,
-            style: theme.customTextTheme.textTheme.subtitle1,
-          ),
+            style: theme.customTextTheme.textTheme.caption.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          )
         ],
       ),
     );

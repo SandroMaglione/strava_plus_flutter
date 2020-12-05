@@ -6,8 +6,8 @@ import 'package:mobile_polimi_project/core/theme/color_theme.dart';
 /// Generate the text theme using the official Material design tool:
 /// https://material.io/design/typography/the-type-system.html#type-scale
 abstract class CustomTextTheme {
-  final CustomColorTheme _customColorTheme;
-  const CustomTextTheme(this._customColorTheme);
+  CustomColorTheme get customColorTheme;
+  const CustomTextTheme();
 
   /// General [TextTheme] for the app theme
   TextTheme get textTheme;
@@ -16,86 +16,86 @@ abstract class CustomTextTheme {
 /// Default text theme settings
 class CustomDefaultTextTheme implements CustomTextTheme {
   @override
-  final CustomColorTheme _customColorTheme;
+  final CustomColorTheme customColorTheme;
 
-  const CustomDefaultTextTheme(this._customColorTheme);
+  const CustomDefaultTextTheme(this.customColorTheme);
 
   @override
-  TextTheme get textTheme => const TextTheme(
-        // H1
-        headline1: const TextStyle(
+  TextTheme get textTheme => TextTheme(
+        headline1: TextStyle(
           fontSize: 96,
           fontWeight: FontWeight.w300,
+          color: customColorTheme.textColor,
           letterSpacing: -1.5,
         ),
-        // H2
-        headline2: const TextStyle(
+        headline2: TextStyle(
           fontSize: 60,
           fontWeight: FontWeight.w300,
+          color: customColorTheme.textColor,
           letterSpacing: -0.5,
         ),
-        // H3
-        headline3: const TextStyle(
+        headline3: TextStyle(
           fontSize: 48,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
         ),
-        // H4
-        headline4: const TextStyle(
+        headline4: TextStyle(
           fontSize: 34,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
           letterSpacing: 0.25,
         ),
-        // H5
-        headline5: const TextStyle(
+        headline5: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
         ),
-        // H6
-        headline6: const TextStyle(
+        headline6: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
+          color: customColorTheme.textColor,
           letterSpacing: 0.15,
         ),
-        // Subtitle 1
-        subtitle1: const TextStyle(
+        subtitle1: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
           letterSpacing: 0.15,
         ),
-        // Subtitle 2
-        subtitle2: const TextStyle(
+        subtitle2: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
+          color: customColorTheme.textColor,
           letterSpacing: 0.1,
         ),
-        // Default material text style
-        bodyText2: const TextStyle(
+        bodyText2: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
           letterSpacing: 0.5,
         ),
-        // Emphasize text inside bodyText2
-        bodyText1: const TextStyle(
+        bodyText1: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
           letterSpacing: 0.25,
         ),
-        // Default button style
-        button: const TextStyle(
+        button: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
+          color: customColorTheme.textColor,
           letterSpacing: 1.25,
         ),
-        // Auxiliary text associated with images
-        caption: const TextStyle(
+        caption: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
           letterSpacing: 0.4,
         ),
-        // For captions or to introduce a (larger) headline
-        overline: const TextStyle(
+        overline: TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w400,
+          color: customColorTheme.textColor,
           letterSpacing: 1.5,
         ),
       );

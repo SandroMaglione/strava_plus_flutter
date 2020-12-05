@@ -31,7 +31,6 @@ class WaterCubit extends Cubit<AsyncState<IMap<DateTime, WaterData>>> {
     state.maybeWhen(
       orElse: () {},
       success: (waterMap) async {
-        emit(const AsyncState.loading());
         emit(
           (await _updateWaterRepo(
             UpdateWaterRepoParams(

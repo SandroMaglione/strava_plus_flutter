@@ -70,11 +70,21 @@ dependencies:
   # Calendar
   table_calendar: ^2.3.1
 
-  # Linear indicator
-  step_progress_indicator: ^0.2.4+7
-
   # Utils
-  # flutter_hooks: ^0.15.0
+  flutter_hooks: ^0.15.0
+
+  # Text
+  recase: ^3.0.1
+  time: ^1.4.0
+
+  # Icons
+  font_awesome_flutter: ^8.10.0
+
+  # Navigation
+  animated_bottom_navigation_bar: ^0.2.0
+
+  # Progress
+  step_progress_indicator: ^0.2.5+8
 
 dev_dependencies:
   flutter_test:

@@ -27,7 +27,6 @@ class WeightCubit extends Cubit<AsyncState<IList<WeightData>>> {
     state.maybeWhen(
       orElse: () {},
       success: (weightList) async {
-        emit(const AsyncState.loading());
         emit(
           (await _updateWeightRepo(
             UpdateWeightRepoParams(

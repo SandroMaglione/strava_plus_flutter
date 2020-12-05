@@ -73,6 +73,13 @@ class CustomAppTheme {
         primaryColorDark: customColorTheme.primaryColorDark,
         primaryColorLight: customColorTheme.primaryColorLight,
         brightness: customColorTheme.brightness,
+        cardTheme: CardTheme(
+          elevation: 30,
+          shadowColor: customColorTheme.scaffoldBackgroundColorLight,
+          shape: ContinuousRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
         inputDecorationTheme: InputDecorationTheme(
           errorBorder: UnderlineInputBorder(
             borderSide: BorderSide(

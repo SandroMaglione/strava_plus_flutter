@@ -91,7 +91,6 @@ class DietCubit extends Cubit<AsyncState<IMap<DateTime, DietData>>> {
     state.maybeWhen(
       orElse: () {},
       success: (dietMap) async {
-        emit(const AsyncState.loading());
         emit(
           (await _updateDietRepo(
             UpdateDietRepoParams(

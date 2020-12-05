@@ -29,7 +29,16 @@ abstract class CustomColorTheme {
   Color get errorColor;
 
   /// Scaffold background color
+  Color get scaffoldBackgroundColorLight;
+
+  /// Scaffold background color
   Color get scaffoldBackgroundColor;
+
+  /// Scaffold background color
+  Color get scaffoldBackgroundColorDark;
+
+  /// Text color
+  Color get textColor;
 
   /// Brigthtness of the theme
   Brightness get brightness;
@@ -43,25 +52,34 @@ class CustomLightColorTheme extends CustomColorTheme {
   Brightness get brightness => Brightness.light;
 
   @override
-  Color get primaryColor => const Color(0xFF192B8A);
+  Color get primaryColor => const Color(0xFFff854a);
 
   @override
-  Color get primaryColorLight => const Color(0xFF0E27A5);
+  Color get primaryColorLight => const Color(0xFFffb678);
 
   @override
-  Color get primaryColorExtraLight => const Color(0xFF3557FF);
+  Color get primaryColorExtraLight => const Color(0xFFffe0c1);
 
   @override
-  Color get primaryColorDark => const Color(0xFF000A38);
+  Color get primaryColorDark => const Color(0xFFc6561d);
 
   @override
-  Color get accentColor => const Color(0xFFECED4C);
+  Color get accentColor => const Color(0xFF4895f0);
 
   @override
   Color get errorColor => const Color(0xFFea4d4d);
 
   @override
-  Color get scaffoldBackgroundColor => const Color(0xFFf4f5f7);
+  Color get scaffoldBackgroundColor => const Color(0xFFEFEFEF);
+
+  @override
+  Color get scaffoldBackgroundColorDark => const Color(0xFFE4E4E4);
+
+  @override
+  Color get scaffoldBackgroundColorLight => const Color(0xffFAFAFA);
+
+  @override
+  Color get textColor => const Color(0xFF111111);
 }
 
 /// Custom colors for app's dark theme
@@ -91,4 +109,16 @@ class CustomDarkColorTheme extends CustomColorTheme {
 
   @override
   Color get scaffoldBackgroundColor => const Color(0xFF434343);
+
+  @override
+  // TODO: implement scaffoldBackgroundColorDark
+  Color get scaffoldBackgroundColorDark => throw UnimplementedError();
+
+  @override
+  // TODO: implement scaffoldBackgroundColorLight
+  Color get scaffoldBackgroundColorLight => throw UnimplementedError();
+
+  @override
+  // TODO: implement textColor
+  Color get textColor => throw UnimplementedError();
 }

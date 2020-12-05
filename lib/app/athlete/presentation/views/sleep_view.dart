@@ -1,27 +1,26 @@
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_polimi_project/app/athlete/presentation/widgets/water_card.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/widgets/sleep_card.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
-import 'package:mobile_polimi_project/app/user/data/models/water_data_model.dart';
-import 'package:mobile_polimi_project/app/user/domain/entities/water_data.dart';
-import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/water_cubit.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
+import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/sleep_cubit.dart';
 import 'package:mobile_polimi_project/core/utils/async_state.dart';
 
-class WaterView extends StatelessWidget {
-  const WaterView({Key key}) : super(key: key);
+class SleepView extends StatelessWidget {
+  const SleepView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = context.watch<ThemeCubit>().state;
 
-    return BlocBuilder<WaterCubit, AsyncState<dartz.IMap<DateTime, WaterData>>>(
+    return BlocBuilder<SleepCubit, AsyncState<dartz.IMap<DateTime, SleepData>>>(
       builder: (context, state) => state.maybeWhen(
         orElse: () => const Center(child: const CircularProgressIndicator()),
         error: (failure) => Center(
           child: Text(failure.errorMessage),
         ),
-        success: (waterList) {
+        success: (sleepList) {
           final today = DateTime.now();
 
           return ListView.builder(
@@ -29,11 +28,9 @@ class WaterView extends StatelessWidget {
             itemBuilder: (context, index) {
               final date = DateTime(today.year, today.month, today.day, 0, 0, 0)
                   .subtract(Duration(days: index));
-              return WaterCard(
+              return SleepCard(
                 date: date,
-                waterData: waterList.get(date).getOrElse(
-                      () => const WaterDataModel(),
-                    ),
+                sleepDataOption: sleepList.get(date),
               );
             },
           );

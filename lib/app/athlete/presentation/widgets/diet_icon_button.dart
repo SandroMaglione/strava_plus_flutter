@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/user/domain/valueobjects/diet_value.dart';
 
@@ -16,14 +17,16 @@ class DietIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.watch<ThemeCubit>().state;
-    final currentValue = dietValue.valueOption.getOrElse(() => false);
+    final isSelected = dietValue.valueOption.getOrElse(() => false);
 
-    return IconButton(
-      color: currentValue
-          ? theme.customColorTheme.accentColor
-          : theme.customColorTheme.primaryColor,
-      icon: const Icon(Icons.set_meal_outlined),
-      onPressed: () => onPressed(!currentValue),
+    return InkWell(
+      onTap: () => onPressed(!isSelected),
+      child: Icon(
+        FontAwesomeIcons.drumstickBite,
+        color: isSelected
+            ? theme.customColorTheme.primaryColor
+            : theme.customColorTheme.scaffoldBackgroundColorDark,
+      ),
     );
   }
 }
