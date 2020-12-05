@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 // RepoCaseGenerator
 // **************************************************************************
 
+import 'package:mobile_polimi_project/app/user/domain/entities/water_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
@@ -122,5 +123,43 @@ class UpdateDietRepoParams {
   const UpdateDietRepoParams({
     @required this.date,
     @required this.dietData,
+  });
+}
+
+class GetWaterListRepo {
+  final UserRepository userRepository;
+
+  const GetWaterListRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, IMap<DateTime, WaterData>>> call() async {
+    return userRepository.getWaterList();
+  }
+}
+
+class UpdateWaterRepo {
+  final UserRepository userRepository;
+
+  const UpdateWaterRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, Tuple2<DateTime, WaterData>>> call(
+      UpdateWaterRepoParams params) async {
+    return userRepository.updateWater(
+      params.date,
+      params.waterData,
+    );
+  }
+}
+
+class UpdateWaterRepoParams {
+  final DateTime date;
+  final WaterData waterData;
+
+  const UpdateWaterRepoParams({
+    @required this.date,
+    @required this.waterData,
   });
 }

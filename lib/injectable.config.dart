@@ -36,6 +36,7 @@ import 'core/services/token_manager.dart';
 import 'app/user/data/datasource/local/user_local_data_source.dart';
 import 'app/user/domain/user_repository.dart';
 import 'app/user/data/repository/user_repository_impl.dart';
+import 'app/user/presentation/controllers/cubit/water_cubit.dart';
 import 'app/user/presentation/controllers/cubit/weight_cubit.dart';
 
 /// adds generated dependencies
@@ -89,6 +90,8 @@ GetIt $initGetIt(
       () => GetLocalSettingRepo(settingRepository: get<SettingRepository>()));
   gh.factory<GetSleepListRepo>(
       () => GetSleepListRepo(userRepository: get<UserRepository>()));
+  gh.factory<GetWaterListRepo>(
+      () => GetWaterListRepo(userRepository: get<UserRepository>()));
   gh.factory<GetWeightListRepo>(
       () => GetWeightListRepo(userRepository: get<UserRepository>()));
   gh.factory<LoginRepository>(() =>
@@ -101,8 +104,12 @@ GetIt $initGetIt(
       () => UpdateDietRepo(userRepository: get<UserRepository>()));
   gh.factory<UpdateSleepRepo>(
       () => UpdateSleepRepo(userRepository: get<UserRepository>()));
+  gh.factory<UpdateWaterRepo>(
+      () => UpdateWaterRepo(userRepository: get<UserRepository>()));
   gh.factory<UpdateWeightRepo>(
       () => UpdateWeightRepo(userRepository: get<UserRepository>()));
+  gh.factory<WaterCubit>(
+      () => WaterCubit(get<GetWaterListRepo>(), get<UpdateWaterRepo>()));
   gh.factory<WeightCubit>(
       () => WeightCubit(get<GetWeightListRepo>(), get<UpdateWeightRepo>()));
   gh.factory<ActivityListCubit>(() => ActivityListCubit(

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'package:mobile_polimi_project/app/user/data/models/diet_data_model.dart';
 import 'package:mobile_polimi_project/app/user/data/models/sleep_data_model.dart';
+import 'package:mobile_polimi_project/app/user/data/models/water_data_model.dart';
 import 'package:mobile_polimi_project/app/user/data/models/weight_data_model.dart';
 import 'package:mobile_polimi_project/core/services/hive_manager.dart';
 
@@ -47,6 +48,17 @@ class UserLocalDataSourceImpl {
         (m) => m.toJson(),
       );
 
+  Future<Tuple2<DateTime, WaterDataModel>> updateWater(
+    DateTime date,
+    WaterDataModel waterDataModel,
+  ) async =>
+      _updateDateHistory(
+        _hiveManager.waterBox,
+        date,
+        waterDataModel,
+        (m) => m.toJson(),
+      );
+
   Future<IMap<DateTime, SleepDataModel>> getSleepList() async =>
       _getDatesHistory(
         _hiveManager.sleepBox,
@@ -56,6 +68,12 @@ class UserLocalDataSourceImpl {
   Future<IMap<DateTime, DietDataModel>> getDietList() async => _getDatesHistory(
         _hiveManager.dietBox,
         (m) => DietDataModel.fromJson(m),
+      );
+
+  Future<IMap<DateTime, WaterDataModel>> getWaterList() async =>
+      _getDatesHistory(
+        _hiveManager.waterBox,
+        (m) => WaterDataModel.fromJson(m),
       );
 
   Future<Tuple2<DateTime, T>> _updateDateHistory<T>(

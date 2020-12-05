@@ -5,6 +5,7 @@ import 'package:mobile_polimi_project/app/user/data/datasource/local/user_local_
 import 'package:mobile_polimi_project/app/user/data/models/weight_data_model.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/diet_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/water_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/user_repository.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
@@ -68,5 +69,27 @@ class UserRepositoryImpl implements UserRepository {
           date,
           dietData.toModel,
         ),
+      ).runAll();
+
+  @override
+  Future<Either<Failure, IMap<DateTime, WaterData>>> getWaterList() async =>
+      Task(
+        () async => _userLocalDataSourceImpl.getWaterList(),
+      ).runAll();
+
+  @override
+  Future<Either<Failure, Tuple2<DateTime, WaterData>>> updateWater(
+          DateTime date, WaterData waterData) async =>
+      Task(
+        () async {
+          if (waterData.water.water.isNone()) {
+            throw const LoginFailure(0, null);
+          } else {
+            return _userLocalDataSourceImpl.updateWater(
+              date,
+              waterData.toModel,
+            );
+          }
+        },
       ).runAll();
 }

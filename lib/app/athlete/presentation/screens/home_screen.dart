@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_polimi_project/app/activity/presentation/controllers/cubit/activity_list_cubit.dart';
-import 'package:mobile_polimi_project/app/athlete/presentation/views/calendar_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/diet_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/profile_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/stats_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/summary_activity_view.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/views/water_view.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/widgets/build_provider.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/diet_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/sleep_cubit.dart';
+import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/water_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/weight_cubit.dart';
 import 'package:mobile_polimi_project/injectable.dart';
 
@@ -42,6 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BlocProvider<DietCubit>(
             create: (context) => getIt<DietCubit>()..init(),
+          ),
+          BlocProvider<WaterCubit>(
+            create: (context) => getIt<WaterCubit>()..init(),
           ),
         ],
         builder: (context) => Scaffold(
@@ -86,6 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
         return const SummaryActivityView();
       case 1:
         return const DietView();
+      case 2:
+        return const WaterView();
       case 3:
         return const StatsView();
       case 4:
