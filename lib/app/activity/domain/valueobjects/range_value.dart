@@ -11,6 +11,9 @@ abstract class RangeValue extends SelectionValue<int> {
 
   Option<String> _labelMessage(int value) => optionOf(messages[value]);
 
+  @override
+  double get points => valueOption.getOrElse(() => 0) / (max - min);
+
   /// Minimum value key in the [messages] map
   Iterable<int> get messagesKeys => messages.keys;
 

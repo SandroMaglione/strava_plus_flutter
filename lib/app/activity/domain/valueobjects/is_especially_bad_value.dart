@@ -11,4 +11,7 @@ class IsEspeciallyBadValue extends BoolValue {
         true: 'Bad workout experience',
         false: 'Standard',
       };
+
+  @override
+  double get points => valueOption.fold(() => 0, (a) => a ? 0 : 1);
 }

@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _tabIndex = 2;
+  int _tabIndex = 4;
 
   @override
   void initState() {
@@ -52,23 +52,41 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         builder: (context) => Scaffold(
           body: _currentView,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => setState(() => _tabIndex = 4),
+            backgroundColor: _tabIndex == 4
+                ? theme.customColorTheme.primaryColor
+                : theme.customColorTheme.scaffoldBackgroundColorLight,
+            elevation: _tabIndex == 4 ? 30 : 0,
+            child: Icon(
+              FontAwesomeIcons.strava,
+              color: _tabIndex == 4
+                  ? theme.customColorTheme.scaffoldBackgroundColorLight
+                  : theme.customColorTheme.primaryColor,
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: AnimatedBottomNavigationBar(
             icons: [
               FontAwesomeIcons.weight,
               FontAwesomeIcons.utensils,
-              FontAwesomeIcons.strava,
               FontAwesomeIcons.tint,
               FontAwesomeIcons.bed,
             ],
             activeIndex: _tabIndex,
-            gapLocation: GapLocation.none,
+            gapLocation: GapLocation.center,
             notchSmoothness: NotchSmoothness.verySmoothEdge,
-            leftCornerRadius: 32,
-            rightCornerRadius: 32,
-            backgroundColor: theme.customColorTheme.primaryColor,
+            // leftCornerRadius: 24,
+            // rightCornerRadius: 24,
+            backgroundColor:
+                theme.customColorTheme.scaffoldBackgroundColorLight,
+            elevation: 10,
+            iconSize: 20,
+            notchMargin: 5,
             splashColor: theme.customColorTheme.primaryColorExtraLight,
-            activeColor: theme.customColorTheme.scaffoldBackgroundColorLight,
-            inactiveColor: theme.customColorTheme.primaryColorLight,
+            activeColor: theme.customColorTheme.primaryColor,
+            inactiveColor: theme.customColorTheme.scaffoldBackgroundColorDark,
             onTap: (index) => setState(() => _tabIndex = index),
           ),
         ),
@@ -83,11 +101,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         return const DietView();
       case 2:
-        return const SummaryActivityView();
-      case 3:
         return const WaterView();
-      case 4:
+      case 3:
         return const SleepView();
+      case 4:
+        return const SummaryActivityView();
       default:
         return const SummaryActivityView();
     }

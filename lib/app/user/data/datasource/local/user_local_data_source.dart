@@ -31,7 +31,7 @@ class UserLocalDataSourceImpl {
     SleepDataModel sleepDataModel,
   ) async =>
       _updateDateHistory(
-        _hiveManager.dietBox,
+        _hiveManager.sleepBox,
         date,
         sleepDataModel,
         (m) => m.toJson(),

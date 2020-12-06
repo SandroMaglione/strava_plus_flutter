@@ -3,6 +3,9 @@ import 'package:mobile_polimi_project/app/activity/domain/valueobjects/selection
 
 /// Specify value in range [min]-[max]
 abstract class BoolValue extends SelectionValue<bool> {
+  @override
+  double get points => valueOption.fold(() => 0, (a) => a ? 1 : 0);
+
   /// Get current message selected based on [valueOption]
   @override
   String get label => valueOption.fold(() => '---', (a) => messages[a]);

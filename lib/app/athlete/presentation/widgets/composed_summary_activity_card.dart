@@ -6,6 +6,7 @@ import 'package:mobile_polimi_project/app/athlete/presentation/widgets/selection
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/core/routes/router.gr.dart';
 import 'package:mobile_polimi_project/core/extensions/duration_extension.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:time/time.dart';
 
 class ComposedSummaryActivityCard extends StatelessWidget {
@@ -39,7 +40,24 @@ class ComposedSummaryActivityCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const Divider(),
+              Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 15,
+                  top: 5,
+                ),
+                child: StepProgressIndicator(
+                  totalSteps:
+                      (composedSummaryActivity.extraStats.maxTotal * 100)
+                          .toInt(),
+                  currentStep:
+                      (composedSummaryActivity.extraStats.points * 100).toInt(),
+                  unselectedColor:
+                      theme.customColorTheme.scaffoldBackgroundColor,
+                  selectedColor: theme.customColorTheme.primaryColorLight,
+                  roundedEdges: const Radius.circular(20),
+                  padding: 0,
+                ),
+              ),
               Wrap(
                 spacing: 15,
                 children: [

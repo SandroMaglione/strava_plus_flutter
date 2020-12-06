@@ -10,6 +10,9 @@ abstract class SelectionValue<T> extends Equatable {
   String get name =>
       this.runtimeType.toString().replaceAll('Value', '').titleCase;
 
+  /// Value points assigned based on current value
+  double get points;
+
   /// Message/Status associated with each value
   Map<T, String> get messages;
 

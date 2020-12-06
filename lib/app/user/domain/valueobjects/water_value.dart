@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 class WaterValue {
   /// Interval accepted
-  static const interval = 0.5;
+  static const interval = 0.25;
 
   final Option<double> water;
 

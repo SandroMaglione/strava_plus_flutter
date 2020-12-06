@@ -10,8 +10,27 @@ class TemperatureValue extends RangeValue {
   Map<int, String> get messages => {
         1: 'Hot',
         2: 'Warm',
-        3: 'Standard',
+        3: 'Pleasant',
         4: 'Cold',
         5: 'Freezing',
       };
+
+  @override
+  double get points => valueOption.fold(
+        () => 0,
+        (a) {
+          switch (a) {
+            case 1:
+            case 5:
+              return 0.25;
+            case 2:
+            case 4:
+              return 0.5;
+            case 3:
+              return 1;
+            default:
+              return 0;
+          }
+        },
+      );
 }

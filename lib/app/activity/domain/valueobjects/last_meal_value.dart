@@ -16,4 +16,26 @@ class LastMealValue extends RangeValue {
         6: '1 hour before',
         7: 'Right before',
       };
+
+  @override
+  double get points => valueOption.fold(
+        () => 0,
+        (a) {
+          switch (a) {
+            case 1:
+            case 7:
+              return 0.25;
+            case 2:
+            case 6:
+              return 0.5;
+            case 3:
+            case 5:
+              return 0.75;
+            case 4:
+              return 1;
+            default:
+              return 0;
+          }
+        },
+      );
 }
