@@ -1,14 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/widgets/horizontal_value_selector.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/widgets/weight_card.dart';
-import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
-import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/key_weight_data.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/weight_cubit.dart';
 
-class WeightList extends HookWidget {
-  final IList<WeightData> weightList;
+class WeightList extends StatelessWidget {
+  final IList<KeyWeightData> weightList;
 
   const WeightList({
     @required this.weightList,
@@ -17,13 +16,9 @@ class WeightList extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.watch<ThemeCubit>().state;
-    final lastWeight =
-        weightList.reverse().headOption.fold(() => 75, (a) => a.value);
-    final controller = usePageController(
-      initialPage: (lastWeight - 30).toInt() * 10 +
-          ((lastWeight - lastWeight.toInt()) * 10).toInt(),
-      viewportFraction: 0.20,
+    final lastWeight = weightList.headOption.fold(
+      () => 75.0,
+      (a) => a.value,
     );
 
     return Column(
@@ -33,40 +28,11 @@ class WeightList extends HookWidget {
             top: 35,
             bottom: 20,
           ),
-          child: SizedBox(
-            height: 65,
-            child: PageView.builder(
-              controller: controller,
-              pageSnapping: false,
-              itemBuilder: (context, index) {
-                final weightValue = (index * 0.1) + 30;
-                return InkWell(
-                  onTap: () =>
-                      context.read<WeightCubit>().updateWeight(weightValue),
-                  child: CircleAvatar(
-                    radius: 30,
-                    backgroundColor:
-                        theme.customColorTheme.scaffoldBackgroundColorLight,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${weightValue.toStringAsFixed(1)}',
-                          style:
-                              theme.customTextTheme.textTheme.button.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          'kg',
-                          style: theme.customTextTheme.textTheme.overline,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+          child: HorizontalValueSelector(
+            lastWeight: lastWeight,
+            selected: lastWeight,
+            onSelected: (weightValue) =>
+                context.read<WeightCubit>().updateWeight(weightValue),
           ),
         ),
         Expanded(
@@ -74,9 +40,11 @@ class WeightList extends HookWidget {
             padding: const EdgeInsets.all(20),
             itemCount: weightList.length(),
             itemBuilder: (context, index) => WeightCard(
-              weightData: weightList.reverse().toList()[index],
-              previousWeightData:
-                  index != 0 ? weightList.reverse().toList()[index - 1] : null,
+              index: index,
+              weightData: weightList.toList()[index],
+              previousWeightData: index != weightList.length() - 1
+                  ? weightList.toList()[index + 1]
+                  : null,
             ),
           ),
         ),

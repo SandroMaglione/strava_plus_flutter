@@ -11,9 +11,8 @@ import 'package:mobile_polimi_project/app/activity/domain/entities/extra_stats.d
 import 'package:mobile_polimi_project/app/activity/domain/entities/detailed_activity.dart';
 import 'package:mobile_polimi_project/app/activity/domain/activity_repository.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
-import 'package:mobile_polimi_project/core/errors/login_failure.dart';
-import 'package:mobile_polimi_project/core/extensions/dartz_extension.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mobile_polimi_project/core/services/connection_checker.dart';
 import 'package:mobile_polimi_project/core/services/token_manager.dart';
 
 @Injectable(as: ActivityRepository)
@@ -21,11 +20,13 @@ class ActivityRepositoryImpl implements ActivityRepository {
   final ActivityRemoteDataSource _activityRemoteDataSource;
   final StatsActivityLocalDataSourceImpl _statsActivityLocalDataSourceImpl;
   final TokenManager _tokenManager;
+  final ConnectionChecker _connectionChecker;
 
   ActivityRepositoryImpl(
     this._activityRemoteDataSource,
     this._tokenManager,
     this._statsActivityLocalDataSourceImpl,
+    this._connectionChecker,
   );
 
   @override
@@ -33,10 +34,10 @@ class ActivityRepositoryImpl implements ActivityRepository {
     int id,
     bool includeAllEfforts,
   ) async =>
-      Task(
-        () async => _tokenManager.tokenRequest(
+      _connectionChecker.connectionCheck(
+        connectionAvailable: () async => _tokenManager.tokenRequest(
           (token) => token.fold(
-            () => throw const LoginFailure(0, null),
+            () => throw const GenericFailure.unexpected(),
             (token) => _activityRemoteDataSource.getActivityById(
               id,
               token,
@@ -44,15 +45,15 @@ class ActivityRepositoryImpl implements ActivityRepository {
             ),
           ),
         ),
-      ).runAll();
+      );
 
   @override
   Future<Either<Failure, Unit>> saveExtraStats(
           int id, ExtraStats extraStats) async =>
-      Task(
-        () async => _statsActivityLocalDataSourceImpl.saveExtraStats(
-            id, extraStats.toModel),
-      ).runAll();
+      _connectionChecker.connectionCheck(
+        connectionAvailable: () async => _statsActivityLocalDataSourceImpl
+            .saveExtraStats(id, extraStats.toModel),
+      );
 
   @override
   Future<Either<Failure, IList<ComposedSummaryActivity>>>
@@ -61,8 +62,8 @@ class ActivityRepositoryImpl implements ActivityRepository {
     DateTime before,
     DateTime after,
   ) async =>
-          Task(
-            () async => ilist(
+          _connectionChecker.connectionCheck(
+            connectionAvailable: () async => ilist(
               await Future.wait(
                 (await _getLoggedInAthleteActivities(page, before, after)).map(
                   (summaryActivity) async => ComposedSummaryActivityModel(
@@ -74,7 +75,7 @@ class ActivityRepositoryImpl implements ActivityRepository {
                 ),
               ),
             ),
-          ).runAll();
+          );
 
   Future<ExtraStatsModel> _getExtraStats(int id) async =>
       _statsActivityLocalDataSourceImpl.getExtraStats(id);
@@ -86,7 +87,7 @@ class ActivityRepositoryImpl implements ActivityRepository {
   ) async =>
       _tokenManager.tokenRequest<List<SummaryActivityModel>>(
         (token) async => token.fold(
-          () => throw const LoginFailure(0, null),
+          () => throw const GenericFailure.unexpected(),
           (token) async =>
               _activityRemoteDataSource.getLoggedInAthleteActivities(
             token,

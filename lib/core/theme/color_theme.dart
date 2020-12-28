@@ -64,7 +64,7 @@ class CustomLightColorTheme extends CustomColorTheme {
   Color get primaryColorDark => const Color(0xFFc23b00);
 
   @override
-  Color get accentColor => const Color(0xFF4895f0);
+  Color get accentColor => const Color(0xFFfc6c26);
 
   @override
   Color get errorColor => const Color(0xFFea4d4d);
@@ -102,7 +102,7 @@ class CustomDarkColorTheme extends CustomColorTheme {
   Color get primaryColorDark => const Color(0xFFc89500);
 
   @override
-  Color get accentColor => const Color(0xFF97c9f9);
+  Color get accentColor => const Color(0xFFffc53b);
 
   @override
   Color get errorColor => const Color(0xFFec9798);

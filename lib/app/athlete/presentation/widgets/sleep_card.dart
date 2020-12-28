@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_polimi_project/app/athlete/presentation/widgets/date_time_selector.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/widgets/time_indicator.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
@@ -84,71 +85,43 @@ class SleepCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: OutlineButton(
-                        shape: ContinuousRectangleBorder(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                          ),
-                          side: BorderSide(
-                            color: theme.customColorTheme.primaryColorDark,
-                          ),
-                        ),
-                        onPressed: () => _selectDateTime(
-                          context,
-                          initialDate: date.subtract(const Duration(days: 1)),
-                          firstDate: date.subtract(const Duration(days: 1)),
-                          lastDate: date,
-                          initialTime: const TimeOfDay(hour: 22, minute: 0),
-                          onComplete: (dateTime) =>
-                              context.read<SleepCubit>().updateGoToBed(
-                                    date,
-                                    dateTime,
-                                  ),
-                        ),
-                        child: Text(
-                          sleepDataOption.fold(
+                      child: DateTimeSelector(
+                        text: sleepDataOption.fold(
+                          () => '---',
+                          (a) => a.sleepTime.goToBed.fold(
                             () => '---',
-                            (a) => a.sleepTime.goToBed.fold(
-                              () => '---',
-                              (a) => DateFormat('dd MMM, HH:mm').format(a),
-                            ),
+                            (a) => DateFormat('dd MMM, HH:mm').format(a),
                           ),
                         ),
+                        initialDate: date.subtract(const Duration(days: 1)),
+                        firstDate: date.subtract(const Duration(days: 1)),
+                        lastDate: date,
+                        initialTime: const TimeOfDay(hour: 22, minute: 0),
+                        onComplete: (dateTime) =>
+                            context.read<SleepCubit>().updateGoToBed(
+                                  date,
+                                  dateTime,
+                                ),
                       ),
                     ),
                     Expanded(
-                      child: OutlineButton(
-                        shape: ContinuousRectangleBorder(
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                          ),
-                          side: BorderSide(
-                            color: theme.customColorTheme.primaryColorDark,
-                          ),
-                        ),
-                        onPressed: () => _selectDateTime(
-                          context,
-                          initialDate: date,
-                          firstDate: date.subtract(const Duration(days: 1)),
-                          lastDate: date,
-                          initialTime: const TimeOfDay(hour: 7, minute: 0),
-                          onComplete: (dateTime) =>
-                              context.read<SleepCubit>().updateWakeUp(
-                                    date,
-                                    dateTime,
-                                  ),
-                        ),
-                        child: Text(
-                          sleepDataOption.fold(
+                      child: DateTimeSelector(
+                        text: sleepDataOption.fold(
+                          () => '---',
+                          (a) => a.sleepTime.wakeUp.fold(
                             () => '---',
-                            (a) => a.sleepTime.wakeUp.fold(
-                              () => '---',
-                              (a) => DateFormat('dd MMM, HH:mm').format(a),
-                            ),
+                            (a) => DateFormat('dd MMM, HH:mm').format(a),
                           ),
                         ),
+                        initialDate: date,
+                        firstDate: date.subtract(const Duration(days: 1)),
+                        lastDate: date,
+                        initialTime: const TimeOfDay(hour: 7, minute: 0),
+                        onComplete: (dateTime) =>
+                            context.read<SleepCubit>().updateWakeUp(
+                                  date,
+                                  dateTime,
+                                ),
                       ),
                     ),
                   ],
@@ -160,42 +133,4 @@ class SleepCard extends StatelessWidget {
       ),
     );
   }
-
-  Future<void> _selectDateTime(
-    BuildContext context, {
-    @required DateTime initialDate,
-    @required DateTime firstDate,
-    @required DateTime lastDate,
-    @required TimeOfDay initialTime,
-    @required void Function(DateTime) onComplete,
-  }) async =>
-      showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        firstDate: firstDate,
-        lastDate: lastDate,
-      ).then(
-        (dateSelected) {
-          if (dateSelected != null) {
-            return showTimePicker(
-              context: context,
-              initialTime: initialTime,
-            ).then(
-              (timeSelected) {
-                if (timeSelected != null) {
-                  onComplete(
-                    DateTime(
-                      dateSelected.year,
-                      dateSelected.month,
-                      dateSelected.day,
-                      timeSelected.hour,
-                      timeSelected.minute,
-                    ),
-                  );
-                }
-              },
-            );
-          }
-        },
-      );
 }

@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:mobile_polimi_project/app/activity/data/models/extra_stats_model.dart';
-import 'package:mobile_polimi_project/app/activity/domain/valueobjects/bool_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/experience_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/humor_post_workout_value.dart';
 import 'package:mobile_polimi_project/app/activity/domain/valueobjects/is_especially_bad_value.dart';

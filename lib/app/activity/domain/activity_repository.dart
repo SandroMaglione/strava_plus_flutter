@@ -14,12 +14,6 @@ abstract class ActivityRepository {
     bool includeAllEfforts,
   );
 
-  // Future<Either<Failure, IList<SummaryActivity>>> getLoggedInAthleteActivities(
-  //   int page,
-  //   DateTime before,
-  //   DateTime after,
-  // );
-
   Future<Either<Failure, IList<ComposedSummaryActivity>>>
       getComposedSummaryActivityList(
     int page,
@@ -27,6 +21,5 @@ abstract class ActivityRepository {
     DateTime after,
   );
 
-  // Future<Either<Failure, ExtraStats>> getExtraStats(int id);
   Future<Either<Failure, Unit>> saveExtraStats(int id, ExtraStats extraStats);
 }

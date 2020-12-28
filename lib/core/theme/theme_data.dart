@@ -66,7 +66,7 @@ class CustomAppTheme {
   ThemeData get themeData => ThemeData(
         fontFamily: _fontFamily,
         textTheme: customTextTheme.textTheme,
-        accentColor: customColorTheme.accentColor,
+        accentColor: customColorTheme.primaryColor,
         scaffoldBackgroundColor: customColorTheme.scaffoldBackgroundColor,
         errorColor: customColorTheme.errorColor,
         primaryColor: customColorTheme.primaryColor,
@@ -84,6 +84,16 @@ class CustomAppTheme {
           errorBorder: UnderlineInputBorder(
             borderSide: BorderSide(
               color: customColorTheme.errorColor,
+            ),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: customColorTheme.primaryColorDark,
+            ),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: customColorTheme.primaryColorDark,
             ),
           ),
         ),

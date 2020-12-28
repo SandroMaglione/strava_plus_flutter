@@ -1,52 +1,60 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mobile_polimi_project/core/errors/dio_error_options.dart';
 
 /// All error yielded throughout the app derive from this interface class
-abstract class Failure extends Equatable {
-  /// Status code to to display error message to the user when a failure occurs
-  final int statusCode;
-
-  /// Error type of an http [Dio] request
-  final DioErrorType dioErrorType;
+abstract class Failure extends Equatable implements Exception {
+  /// Possible [Exception] thrown by the failure
+  Option<Exception> get exceptionOption => none();
 
   /// Initialize deafult error statusCode
-  const Failure({
-    this.statusCode = -1,
-    this.dioErrorType = DioErrorType.RESPONSE,
-  });
+  const Failure();
 
-  /// Get error message from failure
-  String get errorMessage {
-    // Compute error message based on status code and error type
-    return 'Error message';
+  /// Get error message from status code
+  String get errorMessage => "Error message";
+
+  /// Define custom error message [exceptionOption] is a [DioError]
+  String dioErrorMessage(DioError dioError) =>
+      dioErrorOptions(dioError).maybeWhen(
+        orElse: () => "Request error",
+      );
+
+  /// Convert [DioError] to [DioErrorOptions] to make sure to check all possible cases
+  static DioErrorOptions dioErrorOptions(DioError dioError) {
+    switch (dioError.type) {
+      case DioErrorType.RESPONSE:
+        return const DioErrorOptions.response();
+      case DioErrorType.CONNECT_TIMEOUT:
+        return const DioErrorOptions.connection_timeout();
+      case DioErrorType.SEND_TIMEOUT:
+        return const DioErrorOptions.send_timeout();
+      case DioErrorType.RECEIVE_TIMEOUT:
+        return const DioErrorOptions.receive_timeout();
+      case DioErrorType.CANCEL:
+        return const DioErrorOptions.cancel();
+      case DioErrorType.DEFAULT:
+        return const DioErrorOptions.default_error();
+      default:
+        return const DioErrorOptions.unknown();
+    }
   }
 
-  /// Used in subclasses to return custom error message in case of [DioErrorType.RESPONSE]
-  String customErrorMessage(String Function() customError) =>
-      dioErrorType == DioErrorType.RESPONSE ? customError() : 'errorMessage';
-
   @override
-  List<Object> get props => [statusCode];
+  List<Object> get props => [exceptionOption];
 }
 
-/// Generic [Failure] handler when no other error is recognized
+/// [Failure] when no other specific error is defined.
+///
+/// Throws a generic error when no other error is recognized.
 class GenericFailure extends Failure {
-  /// Initialize status code.
-  /// A status code of `-1` is the default for an unexpected error.
-  const GenericFailure(int statusCode) : super(statusCode: statusCode);
+  final Exception exception;
 
-  /// Throws a generic error when no other error is recognized
-  const GenericFailure.unexpected();
+  const GenericFailure(this.exception) : super();
+
+  /// [GenericFailure] without specify exception
+  const GenericFailure.unexpected() : exception = null;
 
   @override
-  String get errorMessage => this.customErrorMessage(
-        () {
-          // Return a custom error based on status code
-          // otherwise call generic error in super class
-          switch (statusCode) {
-            default:
-              return super.errorMessage;
-          }
-        },
-      );
+  Option<Exception> get exceptionOption => some(exception);
 }

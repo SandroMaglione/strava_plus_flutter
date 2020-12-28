@@ -73,6 +73,9 @@ dependencies:
   # Utils
   flutter_hooks: ^0.15.0
 
+  # Check internet connection
+  connectivity: ^2.0.2
+
   # Text
   recase: ^3.0.1
   time: ^1.4.0

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'package:mobile_polimi_project/app/user/data/models/diet_data_model.dart';
+import 'package:mobile_polimi_project/app/user/data/models/key_weight_data_model.dart';
 import 'package:mobile_polimi_project/app/user/data/models/sleep_data_model.dart';
 import 'package:mobile_polimi_project/app/user/data/models/water_data_model.dart';
 import 'package:mobile_polimi_project/app/user/data/models/weight_data_model.dart';
@@ -13,17 +14,31 @@ class UserLocalDataSourceImpl {
 
   const UserLocalDataSourceImpl(this._hiveManager);
 
-  Future<WeightDataModel> updateWeight(WeightDataModel weightDataModel) async =>
+  Future<Unit> deleteWeight(int index) async =>
+      _hiveManager.weightBox.delete(index).then((_) => unit);
+
+  Future<KeyWeightDataModel> updateWeight(
+          WeightDataModel weightDataModel) async =>
       _hiveManager.weightBox
           .add(json.encode(weightDataModel.toJson()))
-          .then((_) => weightDataModel);
+          .then((index) => weightDataModel.toKeyModel(index));
 
-  Future<List<WeightDataModel>> getWeightList() async => [
-        ..._hiveManager.weightBox.values.map(
-          (e) => WeightDataModel.fromJson(
-            json.decode(e) as Map<String, dynamic>,
-          ),
-        )
+  Future<KeyWeightDataModel> changeWeight(
+    KeyWeightDataModel keyWeightDataModel,
+  ) async =>
+      _hiveManager.weightBox
+          .put(
+            keyWeightDataModel.index,
+            json.encode(keyWeightDataModel.toWeightModel.toJson()),
+          )
+          .then((_) => keyWeightDataModel);
+
+  Future<List<KeyWeightDataModel>> getWeightList() async => [
+        ..._hiveManager.weightBox.toMap().entries.map(
+              (entry) => WeightDataModel.fromJson(
+                json.decode(entry.value) as Map<String, dynamic>,
+              ).toKeyModel(entry.key as int),
+            )
       ];
 
   Future<Tuple2<DateTime, SleepDataModel>> updateSleep(

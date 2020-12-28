@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/water_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/sleep_data.dart';
-import 'package:mobile_polimi_project/app/user/domain/entities/weight_data.dart';
+import 'package:mobile_polimi_project/app/user/domain/entities/key_weight_data.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/diet_data.dart';
 import 'package:mobile_polimi_project/core/errors/failure.dart';
 import 'package:mobile_polimi_project/app/user/domain/user_repository.dart';
@@ -22,7 +22,7 @@ class GetWeightListRepo {
     @required this.userRepository,
   });
 
-  Future<Either<Failure, IList<WeightData>>> call() async {
+  Future<Either<Failure, IList<KeyWeightData>>> call() async {
     return userRepository.getWeightList();
   }
 }
@@ -34,7 +34,7 @@ class UpdateWeightRepo {
     @required this.userRepository,
   });
 
-  Future<Either<Failure, WeightData>> call(
+  Future<Either<Failure, IList<KeyWeightData>>> call(
       UpdateWeightRepoParams params) async {
     return userRepository.updateWeight(
       params.weight,
@@ -47,6 +47,58 @@ class UpdateWeightRepoParams {
 
   const UpdateWeightRepoParams({
     @required this.weight,
+  });
+}
+
+class ChangeWeightRepo {
+  final UserRepository userRepository;
+
+  const ChangeWeightRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, IList<KeyWeightData>>> call(
+      ChangeWeightRepoParams params) async {
+    return userRepository.changeWeight(
+      params.index,
+      params.weight,
+      params.dateTime,
+    );
+  }
+}
+
+class ChangeWeightRepoParams {
+  final int index;
+  final double weight;
+  final DateTime dateTime;
+
+  const ChangeWeightRepoParams({
+    @required this.index,
+    @required this.weight,
+    @required this.dateTime,
+  });
+}
+
+class DeleteWeightRepo {
+  final UserRepository userRepository;
+
+  const DeleteWeightRepo({
+    @required this.userRepository,
+  });
+
+  Future<Either<Failure, IList<KeyWeightData>>> call(
+      DeleteWeightRepoParams params) async {
+    return userRepository.deleteWeight(
+      params.index,
+    );
+  }
+}
+
+class DeleteWeightRepoParams {
+  final int index;
+
+  const DeleteWeightRepoParams({
+    @required this.index,
   });
 }
 
