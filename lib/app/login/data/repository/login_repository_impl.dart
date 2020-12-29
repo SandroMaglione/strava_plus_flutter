@@ -34,19 +34,21 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<Either<Failure, Unit>> getAuthToken(String route) async =>
-      _connectionChecker.connectionCheck(connectionAvailable: () async {
-        final uri = Uri.dataFromString(route);
-        final uriParams = uri.queryParameters;
-        if (uriParams['code'] == null) {
-          throw const GenericFailure.unexpected();
-        } else {
-          final authToken = await _loginRemoteDataSource.getAuthToken(
-            56765,
-            "f62a13334825184b1c40e997b839641ec83420fb",
-            uriParams['code'],
-            "authorization_code",
-          );
-          return _tokenManager.saveToken(authToken);
-        }
-      });
+      _connectionChecker.connectionCheck(
+        connectionAvailable: () async {
+          final uri = Uri.dataFromString(route);
+          final uriParams = uri.queryParameters;
+          if (uriParams['code'] == null) {
+            throw const GenericFailure.unexpected();
+          } else {
+            final authToken = await _loginRemoteDataSource.getAuthToken(
+              56765,
+              "f62a13334825184b1c40e997b839641ec83420fb",
+              uriParams['code'],
+              "authorization_code",
+            );
+            return _tokenManager.saveToken(authToken);
+          }
+        },
+      );
 }

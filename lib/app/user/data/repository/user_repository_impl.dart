@@ -23,15 +23,15 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, IList<KeyWeightData>>> getWeightList() async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async => _ilistWeight(),
+      _connectionChecker.failureCheck(
+        () async => _ilistWeight(),
       );
 
   @override
   Future<Either<Failure, IList<KeyWeightData>>> updateWeight(
           double weight) async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async => _userLocalDataSourceImpl
+      _connectionChecker.failureCheck(
+        () async => _userLocalDataSourceImpl
             .updateWeight(
               WeightDataModel(
                 dateTime: DateTime.now(),
@@ -47,8 +47,8 @@ class UserRepositoryImpl implements UserRepository {
     double weight,
     DateTime dateTime,
   ) async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async => _userLocalDataSourceImpl
+      _connectionChecker.failureCheck(
+        () async => _userLocalDataSourceImpl
             .changeWeight(
               KeyWeightDataModel(
                 index: index,
@@ -61,24 +61,23 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, IList<KeyWeightData>>> deleteWeight(int index) async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async => _userLocalDataSourceImpl
+      _connectionChecker.failureCheck(
+        () async => _userLocalDataSourceImpl
             .deleteWeight(index)
             .then((_) => _ilistWeight()),
       );
 
   @override
   Future<Either<Failure, IMap<DateTime, SleepData>>> getSleepList() async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async =>
-            _userLocalDataSourceImpl.getSleepList(),
+      _connectionChecker.failureCheck(
+        () async => _userLocalDataSourceImpl.getSleepList(),
       );
 
   @override
   Future<Either<Failure, Tuple2<DateTime, SleepData>>> updateSleep(
           DateTime date, SleepData sleepData) async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async {
+      _connectionChecker.failureCheck(
+        () async {
           if (sleepData.sleepTime.sleepOption.isNone()) {
             throw const GenericFailure.unexpected();
           } else {
@@ -92,15 +91,15 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, IMap<DateTime, DietData>>> getDietList() async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async => _userLocalDataSourceImpl.getDietList(),
+      _connectionChecker.failureCheck(
+        () async => _userLocalDataSourceImpl.getDietList(),
       );
 
   @override
   Future<Either<Failure, Tuple2<DateTime, DietData>>> updateDiet(
           DateTime date, DietData dietData) async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async => _userLocalDataSourceImpl.updateDiet(
+      _connectionChecker.failureCheck(
+        () async => _userLocalDataSourceImpl.updateDiet(
           date,
           dietData.toModel,
         ),
@@ -108,16 +107,15 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, IMap<DateTime, WaterData>>> getWaterList() async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async =>
-            _userLocalDataSourceImpl.getWaterList(),
+      _connectionChecker.failureCheck(
+        () async => _userLocalDataSourceImpl.getWaterList(),
       );
 
   @override
   Future<Either<Failure, Tuple2<DateTime, WaterData>>> updateWater(
           DateTime date, WaterData waterData) async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async {
+      _connectionChecker.failureCheck(
+        () async {
           if (waterData.water.water.isNone()) {
             throw const GenericFailure.unexpected();
           } else {

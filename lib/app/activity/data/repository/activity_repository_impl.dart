@@ -50,9 +50,11 @@ class ActivityRepositoryImpl implements ActivityRepository {
   @override
   Future<Either<Failure, Unit>> saveExtraStats(
           int id, ExtraStats extraStats) async =>
-      _connectionChecker.connectionCheck(
-        connectionAvailable: () async => _statsActivityLocalDataSourceImpl
-            .saveExtraStats(id, extraStats.toModel),
+      _connectionChecker.failureCheck(
+        () async => _statsActivityLocalDataSourceImpl.saveExtraStats(
+          id,
+          extraStats.toModel,
+        ),
       );
 
   @override

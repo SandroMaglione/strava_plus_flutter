@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/widgets/water_card.dart';
-import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/user/data/models/water_data_model.dart';
 import 'package:mobile_polimi_project/app/user/domain/entities/water_data.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/water_cubit.dart';
@@ -13,8 +12,6 @@ class WaterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.watch<ThemeCubit>().state;
-
     return BlocBuilder<WaterCubit, AsyncState<dartz.IMap<DateTime, WaterData>>>(
       builder: (context, state) => state.maybeWhen(
         orElse: () => const Center(child: const CircularProgressIndicator()),

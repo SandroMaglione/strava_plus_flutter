@@ -47,6 +47,24 @@ abstract class ConnectionChecker {
                   () async => noConnection(),
                 ).runAll(onDioError: onDioError)
               : Future.value(left<Failure, T>(const ConnectionFailure()));
+
+  /// Try to run [request], catch possible [Failure] on the [onFailure] callback
+  Future<Either<Failure, T>> failureCheck<T>(
+    Future<T> Function() request, {
+    Future<T> Function(Failure failure) onFailure,
+  }) async =>
+      (await Task(
+        () async => request(),
+      ).runAllNoException())
+          .fold(
+        (failureOrException) async => failureOrException.fold(
+          (l) => throw l,
+          (failure) => Task(
+            () async => onFailure(failure),
+          ).runAll(),
+        ),
+        (data) => right<Failure, T>(data),
+      );
 }
 
 /// [ConnectionChecker] implementation using [DataConnectionChecker] package

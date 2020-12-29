@@ -125,12 +125,17 @@ dev_dependencies:
   # App icon generator
   flutter_launcher_icons: any
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/ic_launcher.png"
+
 flutter:
   uses-material-design: true
 
   assets:
     - assets/fonts/
-    # - assets/icon/
+    - assets/images/
     # - assets/i18n/
 
   fonts:
