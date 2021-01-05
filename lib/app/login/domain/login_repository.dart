@@ -9,4 +9,5 @@ abstract class LoginRepository {
 
   Future<Either<Failure, DetailedAthlete>> getUserAccountInfo();
   Future<Either<Failure, Unit>> getAuthToken(String route);
+  Future<Either<Failure, Unit>> logout();
 }

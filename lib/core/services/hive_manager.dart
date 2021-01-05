@@ -30,6 +30,14 @@ class HiveManager {
     await Hive.openBox<String>(HiveManager._waterBoxKey);
   }
 
+  Future<void> clearAll() async {
+    statsActivitiesBox.clear();
+    weightBox.clear();
+    sleepBox.clear();
+    dietBox.clear();
+    waterBox.clear();
+  }
+
   /// Get reference to box for Strava activities stats
   Box<String> get statsActivitiesBox =>
       Hive.box<String>(HiveManager._statsActivitiesBoxKey);

@@ -84,7 +84,11 @@ GetIt $initGetIt(
         get<LoginRemoteDataSource>(),
         get<TokenManager>(),
         get<ConnectionChecker>(),
+        get<HiveManager>(),
+        get<SettingLocalDataSource>(),
       ));
+  gh.factory<LogoutRepo>(
+      () => LogoutRepo(loginRepository: get<LoginRepository>()));
   gh.factory<ThemeCubit>(() =>
       ThemeCubit(get<GetLocalSettingRepo>(), get<StoreLocalSettingRepo>()));
   gh.factory<UserRepository>(() => UserRepositoryImpl(
@@ -116,8 +120,11 @@ GetIt $initGetIt(
       () => GetWaterListRepo(userRepository: get<UserRepository>()));
   gh.factory<GetWeightListRepo>(
       () => GetWeightListRepo(userRepository: get<UserRepository>()));
-  gh.factory<LoginCubit>(
-      () => LoginCubit(get<GetAuthTokenRepo>(), get<GetUserAccountInfoRepo>()));
+  gh.factory<LoginCubit>(() => LoginCubit(
+        get<GetAuthTokenRepo>(),
+        get<GetUserAccountInfoRepo>(),
+        get<LogoutRepo>(),
+      ));
   gh.factory<SaveExtraStatsRepo>(
       () => SaveExtraStatsRepo(activityRepository: get<ActivityRepository>()));
   gh.factory<UpdateDietRepo>(

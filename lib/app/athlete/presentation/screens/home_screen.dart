@@ -8,13 +8,16 @@ import 'package:mobile_polimi_project/app/athlete/presentation/views/weight_view
 import 'package:mobile_polimi_project/app/athlete/presentation/views/sleep_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/summary_activity_view.dart';
 import 'package:mobile_polimi_project/app/athlete/presentation/views/water_view.dart';
+import 'package:mobile_polimi_project/app/login/presentation/controllers/cubit/login_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/controller/cubit/theme_cubit.dart';
 import 'package:mobile_polimi_project/app/presentation/widgets/build_provider.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/diet_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/sleep_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/water_cubit.dart';
 import 'package:mobile_polimi_project/app/user/presentation/controllers/cubit/weight_cubit.dart';
+import 'package:mobile_polimi_project/core/routes/router.gr.dart';
 import 'package:mobile_polimi_project/injectable.dart';
+import 'package:auto_route/auto_route.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -35,63 +38,73 @@ class _HomeScreenState extends State<HomeScreen> {
     final theme = context.watch<ThemeCubit>().state;
 
     return SafeArea(
-      child: BuildProvider(
-        providers: [
-          BlocProvider<WeightCubit>(
-            create: (context) => getIt<WeightCubit>()..init(),
-          ),
-          BlocProvider<SleepCubit>(
-            create: (context) => getIt<SleepCubit>()..init(),
-          ),
-          BlocProvider<DietCubit>(
-            create: (context) => getIt<DietCubit>()..init(),
-          ),
-          BlocProvider<WaterCubit>(
-            create: (context) => getIt<WaterCubit>()..init(),
-          ),
-        ],
-        builder: (context) => Scaffold(
-          body: _currentView,
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => setState(() => _tabIndex = 4),
-            backgroundColor: _tabIndex == 4
-                ? theme.customColorTheme.primaryColor
-                : theme.customColorTheme.scaffoldBackgroundColorLight,
-            elevation: _tabIndex == 4 ? 30 : 0,
-            child: Icon(
-              FontAwesomeIcons.strava,
-              color: _tabIndex == 4
-                  ? theme.customColorTheme.scaffoldBackgroundColorLight
-                  : theme.customColorTheme.primaryColor,
+      child: BlocListener<LoginCubit, LoginState>(
+        listener: _listenLogin,
+        child: BuildProvider(
+          providers: [
+            BlocProvider<WeightCubit>(
+              create: (context) => getIt<WeightCubit>()..init(),
             ),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: AnimatedBottomNavigationBar(
-            icons: [
-              FontAwesomeIcons.weight,
-              FontAwesomeIcons.utensils,
-              FontAwesomeIcons.tint,
-              FontAwesomeIcons.bed,
-            ],
-            activeIndex: _tabIndex,
-            gapLocation: GapLocation.center,
-            notchSmoothness: NotchSmoothness.verySmoothEdge,
-            // leftCornerRadius: 24,
-            // rightCornerRadius: 24,
-            backgroundColor:
-                theme.customColorTheme.scaffoldBackgroundColorLight,
-            elevation: 10,
-            iconSize: 20,
-            notchMargin: 5,
-            splashColor: theme.customColorTheme.primaryColorExtraLight,
-            activeColor: theme.customColorTheme.primaryColor,
-            inactiveColor: theme.customColorTheme.scaffoldBackgroundColorDark,
-            onTap: (index) => setState(() => _tabIndex = index),
+            BlocProvider<SleepCubit>(
+              create: (context) => getIt<SleepCubit>()..init(),
+            ),
+            BlocProvider<DietCubit>(
+              create: (context) => getIt<DietCubit>()..init(),
+            ),
+            BlocProvider<WaterCubit>(
+              create: (context) => getIt<WaterCubit>()..init(),
+            ),
+          ],
+          builder: (context) => Scaffold(
+            body: _currentView,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () => setState(() => _tabIndex = 4),
+              backgroundColor: _tabIndex == 4
+                  ? theme.customColorTheme.primaryColor
+                  : theme.customColorTheme.scaffoldBackgroundColorLight,
+              elevation: _tabIndex == 4 ? 30 : 0,
+              child: Icon(
+                FontAwesomeIcons.strava,
+                color: _tabIndex == 4
+                    ? theme.customColorTheme.scaffoldBackgroundColorLight
+                    : theme.customColorTheme.primaryColor,
+              ),
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            bottomNavigationBar: AnimatedBottomNavigationBar(
+              icons: [
+                FontAwesomeIcons.weight,
+                FontAwesomeIcons.utensils,
+                FontAwesomeIcons.tint,
+                FontAwesomeIcons.bed,
+              ],
+              activeIndex: _tabIndex,
+              gapLocation: GapLocation.center,
+              notchSmoothness: NotchSmoothness.verySmoothEdge,
+              backgroundColor:
+                  theme.customColorTheme.scaffoldBackgroundColorLight,
+              elevation: 10,
+              iconSize: 20,
+              notchMargin: 5,
+              splashColor: theme.customColorTheme.primaryColorExtraLight,
+              activeColor: theme.customColorTheme.primaryColor,
+              inactiveColor: theme.customColorTheme.scaffoldBackgroundColorDark,
+              onTap: (index) => setState(() => _tabIndex = index),
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void _listenLogin(BuildContext context, LoginState state) {
+    if (state is! SuccessLoginState) {
+      context.navigator.pushAndRemoveUntil(
+        Routes.LoginScreen,
+        (route) => false,
+      );
+    }
   }
 
   Widget get _currentView {

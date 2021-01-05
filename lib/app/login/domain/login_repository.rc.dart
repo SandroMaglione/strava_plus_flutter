@@ -45,3 +45,15 @@ class GetAuthTokenRepoParams {
     @required this.route,
   });
 }
+
+class LogoutRepo {
+  final LoginRepository loginRepository;
+
+  const LogoutRepo({
+    @required this.loginRepository,
+  });
+
+  Future<Either<Failure, Unit>> call() async {
+    return loginRepository.logout();
+  }
+}

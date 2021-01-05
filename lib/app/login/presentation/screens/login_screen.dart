@@ -1,9 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mobile_polimi_project/app/login/presentation/controllers/cubit/login_cubit.dart';
 import 'package:mobile_polimi_project/core/routes/router.gr.dart';
-import 'package:mobile_polimi_project/core/utils/async_state.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -12,12 +11,25 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BlocConsumer<LoginCubit, AsyncState<Unit>>(
+        body: BlocConsumer<LoginCubit, LoginState>(
           listener: _listenLogin,
           builder: (context, state) => state.maybeWhen(
-            success: (_) => const Center(
-              child: const Text(
-                "Success",
+            success: () => const Center(
+              child: const CircularProgressIndicator(),
+            ),
+            loading: () => const Center(
+              child: const CircularProgressIndicator(),
+            ),
+            missingAuth: () => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Missing authorization, click to retry'),
+                  IconButton(
+                    onPressed: () => _reload(context),
+                    icon: const Icon(FontAwesomeIcons.reply),
+                  ),
+                ],
               ),
             ),
             orElse: () => WebView(
@@ -35,12 +47,16 @@ class LoginScreen extends StatelessWidget {
     context.read<LoginCubit>().getAuthToken(route);
   }
 
-  void _listenLogin(BuildContext context, AsyncState<Unit> state) {
-    if (state is SuccessAsyncState<Unit>) {
+  void _listenLogin(BuildContext context, LoginState state) {
+    if (state is SuccessLoginState) {
       context.navigator.pushAndRemoveUntil(
         Routes.HomeScreen,
         (route) => false,
       );
     }
+  }
+
+  void _reload(BuildContext context) {
+    context.read<LoginCubit>().init();
   }
 }

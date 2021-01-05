@@ -19,6 +19,7 @@ abstract class TokenManager {
   Future<Option<AuthToken>> getToken();
 
   Future<Unit> saveToken(AuthToken authToken);
+  Future<Unit> removeToken();
 }
 
 @Injectable(as: TokenManager)
@@ -83,4 +84,8 @@ class TokenManagerFlutterSecureStorage implements TokenManager {
           "refresh_token",
         ),
       ).runAll();
+
+  @override
+  Future<Unit> removeToken() =>
+      _flutterSecureStorage.deleteAll().then((_) => unit);
 }
