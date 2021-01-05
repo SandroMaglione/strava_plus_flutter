@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:mobile_polimi_project/env/env_reader.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -10,7 +9,6 @@ abstract class RegisterDioClient {
   /// Get [Dio] instance
   Dio get dioClient => Dio(
         BaseOptions(
-          baseUrl: EnvReader.apiBaseUrl,
           connectTimeout: 15000,
           receiveTimeout: 25000,
           contentType: "application/json",

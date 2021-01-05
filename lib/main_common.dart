@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mobile_polimi_project/core/services/hive_manager.dart';
-import 'package:mobile_polimi_project/env/env_reader.dart';
 import 'package:mobile_polimi_project/env/environment_setup.dart';
 import 'package:mobile_polimi_project/injectable.dart';
 import 'package:mobile_polimi_project/main.dart';
@@ -15,7 +14,7 @@ Future<void> mainCommon(
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialze config reader with the given environment
-  EnvReader.initialize(environment);
+  // EnvReader.initialize(environment);
 
   // Initialize injectable dependency injection objects (injectable)
   configureInjectable();
