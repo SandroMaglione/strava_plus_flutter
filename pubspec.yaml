@@ -15,7 +15,7 @@ dependencies:
   intl: any
 
   # .env files
-  envify: any
+  # envify: any
 
   # Compare objects based on their values
   equatable: any
@@ -46,7 +46,7 @@ dependencies:
   flutter_statusbar_manager: any
 
   # Strava API auth
-  oauth2: ^1.6.3
+  # oauth2: ^1.6.3
 
   # Strava auth code on browser
   webview_flutter: ^1.0.7
@@ -68,7 +68,7 @@ dependencies:
   hive_flutter: ^0.3.1
 
   # Calendar
-  table_calendar: ^2.3.1
+  # table_calendar: ^2.3.1
 
   # Utils
   flutter_hooks: ^0.15.0
@@ -97,7 +97,7 @@ dev_dependencies:
   build_runner: any
 
   # .env files
-  envify_generator: any
+  # envify_generator: any
 
   # Generator for http client
   retrofit_generator: any
